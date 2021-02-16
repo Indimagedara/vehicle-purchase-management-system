@@ -13,12 +13,13 @@ namespace VehicleManagementSystem.Forms
   public partial class frmUsers : Form
   {
     VehicleManagementEntities ve;
+    int Id = 0;
     public frmUsers()
     {
       InitializeComponent();
     }
 
-    private void button1_Click(object sender, EventArgs e)
+    private void BtnSave(object sender, EventArgs e)
     {
       ve = new VehicleManagementEntities();
       if(txtUsername.Text != null && txtPassword.Text != null)
@@ -32,6 +33,7 @@ namespace VehicleManagementSystem.Forms
         ve.SaveChanges();
         txtUsername.Text = "";
         txtPassword.Text = "";
+        userBindingSource.DataSource = ve.Users.ToList();
         MessageBox.Show("Successfully added!");
       }
       else
@@ -44,14 +46,46 @@ namespace VehicleManagementSystem.Forms
     {
       // TODO: This line of code loads data into the 'vehiclePurchaseManagementsDataSet.User' table. You can move, or remove it, as needed.
       this.userTableAdapter.Fill(this.vehiclePurchaseManagementsDataSet.User);
-      // TODO: This line of code loads data into the 'vehiclePurchaseManagementsDataSet.Users' table. You can move, or remove it, as needed.
-
-
+      ve = new VehicleManagementEntities();
+      userBindingSource.DataSource = ve.Users.ToList();
     }
+
 
     private void btnClose_Click(object sender, EventArgs e)
     {
       this.Hide();
+    }
+
+    private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+    {
+      if(dataGridView1.Rows[e.RowIndex].Cells[1].Value != null)
+      {
+        Id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
+        txtUsername.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+      }
+      else
+      {
+        MessageBox.Show("You've selected an invalid item.");
+      }
+
+      if (Id != 0)
+      {
+        
+      }
+    }
+
+    //private void button2_Click(object sender, EventArgs e)
+    //{
+    //  txtUsername.Text = "";
+    //  txtPassword.Text = "";
+    //  Id = 0;
+    //}
+
+    private void btnClear_Click(object sender, EventArgs e)
+    {
+      txtUsername.Text = "";
+      txtPassword.Text = "";
+      Id = 0;
     }
   }
 }

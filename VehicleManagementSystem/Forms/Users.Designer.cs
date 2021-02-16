@@ -31,23 +31,23 @@ namespace VehicleManagementSystem.Forms
     {
       this.components = new System.ComponentModel.Container();
       this.txtUsername = new System.Windows.Forms.TextBox();
-      this.button1 = new System.Windows.Forms.Button();
+      this.btnSave = new System.Windows.Forms.Button();
       this.label1 = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
       this.txtPassword = new System.Windows.Forms.TextBox();
       this.dataGridView1 = new System.Windows.Forms.DataGridView();
-      this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-      this.btnClose = new System.Windows.Forms.Button();
-      this.vehiclePurchaseManagementsDataSet = new VehicleManagementSystem.VehiclePurchaseManagementsDataSet();
       this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.btnClose = new System.Windows.Forms.Button();
+      this.btnClear = new System.Windows.Forms.Button();
+      this.vehiclePurchaseManagementsDataSet = new VehicleManagementSystem.VehiclePurchaseManagementsDataSet();
+      this.userBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
       this.userTableAdapter = new VehicleManagementSystem.VehiclePurchaseManagementsDataSetTableAdapters.UserTableAdapter();
-      this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.button2 = new System.Windows.Forms.Button();
+      this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.vehiclePurchaseManagementsDataSet)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.vehiclePurchaseManagementsDataSet)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).BeginInit();
       this.SuspendLayout();
       // 
       // txtUsername
@@ -58,16 +58,16 @@ namespace VehicleManagementSystem.Forms
       this.txtUsername.Size = new System.Drawing.Size(187, 22);
       this.txtUsername.TabIndex = 0;
       // 
-      // button1
+      // btnSave
       // 
-      this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.button1.Location = new System.Drawing.Point(234, 102);
-      this.button1.Name = "button1";
-      this.button1.Size = new System.Drawing.Size(75, 23);
-      this.button1.TabIndex = 1;
-      this.button1.Text = "&Save";
-      this.button1.UseVisualStyleBackColor = true;
-      this.button1.Click += new System.EventHandler(this.button1_Click);
+      this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnSave.Location = new System.Drawing.Point(234, 102);
+      this.btnSave.Name = "btnSave";
+      this.btnSave.Size = new System.Drawing.Size(75, 23);
+      this.btnSave.TabIndex = 1;
+      this.btnSave.Text = "&Save";
+      this.btnSave.UseVisualStyleBackColor = true;
+      this.btnSave.Click += new System.EventHandler(this.BtnSave);
       // 
       // label1
       // 
@@ -99,20 +99,25 @@ namespace VehicleManagementSystem.Forms
       // 
       // dataGridView1
       // 
+      this.dataGridView1.AllowUserToAddRows = false;
+      this.dataGridView1.AllowUserToDeleteRows = false;
+      this.dataGridView1.AllowUserToOrderColumns = true;
       this.dataGridView1.AutoGenerateColumns = false;
       this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-      this.dataGridView1.DataSource = this.userBindingSource;
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6});
+      this.dataGridView1.DataSource = this.userBindingSource1;
       this.dataGridView1.Location = new System.Drawing.Point(42, 164);
       this.dataGridView1.Name = "dataGridView1";
+      this.dataGridView1.ReadOnly = true;
       this.dataGridView1.Size = new System.Drawing.Size(267, 152);
       this.dataGridView1.TabIndex = 5;
+      this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
       // 
-      // usersBindingSource
+      // userBindingSource
       // 
-      this.usersBindingSource.DataMember = "Users";
+      this.userBindingSource.DataMember = "User";
       // 
       // btnClose
       // 
@@ -125,64 +130,69 @@ namespace VehicleManagementSystem.Forms
       this.btnClose.UseVisualStyleBackColor = true;
       this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
       // 
+      // btnClear
+      // 
+      this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnClear.Location = new System.Drawing.Point(153, 102);
+      this.btnClear.Name = "btnClear";
+      this.btnClear.Size = new System.Drawing.Size(75, 23);
+      this.btnClear.TabIndex = 7;
+      this.btnClear.Text = "&Clear";
+      this.btnClear.UseVisualStyleBackColor = true;
+      this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+      // 
       // vehiclePurchaseManagementsDataSet
       // 
       this.vehiclePurchaseManagementsDataSet.DataSetName = "VehiclePurchaseManagementsDataSet";
       this.vehiclePurchaseManagementsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
       // 
-      // userBindingSource
+      // userBindingSource1
       // 
-      this.userBindingSource.DataMember = "User";
-      this.userBindingSource.DataSource = this.vehiclePurchaseManagementsDataSet;
+      this.userBindingSource1.DataMember = "User";
+      this.userBindingSource1.DataSource = this.vehiclePurchaseManagementsDataSet;
       // 
       // userTableAdapter
       // 
       this.userTableAdapter.ClearBeforeFill = true;
       // 
-      // dataGridViewTextBoxColumn1
+      // dataGridViewTextBoxColumn5
       // 
-      this.dataGridViewTextBoxColumn1.DataPropertyName = "UserId";
-      this.dataGridViewTextBoxColumn1.HeaderText = "UserId";
-      this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-      this.dataGridViewTextBoxColumn1.ReadOnly = true;
+      this.dataGridViewTextBoxColumn5.DataPropertyName = "UserId";
+      this.dataGridViewTextBoxColumn5.HeaderText = "UserId";
+      this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+      this.dataGridViewTextBoxColumn5.ReadOnly = true;
       // 
-      // dataGridViewTextBoxColumn2
+      // dataGridViewTextBoxColumn6
       // 
-      this.dataGridViewTextBoxColumn2.DataPropertyName = "Username";
-      this.dataGridViewTextBoxColumn2.HeaderText = "Username";
-      this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-      // 
-      // button2
-      // 
-      this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.button2.Location = new System.Drawing.Point(153, 102);
-      this.button2.Name = "button2";
-      this.button2.Size = new System.Drawing.Size(75, 23);
-      this.button2.TabIndex = 7;
-      this.button2.Text = "&Clear";
-      this.button2.UseVisualStyleBackColor = true;
+      this.dataGridViewTextBoxColumn6.DataPropertyName = "Username";
+      this.dataGridViewTextBoxColumn6.HeaderText = "Username";
+      this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+      this.dataGridViewTextBoxColumn6.ReadOnly = true;
       // 
       // frmUsers
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(334, 395);
-      this.Controls.Add(this.button2);
+      this.Controls.Add(this.btnClear);
       this.Controls.Add(this.btnClose);
       this.Controls.Add(this.dataGridView1);
       this.Controls.Add(this.label2);
       this.Controls.Add(this.txtPassword);
       this.Controls.Add(this.label1);
-      this.Controls.Add(this.button1);
+      this.Controls.Add(this.btnSave);
       this.Controls.Add(this.txtUsername);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+      this.MaximizeBox = false;
+      this.MinimizeBox = false;
       this.Name = "frmUsers";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Users";
       this.Load += new System.EventHandler(this.frmUsers_Load);
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.vehiclePurchaseManagementsDataSet)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.vehiclePurchaseManagementsDataSet)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -191,20 +201,24 @@ namespace VehicleManagementSystem.Forms
     #endregion
 
     private System.Windows.Forms.TextBox txtUsername;
-    private System.Windows.Forms.Button button1;
+    private System.Windows.Forms.Button btnSave;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.TextBox txtPassword;
     private System.Windows.Forms.DataGridView dataGridView1;
-    private System.Windows.Forms.BindingSource usersBindingSource;
+    private System.Windows.Forms.Button btnClose;
+    private System.Windows.Forms.Button btnClear;
     private System.Windows.Forms.DataGridViewTextBoxColumn userIdDataGridViewTextBoxColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
-    private System.Windows.Forms.Button btnClose;
-    private VehiclePurchaseManagementsDataSet vehiclePurchaseManagementsDataSet;
-    private System.Windows.Forms.BindingSource userBindingSource;
-    private VehiclePurchaseManagementsDataSetTableAdapters.UserTableAdapter userTableAdapter;
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-    private System.Windows.Forms.Button button2;
+    private System.Windows.Forms.BindingSource userBindingSource;
+    private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+    private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+    private VehiclePurchaseManagementsDataSet vehiclePurchaseManagementsDataSet;
+    private System.Windows.Forms.BindingSource userBindingSource1;
+    private VehiclePurchaseManagementsDataSetTableAdapters.UserTableAdapter userTableAdapter;
+    private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+    private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
   }
 }
