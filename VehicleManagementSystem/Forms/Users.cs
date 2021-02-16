@@ -48,6 +48,7 @@ namespace VehicleManagementSystem.Forms
       this.userTableAdapter.Fill(this.vehiclePurchaseManagementsDataSet.User);
       ve = new VehicleManagementEntities();
       userBindingSource.DataSource = ve.Users.ToList();
+      btnUpdate.Visible = false;
     }
 
 
@@ -70,22 +71,18 @@ namespace VehicleManagementSystem.Forms
 
       if (Id != 0)
       {
-        
+        btnSave.Visible = false;
+        btnUpdate.Visible = true;
       }
     }
-
-    //private void button2_Click(object sender, EventArgs e)
-    //{
-    //  txtUsername.Text = "";
-    //  txtPassword.Text = "";
-    //  Id = 0;
-    //}
 
     private void btnClear_Click(object sender, EventArgs e)
     {
       txtUsername.Text = "";
       txtPassword.Text = "";
       Id = 0;
+      btnUpdate.Visible = false;
+      btnSave.Visible = true;
     }
   }
 }

@@ -44,6 +44,7 @@ namespace VehicleManagementSystem.Forms
       this.userTableAdapter = new VehicleManagementSystem.VehiclePurchaseManagementsDataSetTableAdapters.UserTableAdapter();
       this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.btnUpdate = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.vehiclePurchaseManagementsDataSet)).BeginInit();
@@ -169,11 +170,22 @@ namespace VehicleManagementSystem.Forms
       this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
       this.dataGridViewTextBoxColumn6.ReadOnly = true;
       // 
+      // btnUpdate
+      // 
+      this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.btnUpdate.Location = new System.Drawing.Point(234, 102);
+      this.btnUpdate.Name = "btnUpdate";
+      this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+      this.btnUpdate.TabIndex = 8;
+      this.btnUpdate.Text = "&Update";
+      this.btnUpdate.UseVisualStyleBackColor = true;
+      // 
       // frmUsers
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(334, 395);
+      this.Controls.Add(this.btnUpdate);
       this.Controls.Add(this.btnClear);
       this.Controls.Add(this.btnClose);
       this.Controls.Add(this.dataGridView1);
@@ -220,5 +232,6 @@ namespace VehicleManagementSystem.Forms
     private VehiclePurchaseManagementsDataSetTableAdapters.UserTableAdapter userTableAdapter;
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+    private System.Windows.Forms.Button btnUpdate;
   }
 }
