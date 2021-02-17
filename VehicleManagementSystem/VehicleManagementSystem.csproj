@@ -122,6 +122,12 @@
     <Compile Include="VehicleType.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="VehicleTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VehicleTypes.Designer.cs">
+      <DependentUpon>VehicleTypes.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -140,6 +146,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="VehicleTypes.resx">
+      <DependentUpon>VehicleTypes.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>

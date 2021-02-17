@@ -44,36 +44,27 @@ namespace VehicleManagementSystem.Forms
 
     private void frmUsers_Load(object sender, EventArgs e)
     {
-      // TODO: This line of code loads data into the 'vehiclePurchaseManagementsDataSet.User' table. You can move, or remove it, as needed.
-      this.userTableAdapter.Fill(this.vehiclePurchaseManagementsDataSet.User);
-      ve = new VehicleManagementEntities();
-      userBindingSource.DataSource = ve.Users.ToList();
+      Cursor.Current = Cursors.WaitCursor;
       btnUpdate.Visible = false;
+      listUsers.HideSelection = false;
+      listUsers.FullRowSelect = true;
+      using(ve = new VehicleManagementEntities())
+      {
+        List<User> list = ve.Users.ToList();
+        foreach(User u in list)
+        {
+          ListViewItem item = new ListViewItem(u.UserId.ToString());
+          item.SubItems.Add(u.Username);
+          listUsers.Items.Add(item);
+        }
+      }
+      Cursor.Current = Cursors.Default;
     }
 
 
     private void btnClose_Click(object sender, EventArgs e)
     {
       this.Hide();
-    }
-
-    private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-    {
-      if(dataGridView1.Rows[e.RowIndex].Cells[1].Value != null)
-      {
-        Id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
-        txtUsername.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-      }
-      else
-      {
-        MessageBox.Show("You've selected an invalid item.");
-      }
-
-      if (Id != 0)
-      {
-        btnSave.Visible = false;
-        btnUpdate.Visible = true;
-      }
     }
 
     private void btnClear_Click(object sender, EventArgs e)
@@ -83,6 +74,20 @@ namespace VehicleManagementSystem.Forms
       Id = 0;
       btnUpdate.Visible = false;
       btnSave.Visible = true;
+    }
+
+    private void listUsers_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      ListView.SelectedListViewItemCollection selectedUser = this.listUsers.SelectedItems;
+      string username = "";
+      foreach(ListViewItem item in selectedUser)
+      {
+        Id = Int32.Parse(item.SubItems[0].Text);
+        username = item.SubItems[1].Text;
+      }
+      txtUsername.Text = username;
+      btnSave.Visible = false;
+      btnUpdate.Visible = true;
     }
   }
 }

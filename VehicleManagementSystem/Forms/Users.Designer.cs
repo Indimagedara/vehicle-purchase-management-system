@@ -35,20 +35,16 @@ namespace VehicleManagementSystem.Forms
       this.label1 = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
       this.txtPassword = new System.Windows.Forms.TextBox();
-      this.dataGridView1 = new System.Windows.Forms.DataGridView();
+      this.userBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
       this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.btnClose = new System.Windows.Forms.Button();
       this.btnClear = new System.Windows.Forms.Button();
-      this.vehiclePurchaseManagementsDataSet = new VehicleManagementSystem.VehiclePurchaseManagementsDataSet();
-      this.userBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-      this.userTableAdapter = new VehicleManagementSystem.VehiclePurchaseManagementsDataSetTableAdapters.UserTableAdapter();
-      this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.btnUpdate = new System.Windows.Forms.Button();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.vehiclePurchaseManagementsDataSet)).BeginInit();
+      this.listUsers = new System.Windows.Forms.ListView();
+      this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
       this.SuspendLayout();
       // 
       // txtUsername
@@ -98,23 +94,9 @@ namespace VehicleManagementSystem.Forms
       this.txtPassword.Size = new System.Drawing.Size(187, 22);
       this.txtPassword.TabIndex = 3;
       // 
-      // dataGridView1
+      // userBindingSource1
       // 
-      this.dataGridView1.AllowUserToAddRows = false;
-      this.dataGridView1.AllowUserToDeleteRows = false;
-      this.dataGridView1.AllowUserToOrderColumns = true;
-      this.dataGridView1.AutoGenerateColumns = false;
-      this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6});
-      this.dataGridView1.DataSource = this.userBindingSource1;
-      this.dataGridView1.Location = new System.Drawing.Point(42, 164);
-      this.dataGridView1.Name = "dataGridView1";
-      this.dataGridView1.ReadOnly = true;
-      this.dataGridView1.Size = new System.Drawing.Size(267, 152);
-      this.dataGridView1.TabIndex = 5;
-      this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
+      this.userBindingSource1.DataMember = "User";
       // 
       // userBindingSource
       // 
@@ -142,34 +124,6 @@ namespace VehicleManagementSystem.Forms
       this.btnClear.UseVisualStyleBackColor = true;
       this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
       // 
-      // vehiclePurchaseManagementsDataSet
-      // 
-      this.vehiclePurchaseManagementsDataSet.DataSetName = "VehiclePurchaseManagementsDataSet";
-      this.vehiclePurchaseManagementsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-      // 
-      // userBindingSource1
-      // 
-      this.userBindingSource1.DataMember = "User";
-      this.userBindingSource1.DataSource = this.vehiclePurchaseManagementsDataSet;
-      // 
-      // userTableAdapter
-      // 
-      this.userTableAdapter.ClearBeforeFill = true;
-      // 
-      // dataGridViewTextBoxColumn5
-      // 
-      this.dataGridViewTextBoxColumn5.DataPropertyName = "UserId";
-      this.dataGridViewTextBoxColumn5.HeaderText = "UserId";
-      this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-      this.dataGridViewTextBoxColumn5.ReadOnly = true;
-      // 
-      // dataGridViewTextBoxColumn6
-      // 
-      this.dataGridViewTextBoxColumn6.DataPropertyName = "Username";
-      this.dataGridViewTextBoxColumn6.HeaderText = "Username";
-      this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-      this.dataGridViewTextBoxColumn6.ReadOnly = true;
-      // 
       // btnUpdate
       // 
       this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -180,15 +134,42 @@ namespace VehicleManagementSystem.Forms
       this.btnUpdate.Text = "&Update";
       this.btnUpdate.UseVisualStyleBackColor = true;
       // 
+      // listUsers
+      // 
+      this.listUsers.Activation = System.Windows.Forms.ItemActivation.OneClick;
+      this.listUsers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+      this.listUsers.GridLines = true;
+      this.listUsers.HideSelection = false;
+      this.listUsers.Location = new System.Drawing.Point(44, 155);
+      this.listUsers.MultiSelect = false;
+      this.listUsers.Name = "listUsers";
+      this.listUsers.Size = new System.Drawing.Size(267, 168);
+      this.listUsers.TabIndex = 9;
+      this.listUsers.UseCompatibleStateImageBehavior = false;
+      this.listUsers.View = System.Windows.Forms.View.Details;
+      this.listUsers.SelectedIndexChanged += new System.EventHandler(this.listUsers_SelectedIndexChanged);
+      // 
+      // columnHeader1
+      // 
+      this.columnHeader1.Text = "User Id";
+      this.columnHeader1.Width = 100;
+      // 
+      // columnHeader2
+      // 
+      this.columnHeader2.Text = "Username";
+      this.columnHeader2.Width = 150;
+      // 
       // frmUsers
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(334, 395);
+      this.Controls.Add(this.listUsers);
       this.Controls.Add(this.btnUpdate);
       this.Controls.Add(this.btnClear);
       this.Controls.Add(this.btnClose);
-      this.Controls.Add(this.dataGridView1);
       this.Controls.Add(this.label2);
       this.Controls.Add(this.txtPassword);
       this.Controls.Add(this.label1);
@@ -201,10 +182,8 @@ namespace VehicleManagementSystem.Forms
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Users";
       this.Load += new System.EventHandler(this.frmUsers_Load);
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.vehiclePurchaseManagementsDataSet)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -217,7 +196,6 @@ namespace VehicleManagementSystem.Forms
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.TextBox txtPassword;
-    private System.Windows.Forms.DataGridView dataGridView1;
     private System.Windows.Forms.Button btnClose;
     private System.Windows.Forms.Button btnClear;
     private System.Windows.Forms.DataGridViewTextBoxColumn userIdDataGridViewTextBoxColumn;
@@ -233,5 +211,8 @@ namespace VehicleManagementSystem.Forms
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     private System.Windows.Forms.Button btnUpdate;
+    private System.Windows.Forms.ListView listUsers;
+    private System.Windows.Forms.ColumnHeader columnHeader1;
+    private System.Windows.Forms.ColumnHeader columnHeader2;
   }
 }
