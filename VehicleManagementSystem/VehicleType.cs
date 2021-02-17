@@ -15,6 +15,6 @@ namespace VehicleManagementSystem
     public partial class VehicleType
     {
         public long VehicleTypeId { get; set; }
-        public string VehicleType1 { get; set; }
+        public string VehiType { get; set; }
     }
 }

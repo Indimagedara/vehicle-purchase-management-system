@@ -89,5 +89,20 @@ namespace VehicleManagementSystem.Forms
       btnSave.Visible = false;
       btnUpdate.Visible = true;
     }
+
+    private void btnUpdate_Click(object sender, EventArgs e)
+    {
+      if (!string.IsNullOrEmpty(txtUsername.Text))
+      {
+        ve = new VehicleManagementEntities();
+        var singleUser = ve.Users.Where(r => r.UserId == Id).First();
+        singleUser.Username = txtUsername.Text;
+        singleUser.Password = BCrypt.Net.BCrypt.HashString(txtPassword.Text);
+        ve.SaveChanges();
+        MessageBox.Show("Successfully updated!");
+        Id = 0;
+        userBindingSource.DataSource = ve.Users.ToList();
+      }
+    }
   }
 }

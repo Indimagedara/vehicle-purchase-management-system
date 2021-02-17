@@ -108,7 +108,7 @@ namespace VehicleManagementSystem.Forms
       this.btnClose.Location = new System.Drawing.Point(234, 340);
       this.btnClose.Name = "btnClose";
       this.btnClose.Size = new System.Drawing.Size(75, 23);
-      this.btnClose.TabIndex = 6;
+      this.btnClose.TabIndex = 2;
       this.btnClose.Text = "&Close";
       this.btnClose.UseVisualStyleBackColor = true;
       this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -133,6 +133,7 @@ namespace VehicleManagementSystem.Forms
       this.btnUpdate.TabIndex = 8;
       this.btnUpdate.Text = "&Update";
       this.btnUpdate.UseVisualStyleBackColor = true;
+      this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
       // 
       // listUsers
       // 

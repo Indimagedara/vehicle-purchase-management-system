@@ -23,5 +23,11 @@ namespace VehicleManagementSystem
       frmUsers users = new frmUsers();
       users.Show();
     }
+
+    private void vehicleTypesToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      frmVehicleType vehicleType = new frmVehicleType();
+      vehicleType.Show();
+    }
   }
 }

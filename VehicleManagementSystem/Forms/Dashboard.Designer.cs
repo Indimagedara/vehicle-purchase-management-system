@@ -33,6 +33,8 @@ namespace VehicleManagementSystem
       this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.vehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.vehicleTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -44,7 +46,8 @@ namespace VehicleManagementSystem
       // menuStrip1
       // 
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usersToolStripMenuItem});
+            this.usersToolStripMenuItem,
+            this.vehicleToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -57,6 +60,21 @@ namespace VehicleManagementSystem
       this.usersToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
       this.usersToolStripMenuItem.Text = "Users";
       this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
+      // 
+      // vehicleToolStripMenuItem
+      // 
+      this.vehicleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.vehicleTypesToolStripMenuItem});
+      this.vehicleToolStripMenuItem.Name = "vehicleToolStripMenuItem";
+      this.vehicleToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+      this.vehicleToolStripMenuItem.Text = "Vehicle";
+      // 
+      // vehicleTypesToolStripMenuItem
+      // 
+      this.vehicleTypesToolStripMenuItem.Name = "vehicleTypesToolStripMenuItem";
+      this.vehicleTypesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.vehicleTypesToolStripMenuItem.Text = "Vehicle Types";
+      this.vehicleTypesToolStripMenuItem.Click += new System.EventHandler(this.vehicleTypesToolStripMenuItem_Click);
       // 
       // frmDashboard
       // 
@@ -80,5 +98,7 @@ namespace VehicleManagementSystem
     private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     private System.Windows.Forms.MenuStrip menuStrip1;
     private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem vehicleToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem vehicleTypesToolStripMenuItem;
   }
 }
