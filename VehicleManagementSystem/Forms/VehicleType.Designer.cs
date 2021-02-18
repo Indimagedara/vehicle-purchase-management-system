@@ -94,7 +94,7 @@ namespace VehicleManagementSystem.Forms
       // btnSave
       // 
       this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.btnSave.Location = new System.Drawing.Point(234, 122);
+      this.btnSave.Location = new System.Drawing.Point(235, 101);
       this.btnSave.Name = "btnSave";
       this.btnSave.Size = new System.Drawing.Size(75, 23);
       this.btnSave.TabIndex = 13;
@@ -108,6 +108,7 @@ namespace VehicleManagementSystem.Forms
       this.listVehicleTypes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+      this.listVehicleTypes.FullRowSelect = true;
       this.listVehicleTypes.GridLines = true;
       this.listVehicleTypes.HideSelection = false;
       this.listVehicleTypes.Location = new System.Drawing.Point(43, 151);
@@ -117,6 +118,7 @@ namespace VehicleManagementSystem.Forms
       this.listVehicleTypes.TabIndex = 14;
       this.listVehicleTypes.UseCompatibleStateImageBehavior = false;
       this.listVehicleTypes.View = System.Windows.Forms.View.Details;
+      this.listVehicleTypes.SelectedIndexChanged += new System.EventHandler(this.listVehicleTypes_SelectedIndexChanged);
       // 
       // columnHeader1
       // 

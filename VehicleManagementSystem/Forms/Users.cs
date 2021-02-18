@@ -35,6 +35,7 @@ namespace VehicleManagementSystem.Forms
         txtPassword.Text = "";
         userBindingSource.DataSource = ve.Users.ToList();
         MessageBox.Show("Successfully added!");
+        displayData();
       }
       else
       {
@@ -44,21 +45,7 @@ namespace VehicleManagementSystem.Forms
 
     private void frmUsers_Load(object sender, EventArgs e)
     {
-      Cursor.Current = Cursors.WaitCursor;
-      btnUpdate.Visible = false;
-      listUsers.HideSelection = false;
-      listUsers.FullRowSelect = true;
-      using(ve = new VehicleManagementEntities())
-      {
-        List<User> list = ve.Users.ToList();
-        foreach(User u in list)
-        {
-          ListViewItem item = new ListViewItem(u.UserId.ToString());
-          item.SubItems.Add(u.Username);
-          listUsers.Items.Add(item);
-        }
-      }
-      Cursor.Current = Cursors.Default;
+      displayData();
     }
 
 
@@ -90,9 +77,28 @@ namespace VehicleManagementSystem.Forms
       btnUpdate.Visible = true;
     }
 
+    private void displayData() {
+      Cursor.Current = Cursors.WaitCursor;
+      btnUpdate.Visible = false;
+      listUsers.HideSelection = false;
+      listUsers.FullRowSelect = true;
+      listUsers.Items.Clear();
+      using (ve = new VehicleManagementEntities())
+      {
+        List<User> list = ve.Users.ToList();
+        foreach (User u in list)
+        {
+          ListViewItem item = new ListViewItem(u.UserId.ToString());
+          item.SubItems.Add(u.Username);
+          listUsers.Items.Add(item);
+        }
+      }
+      Cursor.Current = Cursors.Default;
+    }
+
     private void btnUpdate_Click(object sender, EventArgs e)
     {
-      if (!string.IsNullOrEmpty(txtUsername.Text))
+      if (!string.IsNullOrEmpty(txtUsername.Text) && !string.IsNullOrEmpty(txtPassword.Text))
       {
         ve = new VehicleManagementEntities();
         var singleUser = ve.Users.Where(r => r.UserId == Id).First();
@@ -101,7 +107,13 @@ namespace VehicleManagementSystem.Forms
         ve.SaveChanges();
         MessageBox.Show("Successfully updated!");
         Id = 0;
-        userBindingSource.DataSource = ve.Users.ToList();
+        displayData();
+        txtPassword.Text = "";
+        txtUsername.Text = "";
+      }
+      else
+      {
+        MessageBox.Show("Cannot update empty fields!");
       }
     }
   }

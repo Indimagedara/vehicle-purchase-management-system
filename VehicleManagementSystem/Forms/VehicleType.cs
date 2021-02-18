@@ -14,6 +14,7 @@ namespace VehicleManagementSystem.Forms
   {
     VehicleManagementEntities ve;
     int Id = 0;
+    int index = 0;
     public frmVehicleType()
     {
       InitializeComponent();
@@ -33,23 +34,7 @@ namespace VehicleManagementSystem.Forms
 
     private void frmVehicleType_Load(object sender, EventArgs e)
     {
-      Cursor.Current = Cursors.WaitCursor;
-      btnSave.Visible = true;
-      btnUpdate.Visible = false;
-
-      using(ve = new VehicleManagementEntities())
-      {
-        List<VehicleType> list = ve.VehicleTypes.ToList();
-        foreach(VehicleType v in list)
-        {
-          ListViewItem item = new ListViewItem(v.VehicleTypeId.ToString());
-          item.SubItems.Add(v.VehiType);
-          listVehicleTypes.Items.Add(item);
-        }
-      }
-      Cursor.Current = Cursors.Default;
-
-
+      displayData();
     }
 
     private void btnSave_Click(object sender, EventArgs e)
@@ -65,6 +50,7 @@ namespace VehicleManagementSystem.Forms
         ve.SaveChanges();
         txtVehicleType.Text = "";
         MessageBox.Show("Successfully saved!");
+        displayData();
       }
 
     }
@@ -77,9 +63,42 @@ namespace VehicleManagementSystem.Forms
         var singleVehiType = ve.VehicleTypes.Where(r => r.VehicleTypeId == Id).First();
         singleVehiType.VehiType = txtVehicleType.Text;
         ve.SaveChanges();
+        displayData();
         MessageBox.Show("Successfully updated!");
         Id = 0;
+        txtVehicleType.Text = "";
       }
+    }
+    private void displayData()
+    {
+      Cursor.Current = Cursors.WaitCursor;
+      btnSave.Visible = true;
+      btnUpdate.Visible = false;
+      listVehicleTypes.Items.Clear();
+      using (ve = new VehicleManagementEntities())
+      {
+        List<VehicleType> list = ve.VehicleTypes.ToList();
+        foreach (VehicleType v in list)
+        {
+          ListViewItem item = new ListViewItem(v.VehicleTypeId.ToString());
+          item.SubItems.Add(v.VehiType);
+          listVehicleTypes.Items.Add(item);
+        }
+      }
+      Cursor.Current = Cursors.Default;
+    }
+    private void listVehicleTypes_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      ListView.SelectedListViewItemCollection selectedVehicleType = this.listVehicleTypes.SelectedItems;
+      string vehicleType = "";
+      foreach (ListViewItem item in selectedVehicleType)
+      {
+        Id = Int32.Parse(item.SubItems[0].Text);
+        vehicleType = item.SubItems[1].Text;
+      }
+      txtVehicleType.Text = vehicleType;
+      btnSave.Visible = false;
+      btnUpdate.Visible = true;
     }
   }
 }
