@@ -142,6 +142,7 @@ namespace VehicleManagementSystem.Forms
       this.listUsers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+      this.listUsers.FullRowSelect = true;
       this.listUsers.GridLines = true;
       this.listUsers.HideSelection = false;
       this.listUsers.Location = new System.Drawing.Point(44, 155);

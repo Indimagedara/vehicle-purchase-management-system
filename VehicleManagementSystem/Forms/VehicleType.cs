@@ -51,6 +51,7 @@ namespace VehicleManagementSystem.Forms
         txtVehicleType.Text = "";
         MessageBox.Show("Successfully saved!");
         displayData();
+        txtVehicleType.Text = "";
       }
 
     }

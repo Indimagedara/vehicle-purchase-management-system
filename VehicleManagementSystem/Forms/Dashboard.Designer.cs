@@ -35,6 +35,7 @@ namespace VehicleManagementSystem
       this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.vehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.vehicleTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.vehicleCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -64,7 +65,8 @@ namespace VehicleManagementSystem
       // vehicleToolStripMenuItem
       // 
       this.vehicleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.vehicleTypesToolStripMenuItem});
+            this.vehicleTypesToolStripMenuItem,
+            this.vehicleCategoryToolStripMenuItem});
       this.vehicleToolStripMenuItem.Name = "vehicleToolStripMenuItem";
       this.vehicleToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
       this.vehicleToolStripMenuItem.Text = "Vehicle";
@@ -75,6 +77,13 @@ namespace VehicleManagementSystem
       this.vehicleTypesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
       this.vehicleTypesToolStripMenuItem.Text = "Vehicle Types";
       this.vehicleTypesToolStripMenuItem.Click += new System.EventHandler(this.vehicleTypesToolStripMenuItem_Click);
+      // 
+      // vehicleCategoryToolStripMenuItem
+      // 
+      this.vehicleCategoryToolStripMenuItem.Name = "vehicleCategoryToolStripMenuItem";
+      this.vehicleCategoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.vehicleCategoryToolStripMenuItem.Text = "Vehicle Category";
+      this.vehicleCategoryToolStripMenuItem.Click += new System.EventHandler(this.vehicleCategoryToolStripMenuItem_Click);
       // 
       // frmDashboard
       // 
@@ -100,5 +109,6 @@ namespace VehicleManagementSystem
     private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem vehicleToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem vehicleTypesToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem vehicleCategoryToolStripMenuItem;
   }
 }

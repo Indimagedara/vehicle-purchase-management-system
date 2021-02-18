@@ -33,9 +33,10 @@ namespace VehicleManagementSystem.Forms
         ve.SaveChanges();
         txtUsername.Text = "";
         txtPassword.Text = "";
-        userBindingSource.DataSource = ve.Users.ToList();
         MessageBox.Show("Successfully added!");
         displayData();
+        txtUsername.Text = "";
+        txtPassword.Text = "";
       }
       else
       {
@@ -80,8 +81,8 @@ namespace VehicleManagementSystem.Forms
     private void displayData() {
       Cursor.Current = Cursors.WaitCursor;
       btnUpdate.Visible = false;
-      listUsers.HideSelection = false;
-      listUsers.FullRowSelect = true;
+      btnSave.Visible = true;
+      btnUpdate.Visible = false;
       listUsers.Items.Clear();
       using (ve = new VehicleManagementEntities())
       {

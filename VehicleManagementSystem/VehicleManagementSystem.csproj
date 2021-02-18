@@ -85,6 +85,12 @@
     <Compile Include="Forms\Users.Designer.cs">
       <DependentUpon>Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\VehicleCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\VehicleCategory.Designer.cs">
+      <DependentUpon>VehicleCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\VehicleType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Users.resx">
       <DependentUpon>Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VehicleCategory.resx">
+      <DependentUpon>VehicleCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\VehicleType.resx">
       <DependentUpon>VehicleType.cs</DependentUpon>

@@ -29,5 +29,11 @@ namespace VehicleManagementSystem
       frmVehicleType vehicleType = new frmVehicleType();
       vehicleType.Show();
     }
+
+    private void vehicleCategoryToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      frmVehicleCategory vehicleCategory = new frmVehicleCategory();
+      vehicleCategory.Show();
+    }
   }
 }
