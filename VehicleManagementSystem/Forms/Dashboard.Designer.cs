@@ -36,6 +36,7 @@ namespace VehicleManagementSystem
       this.vehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.vehicleTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.vehicleCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -48,7 +49,8 @@ namespace VehicleManagementSystem
       // 
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.usersToolStripMenuItem,
-            this.vehicleToolStripMenuItem});
+            this.vehicleToolStripMenuItem,
+            this.employeesToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -85,6 +87,13 @@ namespace VehicleManagementSystem
       this.vehicleCategoryToolStripMenuItem.Text = "Vehicle Category";
       this.vehicleCategoryToolStripMenuItem.Click += new System.EventHandler(this.vehicleCategoryToolStripMenuItem_Click);
       // 
+      // employeesToolStripMenuItem
+      // 
+      this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
+      this.employeesToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+      this.employeesToolStripMenuItem.Text = "Employees";
+      this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
+      // 
       // frmDashboard
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -110,5 +119,6 @@ namespace VehicleManagementSystem
     private System.Windows.Forms.ToolStripMenuItem vehicleToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem vehicleTypesToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem vehicleCategoryToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
   }
 }

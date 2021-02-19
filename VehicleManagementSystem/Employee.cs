@@ -18,8 +18,8 @@ namespace VehicleManagementSystem
         public string EmployeeName { get; set; }
         public string Nic { get; set; }
         public string Phone { get; set; }
-        public bool Type { get; set; }
-        public bool SalaryType { get; set; }
+        public string EmpType { get; set; }
+        public string SalaryType { get; set; }
         public double Salary { get; set; }
     }
 }

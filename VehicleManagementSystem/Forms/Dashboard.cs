@@ -35,5 +35,11 @@ namespace VehicleManagementSystem
       frmVehicleCategory vehicleCategory = new frmVehicleCategory();
       vehicleCategory.Show();
     }
+
+    private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      frmEmployees employees = new frmEmployees();
+      employees.Show();
+    }
   }
 }

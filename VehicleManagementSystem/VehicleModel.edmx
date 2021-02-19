@@ -20,8 +20,8 @@
           <Property Name="EmployeeName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Nic" Type="varchar" MaxLength="50" />
           <Property Name="Phone" Type="varchar" MaxLength="15" />
-          <Property Name="Type" Type="bit" Nullable="false" />
-          <Property Name="SalaryType" Type="bit" Nullable="false" />
+          <Property Name="EmpType" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="SalaryType" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Salary" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="InventoryItems">
@@ -92,18 +92,6 @@
           <Property Name="CategoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="EmployeeId" />
-          </Key>
-          <Property Name="EmployeeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Nic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Type" Type="Boolean" Nullable="false" />
-          <Property Name="SalaryType" Type="Boolean" Nullable="false" />
-          <Property Name="Salary" Type="Double" Nullable="false" />
-        </EntityType>
         <EntityType Name="InventoryItem">
           <Key>
             <PropertyRef Name="InventoryItems" />
@@ -147,12 +135,12 @@
         </EntityType>
         <EntityContainer Name="VehicleManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="InventoryItems" EntityType="Self.InventoryItem" />
           <EntitySet Name="PartInventories" EntityType="Self.PartInventory" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
           <EntitySet Name="VehicleTypes" EntityType="VehiclePurchaseManagementsModel.VehicleType" />
+          <EntitySet Name="Employees" EntityType="VehiclePurchaseManagementsModel.Employee" />
         </EntityContainer>
         <EntityType Name="VehicleType">
           <Key>
@@ -160,6 +148,18 @@
           </Key>
           <Property Name="VehicleTypeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VehiType" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EmpType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SalaryType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Double" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -172,19 +172,6 @@
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Category1" ColumnName="Category" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Employee">
-              <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="Nic" ColumnName="Nic" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="SalaryType" ColumnName="SalaryType" />
-                <ScalarProperty Name="Salary" ColumnName="Salary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -238,6 +225,19 @@
               <MappingFragment StoreEntitySet="VehicleType">
                 <ScalarProperty Name="VehiType" ColumnName="VehiType" />
                 <ScalarProperty Name="VehicleTypeId" ColumnName="VehicleTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="SalaryType" ColumnName="SalaryType" />
+                <ScalarProperty Name="EmpType" ColumnName="EmpType" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Nic" ColumnName="Nic" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
