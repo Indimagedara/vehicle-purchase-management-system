@@ -59,15 +59,22 @@ namespace VehicleManagementSystem.Forms
       if(txtItem.Text != null)
       {
         ve = new VehicleManagementEntities();
-        InventoryItem inventoryItem = new InventoryItem()
+        if (ve.InventoryItems.Any(o => o.ItemName == txtItem.Text))
         {
-          ItemName = txtItem.Text
-        };
-        ve.InventoryItems.Add(inventoryItem);
-        ve.SaveChanges();
-        MessageBox.Show("Successfully saved");
-        clearValues();
-        displayData();
+          MessageBox.Show("Item already exists");
+        }
+        else
+        {
+          InventoryItem inventoryItem = new InventoryItem()
+          {
+            ItemName = txtItem.Text
+          };
+          ve.InventoryItems.Add(inventoryItem);
+          ve.SaveChanges();
+          MessageBox.Show("Successfully saved");
+          clearValues();
+          displayData();
+        }
       }
       else
       {

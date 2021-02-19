@@ -42,16 +42,23 @@ namespace VehicleManagementSystem.Forms
       if(txtVehicleType.Text != null)
       {
         ve = new VehicleManagementEntities();
-        VehicleType vehicleType = new VehicleType()
+        if (ve.VehicleTypes.Any(o => o.VehiType == txtVehicleType.Text))
         {
-          VehiType = txtVehicleType.Text
-        };
-        ve.VehicleTypes.Add(vehicleType);
-        ve.SaveChanges();
-        txtVehicleType.Text = "";
-        MessageBox.Show("Successfully saved!");
-        displayData();
-        txtVehicleType.Text = "";
+          MessageBox.Show("Vehicle Type already exists");
+        }
+        else
+        {
+          VehicleType vehicleType = new VehicleType()
+          {
+            VehiType = txtVehicleType.Text
+          };
+          ve.VehicleTypes.Add(vehicleType);
+          ve.SaveChanges();
+          txtVehicleType.Text = "";
+          MessageBox.Show("Successfully saved!");
+          displayData();
+          txtVehicleType.Text = "";
+        }
       }
 
     }

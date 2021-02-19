@@ -21,22 +21,29 @@ namespace VehicleManagementSystem.Forms
 
     private void BtnSave(object sender, EventArgs e)
     {
-      ve = new VehicleManagementEntities();
       if(txtUsername.Text != null && txtPassword.Text != null)
       {
-        User users = new User()
+        ve = new VehicleManagementEntities();
+        if (ve.Users.Any(o => o.Username == txtUsername.Text))
         {
-          Username = txtUsername.Text,
-          Password = BCrypt.Net.BCrypt.HashString(txtPassword.Text),
-        };
-        ve.Users.Add(users);
-        ve.SaveChanges();
-        txtUsername.Text = "";
-        txtPassword.Text = "";
-        MessageBox.Show("Successfully added!");
-        displayData();
-        txtUsername.Text = "";
-        txtPassword.Text = "";
+          MessageBox.Show("User already exists");
+        }
+        else
+        {
+          User users = new User()
+          {
+            Username = txtUsername.Text,
+            Password = BCrypt.Net.BCrypt.HashString(txtPassword.Text),
+          };
+          ve.Users.Add(users);
+          ve.SaveChanges();
+          txtUsername.Text = "";
+          txtPassword.Text = "";
+          MessageBox.Show("Successfully added!");
+          displayData();
+          txtUsername.Text = "";
+          txtPassword.Text = "";        
+        }
       }
       else
       {

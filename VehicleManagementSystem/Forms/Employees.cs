@@ -24,25 +24,32 @@ namespace VehicleManagementSystem.Forms
       if(txtName.Text != null && txtNic.Text != null && txtPhone.Text != null && cmbEmpType.SelectedItem != null && cmbSalType.SelectedItem != null)
       {
         ve = new VehicleManagementEntities();
-        Employee employee = new Employee()
+        if (ve.Employees.Any(o => o.Nic == txtNic.Text))
         {
-          EmployeeName = txtName.Text,
-          Nic = txtNic.Text,
-          Phone = txtPhone.Text,
-          EmpType = cmbEmpType.Text,
-          SalaryType = cmbSalType.Text,
-          Salary = Int32.Parse(txtSalary.Text)
-        };
-        ve.Employees.Add(employee);
-        ve.SaveChanges();
-        txtName.Text = "";
-        txtNic.Text = "";
-        txtPhone.Text = "";
-        txtSalary.Text = "";
-        cmbEmpType.Text = "";
-        cmbSalType.Text = "";
-        displayData();
-        MessageBox.Show("Saved successfully");
+          MessageBox.Show("Employee already exists");
+        }
+        else
+        {
+          Employee employee = new Employee()
+          {
+            EmployeeName = txtName.Text,
+            Nic = txtNic.Text,
+            Phone = txtPhone.Text,
+            EmpType = cmbEmpType.Text,
+            SalaryType = cmbSalType.Text,
+            Salary = Int32.Parse(txtSalary.Text)
+          };
+          ve.Employees.Add(employee);
+          ve.SaveChanges();
+          txtName.Text = "";
+          txtNic.Text = "";
+          txtPhone.Text = "";
+          txtSalary.Text = "";
+          cmbEmpType.Text = "";
+          cmbSalType.Text = "";
+          displayData();
+          MessageBox.Show("Saved successfully");
+        }
       }
       else
       {

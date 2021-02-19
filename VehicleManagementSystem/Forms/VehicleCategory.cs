@@ -46,19 +46,26 @@ namespace VehicleManagementSystem.Forms
 
     private void btnSave_Click(object sender, EventArgs e)
     {
-      ve = new VehicleManagementEntities();
       if (txtCategory.Text != null)
       {
-        Category category = new Category()
+        ve = new VehicleManagementEntities();
+        if (ve.Categories.Any(o => o.Category1 == txtCategory.Text))
         {
-          Category1 = txtCategory.Text,
-        };
-        ve.Categories.Add(category);
-        ve.SaveChanges();
-        txtCategory.Text = "";
-        MessageBox.Show("Successfully added!");
-        displayData();
-        txtCategory.Text = "";
+          MessageBox.Show("Category already exists");
+        }
+        else
+        {
+          Category category = new Category()
+          {
+            Category1 = txtCategory.Text,
+          };
+          ve.Categories.Add(category);
+          ve.SaveChanges();
+          txtCategory.Text = "";
+          MessageBox.Show("Successfully added!");
+          displayData();
+          txtCategory.Text = "";
+        }
       }
       else
       {
