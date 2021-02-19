@@ -38,6 +38,11 @@ namespace VehicleManagementSystem
       this.vehicleCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+      this.staffManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.employeesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+      this.usersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+      this.addVehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -52,7 +57,9 @@ namespace VehicleManagementSystem
             this.usersToolStripMenuItem,
             this.vehicleToolStripMenuItem,
             this.employeesToolStripMenuItem,
-            this.inventoryToolStripMenuItem});
+            this.inventoryToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.staffManagementToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -62,18 +69,17 @@ namespace VehicleManagementSystem
       // usersToolStripMenuItem
       // 
       this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-      this.usersToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-      this.usersToolStripMenuItem.Text = "Users";
-      this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
+      this.usersToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
       // 
       // vehicleToolStripMenuItem
       // 
       this.vehicleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addVehicleToolStripMenuItem,
             this.vehicleTypesToolStripMenuItem,
             this.vehicleCategoryToolStripMenuItem});
       this.vehicleToolStripMenuItem.Name = "vehicleToolStripMenuItem";
-      this.vehicleToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-      this.vehicleToolStripMenuItem.Text = "Vehicle";
+      this.vehicleToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
+      this.vehicleToolStripMenuItem.Text = "Vehicle Management";
       // 
       // vehicleTypesToolStripMenuItem
       // 
@@ -92,9 +98,7 @@ namespace VehicleManagementSystem
       // employeesToolStripMenuItem
       // 
       this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
-      this.employeesToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
-      this.employeesToolStripMenuItem.Text = "Employees";
-      this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
+      this.employeesToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
       // 
       // inventoryToolStripMenuItem
       // 
@@ -102,6 +106,41 @@ namespace VehicleManagementSystem
       this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
       this.inventoryToolStripMenuItem.Text = "Inventory";
       this.inventoryToolStripMenuItem.Click += new System.EventHandler(this.inventoryToolStripMenuItem_Click);
+      // 
+      // toolStripMenuItem1
+      // 
+      this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+      this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
+      // 
+      // staffManagementToolStripMenuItem
+      // 
+      this.staffManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.employeesToolStripMenuItem1,
+            this.usersToolStripMenuItem1});
+      this.staffManagementToolStripMenuItem.Name = "staffManagementToolStripMenuItem";
+      this.staffManagementToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+      this.staffManagementToolStripMenuItem.Text = "Staff Management";
+      // 
+      // employeesToolStripMenuItem1
+      // 
+      this.employeesToolStripMenuItem1.Name = "employeesToolStripMenuItem1";
+      this.employeesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+      this.employeesToolStripMenuItem1.Text = "Employees";
+      this.employeesToolStripMenuItem1.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
+      // 
+      // usersToolStripMenuItem1
+      // 
+      this.usersToolStripMenuItem1.Name = "usersToolStripMenuItem1";
+      this.usersToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+      this.usersToolStripMenuItem1.Text = "Users";
+      this.usersToolStripMenuItem1.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
+      // 
+      // addVehicleToolStripMenuItem
+      // 
+      this.addVehicleToolStripMenuItem.Name = "addVehicleToolStripMenuItem";
+      this.addVehicleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.addVehicleToolStripMenuItem.Text = "Add Vehicle";
+      this.addVehicleToolStripMenuItem.Click += new System.EventHandler(this.addVehicleToolStripMenuItem_Click);
       // 
       // frmDashboard
       // 
@@ -130,5 +169,10 @@ namespace VehicleManagementSystem
     private System.Windows.Forms.ToolStripMenuItem vehicleCategoryToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem inventoryToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+    private System.Windows.Forms.ToolStripMenuItem staffManagementToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem1;
+    private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem1;
+    private System.Windows.Forms.ToolStripMenuItem addVehicleToolStripMenuItem;
   }
 }

@@ -18,12 +18,6 @@ namespace VehicleManagementSystem
       InitializeComponent();
     }
 
-    private void usersToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      frmUsers users = new frmUsers();
-      users.Show();
-    }
-
     private void vehicleTypesToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmVehicleType vehicleType = new frmVehicleType();
@@ -36,16 +30,29 @@ namespace VehicleManagementSystem
       vehicleCategory.Show();
     }
 
+
+    private void inventoryToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      frmInventory inventory = new frmInventory();
+      inventory.Show();
+    }
+
     private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
     {
       frmEmployees employees = new frmEmployees();
       employees.Show();
     }
 
-    private void inventoryToolStripMenuItem_Click(object sender, EventArgs e)
+    private void usersToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      frmInventory inventory = new frmInventory();
-      inventory.Show();
+      frmUsers users = new frmUsers();
+      users.Show();
+    }
+
+    private void addVehicleToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      frmAddVehicle addVehicle = new frmAddVehicle();
+      addVehicle.Show();
     }
   }
 }

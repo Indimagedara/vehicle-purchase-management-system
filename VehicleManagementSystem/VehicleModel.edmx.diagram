@@ -6,12 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="ed7a2b1a1ef345ddbe14e4cc337647be" Name="Diagram1">
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.PartInventory" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.User" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.User" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.Vehicle" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.VehicleType" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.Employee" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.InventoryItem" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.PartInventory" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

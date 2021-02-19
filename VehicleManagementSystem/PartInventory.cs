@@ -18,5 +18,6 @@ namespace VehicleManagementSystem
         public long VehicleId { get; set; }
         public long InventoryItemId { get; set; }
         public bool ItemStatus { get; set; }
+        public byte[] ItemNote { get; set; }
     }
 }

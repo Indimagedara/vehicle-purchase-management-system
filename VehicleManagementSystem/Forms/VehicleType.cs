@@ -14,7 +14,6 @@ namespace VehicleManagementSystem.Forms
   {
     VehicleManagementEntities ve;
     int Id = 0;
-    int index = 0;
     public frmVehicleType()
     {
       InitializeComponent();
