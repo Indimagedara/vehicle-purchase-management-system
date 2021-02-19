@@ -290,6 +290,7 @@ namespace VehicleManagementSystem.Forms
       this.Controls.Add(this.label1);
       this.Controls.Add(this.txtName);
       this.Controls.Add(this.btnClose);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "frmEmployees";

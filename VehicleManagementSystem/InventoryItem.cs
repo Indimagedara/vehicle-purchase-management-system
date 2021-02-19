@@ -14,7 +14,7 @@ namespace VehicleManagementSystem
     
     public partial class InventoryItem
     {
-        public long InventoryItems { get; set; }
+        public long InventoryItemId { get; set; }
         public string ItemName { get; set; }
     }
 }

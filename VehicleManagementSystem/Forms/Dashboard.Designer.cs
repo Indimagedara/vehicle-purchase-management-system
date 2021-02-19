@@ -37,6 +37,7 @@ namespace VehicleManagementSystem
       this.vehicleTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.vehicleCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -50,7 +51,8 @@ namespace VehicleManagementSystem
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.usersToolStripMenuItem,
             this.vehicleToolStripMenuItem,
-            this.employeesToolStripMenuItem});
+            this.employeesToolStripMenuItem,
+            this.inventoryToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -94,6 +96,13 @@ namespace VehicleManagementSystem
       this.employeesToolStripMenuItem.Text = "Employees";
       this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
       // 
+      // inventoryToolStripMenuItem
+      // 
+      this.inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
+      this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+      this.inventoryToolStripMenuItem.Text = "Inventory";
+      this.inventoryToolStripMenuItem.Click += new System.EventHandler(this.inventoryToolStripMenuItem_Click);
+      // 
       // frmDashboard
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,5 +129,6 @@ namespace VehicleManagementSystem
     private System.Windows.Forms.ToolStripMenuItem vehicleTypesToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem vehicleCategoryToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem inventoryToolStripMenuItem;
   }
 }

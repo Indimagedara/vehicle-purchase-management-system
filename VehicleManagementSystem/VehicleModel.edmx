@@ -26,9 +26,9 @@
         </EntityType>
         <EntityType Name="InventoryItems">
           <Key>
-            <PropertyRef Name="InventoryItems" />
+            <PropertyRef Name="InventoryItemId" />
           </Key>
-          <Property Name="InventoryItems" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InventoryItemId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="PartInventory">
@@ -92,13 +92,6 @@
           <Property Name="CategoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="InventoryItem">
-          <Key>
-            <PropertyRef Name="InventoryItems" />
-          </Key>
-          <Property Name="InventoryItems" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="PartInventory">
           <Key>
             <PropertyRef Name="InventoryId" />
@@ -135,12 +128,12 @@
         </EntityType>
         <EntityContainer Name="VehicleManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="InventoryItems" EntityType="Self.InventoryItem" />
           <EntitySet Name="PartInventories" EntityType="Self.PartInventory" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
           <EntitySet Name="VehicleTypes" EntityType="VehiclePurchaseManagementsModel.VehicleType" />
           <EntitySet Name="Employees" EntityType="VehiclePurchaseManagementsModel.Employee" />
+          <EntitySet Name="InventoryItems" EntityType="VehiclePurchaseManagementsModel.InventoryItem" />
         </EntityContainer>
         <EntityType Name="VehicleType">
           <Key>
@@ -161,6 +154,13 @@
           <Property Name="SalaryType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Salary" Type="Double" Nullable="false" />
         </EntityType>
+        <EntityType Name="InventoryItem">
+          <Key>
+            <PropertyRef Name="InventoryItemId" />
+          </Key>
+          <Property Name="InventoryItemId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -172,14 +172,6 @@
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Category1" ColumnName="Category" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InventoryItems">
-            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.InventoryItem">
-              <MappingFragment StoreEntitySet="InventoryItems">
-                <ScalarProperty Name="InventoryItems" ColumnName="InventoryItems" />
-                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -238,6 +230,14 @@
                 <ScalarProperty Name="Nic" ColumnName="Nic" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryItems">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.InventoryItem">
+              <MappingFragment StoreEntitySet="InventoryItems">
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="InventoryItemId" ColumnName="InventoryItemId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

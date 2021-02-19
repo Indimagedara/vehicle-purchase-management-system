@@ -26,11 +26,11 @@ namespace VehicleManagementSystem
         }
     
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<InventoryItem> InventoryItems { get; set; }
         public virtual DbSet<PartInventory> PartInventories { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
         public virtual DbSet<VehicleType> VehicleTypes { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<InventoryItem> InventoryItems { get; set; }
     }
 }

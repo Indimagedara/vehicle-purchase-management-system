@@ -63,15 +63,15 @@ namespace VehicleManagementSystem.Forms
       using(ve = new VehicleManagementEntities())
       {
         List<Employee> list = ve.Employees.ToList();
-        foreach(Employee e in list)
+        foreach(Employee u in list)
         {
-          ListViewItem item = new ListViewItem(e.EmployeeId.ToString());
-          item.SubItems.Add(e.EmployeeName);
-          item.SubItems.Add(e.Nic);
-          item.SubItems.Add(e.Phone);
-          item.SubItems.Add(e.EmpType);
-          item.SubItems.Add(e.SalaryType);
-          item.SubItems.Add(e.Salary.ToString());
+          ListViewItem item = new ListViewItem(u.EmployeeId.ToString());
+          item.SubItems.Add(u.EmployeeName);
+          item.SubItems.Add(u.Nic);
+          item.SubItems.Add(u.Phone);
+          item.SubItems.Add(u.EmpType);
+          item.SubItems.Add(u.SalaryType);
+          item.SubItems.Add(u.Salary.ToString());
           listVehicleCategory.Items.Add(item);
         }
 
