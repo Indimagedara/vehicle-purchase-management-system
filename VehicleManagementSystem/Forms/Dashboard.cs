@@ -54,5 +54,11 @@ namespace VehicleManagementSystem
       frmAddVehicle addVehicle = new frmAddVehicle();
       addVehicle.Show();
     }
+
+    private void brandsToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      frmBrands brands = new frmBrands();
+      brands.Show();
+    }
   }
 }

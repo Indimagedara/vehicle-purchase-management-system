@@ -34,6 +34,7 @@ namespace VehicleManagementSystem
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.vehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.addVehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.vehicleTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.vehicleCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,7 +43,7 @@ namespace VehicleManagementSystem
       this.staffManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.employeesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.usersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-      this.addVehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.brandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -76,10 +77,18 @@ namespace VehicleManagementSystem
       this.vehicleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addVehicleToolStripMenuItem,
             this.vehicleTypesToolStripMenuItem,
-            this.vehicleCategoryToolStripMenuItem});
+            this.vehicleCategoryToolStripMenuItem,
+            this.brandsToolStripMenuItem});
       this.vehicleToolStripMenuItem.Name = "vehicleToolStripMenuItem";
       this.vehicleToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
       this.vehicleToolStripMenuItem.Text = "Vehicle Management";
+      // 
+      // addVehicleToolStripMenuItem
+      // 
+      this.addVehicleToolStripMenuItem.Name = "addVehicleToolStripMenuItem";
+      this.addVehicleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.addVehicleToolStripMenuItem.Text = "Add Vehicle";
+      this.addVehicleToolStripMenuItem.Click += new System.EventHandler(this.addVehicleToolStripMenuItem_Click);
       // 
       // vehicleTypesToolStripMenuItem
       // 
@@ -124,23 +133,23 @@ namespace VehicleManagementSystem
       // employeesToolStripMenuItem1
       // 
       this.employeesToolStripMenuItem1.Name = "employeesToolStripMenuItem1";
-      this.employeesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+      this.employeesToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
       this.employeesToolStripMenuItem1.Text = "Employees";
       this.employeesToolStripMenuItem1.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
       // 
       // usersToolStripMenuItem1
       // 
       this.usersToolStripMenuItem1.Name = "usersToolStripMenuItem1";
-      this.usersToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+      this.usersToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
       this.usersToolStripMenuItem1.Text = "Users";
       this.usersToolStripMenuItem1.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
       // 
-      // addVehicleToolStripMenuItem
+      // brandsToolStripMenuItem
       // 
-      this.addVehicleToolStripMenuItem.Name = "addVehicleToolStripMenuItem";
-      this.addVehicleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-      this.addVehicleToolStripMenuItem.Text = "Add Vehicle";
-      this.addVehicleToolStripMenuItem.Click += new System.EventHandler(this.addVehicleToolStripMenuItem_Click);
+      this.brandsToolStripMenuItem.Name = "brandsToolStripMenuItem";
+      this.brandsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.brandsToolStripMenuItem.Text = "Brands";
+      this.brandsToolStripMenuItem.Click += new System.EventHandler(this.brandsToolStripMenuItem_Click);
       // 
       // frmDashboard
       // 
@@ -174,5 +183,6 @@ namespace VehicleManagementSystem
     private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem1;
     private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem1;
     private System.Windows.Forms.ToolStripMenuItem addVehicleToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem brandsToolStripMenuItem;
   }
 }
