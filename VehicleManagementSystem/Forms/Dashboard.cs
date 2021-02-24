@@ -13,6 +13,8 @@ namespace VehicleManagementSystem
 {
   public partial class frmDashboard : Form
   {
+    VehicleManagementEntities ve;
+    int Id = 0;
     public frmDashboard()
     {
       InitializeComponent();
@@ -59,6 +61,55 @@ namespace VehicleManagementSystem
     {
       frmBrands brands = new frmBrands();
       brands.Show();
+    }
+
+    private void frmDashboard_Load(object sender, EventArgs e)
+    {
+      fetchVehicleData();
+    }
+
+    private void fetchVehicleData()
+    {
+      Cursor.Current = Cursors.WaitCursor;
+      listVehicles.Items.Clear();
+      using(ve = new VehicleManagementEntities())
+      {
+        var query = ve.Vehicles
+          .Join(
+            ve.Categories,
+            vh => vh.CategoryId,
+            vc => vc.CategoryId,
+            (vh,vc) => new {vh,vc}
+          )
+          .Join(
+            ve.VehicleTypes,
+            v => v.vh.TypeId,
+            vt => vt.VehicleTypeId,
+            (v, vt) => new
+            {
+              VehicleId = v.vh.VehicleId,
+              Brand = v.vh.Brand,
+              Model = v.vh.Model,
+              RegNum = v.vh.RegNum,
+              VehicleType = vt.VehiType,
+              VehicleCategory = v.vc.Category1,
+              Date = v.vh.DateCreated
+            }
+          ).ToList();
+        foreach(var vehi in query)
+        {
+          ListViewItem item = new ListViewItem(vehi.VehicleId.ToString());
+          item.SubItems.Add(vehi.RegNum);
+          item.SubItems.Add(vehi.Model);
+          item.SubItems.Add(vehi.Brand);
+          item.SubItems.Add(vehi.VehicleType);
+          item.SubItems.Add(vehi.VehicleCategory);
+          item.SubItems.Add(vehi.Date.ToString("dd/MM/yyyy"));
+          listVehicles.Items.Add(item);
+        }
+
+      }
+      Cursor.Current = Cursors.Default;
     }
   }
 }
