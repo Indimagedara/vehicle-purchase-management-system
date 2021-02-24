@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="VehiclePurchaseManagementsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="BrandId" />
+          </Key>
+          <Property Name="BrandId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -54,17 +61,23 @@
             <PropertyRef Name="VehicleId" />
           </Key>
           <Property Name="VehicleId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ModelYear" Type="int" Nullable="false" />
           <Property Name="TypeId" Type="bigint" Nullable="false" />
           <Property Name="CategoryId" Type="bigint" Nullable="false" />
           <Property Name="RegNum" Type="varchar" MaxLength="10" />
           <Property Name="RegYear" Type="int" />
+          <Property Name="Transmission" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Condition" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="EngineNumber" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ChassieNumber" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Milage" Type="int" Nullable="false" />
           <Property Name="EngineCapacity" Type="float" Nullable="false" />
           <Property Name="FuelType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="PartInventory" Type="text" />
+          <Property Name="Note" Type="text" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="VehicleType">
           <Key>
@@ -74,6 +87,7 @@
           <Property Name="VehiType" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityContainer Name="VehiclePurchaseManagementsModelStoreContainer">
+          <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryItems" EntityType="Self.InventoryItems" Schema="dbo" store:Type="Tables" />
@@ -101,31 +115,15 @@
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="Vehicle">
-          <Key>
-            <PropertyRef Name="VehicleId" />
-          </Key>
-          <Property Name="VehicleId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ModelYear" Type="Int32" Nullable="false" />
-          <Property Name="TypeId" Type="Int64" Nullable="false" />
-          <Property Name="CategoryId" Type="Int64" Nullable="false" />
-          <Property Name="RegNum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="RegYear" Type="Int32" />
-          <Property Name="EngineNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ChassieNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Milage" Type="Int32" Nullable="false" />
-          <Property Name="EngineCapacity" Type="Double" Nullable="false" />
-          <Property Name="FuelType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="VehicleManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
           <EntitySet Name="VehicleTypes" EntityType="VehiclePurchaseManagementsModel.VehicleType" />
           <EntitySet Name="Employees" EntityType="VehiclePurchaseManagementsModel.Employee" />
           <EntitySet Name="InventoryItems" EntityType="VehiclePurchaseManagementsModel.InventoryItem" />
           <EntitySet Name="PartInventories" EntityType="VehiclePurchaseManagementsModel.PartInventory" />
+          <EntitySet Name="Vehicles" EntityType="VehiclePurchaseManagementsModel.Vehicle" />
+          <EntitySet Name="Brands" EntityType="VehiclePurchaseManagementsModel.Brand" />
         </EntityContainer>
         <EntityType Name="VehicleType">
           <Key>
@@ -163,6 +161,36 @@
           <Property Name="ItemStatus" Type="Boolean" Nullable="false" />
           <Property Name="ItemNote" Type="Binary" MaxLength="150" FixedLength="false" />
         </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="VehicleId" />
+          </Key>
+          <Property Name="VehicleId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModelYear" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int64" Nullable="false" />
+          <Property Name="CategoryId" Type="Int64" Nullable="false" />
+          <Property Name="RegNum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RegYear" Type="Int32" />
+          <Property Name="Transmission" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Condition" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EngineNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChassieNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Milage" Type="Int32" Nullable="false" />
+          <Property Name="EngineCapacity" Type="Double" Nullable="false" />
+          <Property Name="FuelType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PartInventory" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="BrandId" />
+          </Key>
+          <Property Name="BrandId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -183,24 +211,6 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vehicles">
-            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Vehicle">
-              <MappingFragment StoreEntitySet="Vehicle">
-                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ModelYear" ColumnName="ModelYear" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="RegNum" ColumnName="RegNum" />
-                <ScalarProperty Name="RegYear" ColumnName="RegYear" />
-                <ScalarProperty Name="EngineNumber" ColumnName="EngineNumber" />
-                <ScalarProperty Name="ChassieNumber" ColumnName="ChassieNumber" />
-                <ScalarProperty Name="Milage" ColumnName="Milage" />
-                <ScalarProperty Name="EngineCapacity" ColumnName="EngineCapacity" />
-                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -241,6 +251,38 @@
                 <ScalarProperty Name="InventoryItemId" ColumnName="InventoryItemId" />
                 <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
                 <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="PartInventory" ColumnName="PartInventory" />
+                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+                <ScalarProperty Name="EngineCapacity" ColumnName="EngineCapacity" />
+                <ScalarProperty Name="Milage" ColumnName="Milage" />
+                <ScalarProperty Name="ChassieNumber" ColumnName="ChassieNumber" />
+                <ScalarProperty Name="EngineNumber" ColumnName="EngineNumber" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+                <ScalarProperty Name="RegYear" ColumnName="RegYear" />
+                <ScalarProperty Name="RegNum" ColumnName="RegNum" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="ModelYear" ColumnName="ModelYear" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Brand">
+              <MappingFragment StoreEntitySet="Brands">
+                <ScalarProperty Name="Brand1" ColumnName="Brand" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

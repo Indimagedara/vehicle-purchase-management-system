@@ -61,6 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Brand.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
@@ -149,6 +152,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VehiclePurchaseManagementsDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="VehiclePurchaseManagementsDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehiclePurchaseManagementsDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="VehicleType.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
@@ -224,6 +232,17 @@
     </None>
     <None Include="VehiclePurchaseManagementsDataSet.xss">
       <DependentUpon>VehiclePurchaseManagementsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="VehiclePurchaseManagementsDataSet1.xsc">
+      <DependentUpon>VehiclePurchaseManagementsDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="VehiclePurchaseManagementsDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VehiclePurchaseManagementsDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="VehiclePurchaseManagementsDataSet1.xss">
+      <DependentUpon>VehiclePurchaseManagementsDataSet1.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

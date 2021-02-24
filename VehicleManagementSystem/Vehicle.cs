@@ -15,16 +15,22 @@ namespace VehicleManagementSystem
     public partial class Vehicle
     {
         public long VehicleId { get; set; }
+        public string Brand { get; set; }
         public string Model { get; set; }
         public int ModelYear { get; set; }
         public long TypeId { get; set; }
         public long CategoryId { get; set; }
         public string RegNum { get; set; }
         public Nullable<int> RegYear { get; set; }
+        public string Transmission { get; set; }
+        public string Condition { get; set; }
         public string EngineNumber { get; set; }
         public string ChassieNumber { get; set; }
         public int Milage { get; set; }
         public double EngineCapacity { get; set; }
         public string FuelType { get; set; }
+        public string PartInventory { get; set; }
+        public string Note { get; set; }
+        public System.DateTime DateCreated { get; set; }
     }
 }
