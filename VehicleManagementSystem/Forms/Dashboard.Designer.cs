@@ -37,13 +37,13 @@ namespace VehicleManagementSystem
       this.addVehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.vehicleTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.vehicleCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.brandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.staffManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.employeesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.usersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-      this.brandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.listVehicles = new System.Windows.Forms.ListView();
       this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -57,7 +57,7 @@ namespace VehicleManagementSystem
       this.btnSearch = new System.Windows.Forms.Button();
       this.btnReset = new System.Windows.Forms.Button();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
-      this.button1 = new System.Windows.Forms.Button();
+      this.btnOpen = new System.Windows.Forms.Button();
       this.menuStrip1.SuspendLayout();
       this.groupBox1.SuspendLayout();
       this.SuspendLayout();
@@ -101,23 +101,30 @@ namespace VehicleManagementSystem
       // addVehicleToolStripMenuItem
       // 
       this.addVehicleToolStripMenuItem.Name = "addVehicleToolStripMenuItem";
-      this.addVehicleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.addVehicleToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
       this.addVehicleToolStripMenuItem.Text = "Add Vehicle";
       this.addVehicleToolStripMenuItem.Click += new System.EventHandler(this.addVehicleToolStripMenuItem_Click);
       // 
       // vehicleTypesToolStripMenuItem
       // 
       this.vehicleTypesToolStripMenuItem.Name = "vehicleTypesToolStripMenuItem";
-      this.vehicleTypesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.vehicleTypesToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
       this.vehicleTypesToolStripMenuItem.Text = "Vehicle Types";
       this.vehicleTypesToolStripMenuItem.Click += new System.EventHandler(this.vehicleTypesToolStripMenuItem_Click);
       // 
       // vehicleCategoryToolStripMenuItem
       // 
       this.vehicleCategoryToolStripMenuItem.Name = "vehicleCategoryToolStripMenuItem";
-      this.vehicleCategoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.vehicleCategoryToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
       this.vehicleCategoryToolStripMenuItem.Text = "Vehicle Category";
       this.vehicleCategoryToolStripMenuItem.Click += new System.EventHandler(this.vehicleCategoryToolStripMenuItem_Click);
+      // 
+      // brandsToolStripMenuItem
+      // 
+      this.brandsToolStripMenuItem.Name = "brandsToolStripMenuItem";
+      this.brandsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+      this.brandsToolStripMenuItem.Text = "Brands";
+      this.brandsToolStripMenuItem.Click += new System.EventHandler(this.brandsToolStripMenuItem_Click);
       // 
       // employeesToolStripMenuItem
       // 
@@ -158,13 +165,6 @@ namespace VehicleManagementSystem
       this.usersToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
       this.usersToolStripMenuItem1.Text = "Users";
       this.usersToolStripMenuItem1.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
-      // 
-      // brandsToolStripMenuItem
-      // 
-      this.brandsToolStripMenuItem.Name = "brandsToolStripMenuItem";
-      this.brandsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-      this.brandsToolStripMenuItem.Text = "Brands";
-      this.brandsToolStripMenuItem.Click += new System.EventHandler(this.brandsToolStripMenuItem_Click);
       // 
       // listVehicles
       // 
@@ -259,7 +259,7 @@ namespace VehicleManagementSystem
       // 
       // groupBox1
       // 
-      this.groupBox1.Controls.Add(this.button1);
+      this.groupBox1.Controls.Add(this.btnOpen);
       this.groupBox1.Controls.Add(this.btnReset);
       this.groupBox1.Controls.Add(this.btnSearch);
       this.groupBox1.Controls.Add(this.cmSearchType);
@@ -273,14 +273,15 @@ namespace VehicleManagementSystem
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Vehicles";
       // 
-      // button1
+      // btnOpen
       // 
-      this.button1.Location = new System.Drawing.Point(592, 23);
-      this.button1.Name = "button1";
-      this.button1.Size = new System.Drawing.Size(64, 27);
-      this.button1.TabIndex = 5;
-      this.button1.Text = "&Open";
-      this.button1.UseVisualStyleBackColor = true;
+      this.btnOpen.Location = new System.Drawing.Point(592, 23);
+      this.btnOpen.Name = "btnOpen";
+      this.btnOpen.Size = new System.Drawing.Size(64, 27);
+      this.btnOpen.TabIndex = 5;
+      this.btnOpen.Text = "&Open";
+      this.btnOpen.UseVisualStyleBackColor = true;
+      this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
       // 
       // frmDashboard
       // 
@@ -333,6 +334,6 @@ namespace VehicleManagementSystem
     private System.Windows.Forms.Button btnSearch;
     private System.Windows.Forms.Button btnReset;
     private System.Windows.Forms.GroupBox groupBox1;
-    private System.Windows.Forms.Button button1;
+    private System.Windows.Forms.Button btnOpen;
   }
 }

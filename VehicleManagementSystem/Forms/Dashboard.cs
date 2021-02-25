@@ -14,7 +14,7 @@ namespace VehicleManagementSystem
   public partial class frmDashboard : Form
   {
     VehicleManagementEntities ve;
-    int Id = 0;
+    public static int Id = 0;
     public frmDashboard()
     {
       InitializeComponent();
@@ -106,10 +106,17 @@ namespace VehicleManagementSystem
           item.SubItems.Add(vehi.VehicleCategory);
           item.SubItems.Add(vehi.Date.ToString("dd/MM/yyyy"));
           listVehicles.Items.Add(item);
+          Id = Int32.Parse(vehi.VehicleId.ToString());
         }
 
       }
       Cursor.Current = Cursors.Default;
+    }
+
+    private void btnOpen_Click(object sender, EventArgs e)
+    {
+      frmSingleVehicle singleVehicle = new frmSingleVehicle();
+      singleVehicle.Show();
     }
   }
 }
