@@ -83,7 +83,7 @@
           <Key>
             <PropertyRef Name="VehicleSellerId" />
           </Key>
-          <Property Name="VehicleSellerId" Type="bigint" Nullable="false" />
+          <Property Name="VehicleSellerId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SellerName" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="SellerContactNumber" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="SellerType" Type="varchar" MaxLength="15" Nullable="false" />
@@ -208,7 +208,7 @@
           <Key>
             <PropertyRef Name="VehicleSellerId" />
           </Key>
-          <Property Name="VehicleSellerId" Type="Int64" Nullable="false" />
+          <Property Name="VehicleSellerId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SellerName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="SellerContactNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="SellerType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
