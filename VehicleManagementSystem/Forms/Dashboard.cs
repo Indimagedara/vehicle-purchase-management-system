@@ -15,6 +15,7 @@ namespace VehicleManagementSystem
   {
     VehicleManagementEntities ve;
     public static int Id = 0;
+    public static string selectedRegNum;
     public frmDashboard()
     {
       InitializeComponent();
@@ -106,7 +107,6 @@ namespace VehicleManagementSystem
           item.SubItems.Add(vehi.VehicleCategory);
           item.SubItems.Add(vehi.Date.ToString("dd/MM/yyyy"));
           listVehicles.Items.Add(item);
-          Id = Int32.Parse(vehi.VehicleId.ToString());
         }
 
       }
@@ -117,6 +117,17 @@ namespace VehicleManagementSystem
     {
       frmSingleVehicle singleVehicle = new frmSingleVehicle();
       singleVehicle.Show();
+    }
+
+    private void listVehicles_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      ListView.SelectedListViewItemCollection selectedVehicle = this.listVehicles.SelectedItems;
+      string vehicleType = "";
+      foreach (ListViewItem item in selectedVehicle)
+      {
+        Id = Int32.Parse(item.SubItems[0].Text);
+        selectedRegNum = item.SubItems[1].Text;
+      }
     }
   }
 }

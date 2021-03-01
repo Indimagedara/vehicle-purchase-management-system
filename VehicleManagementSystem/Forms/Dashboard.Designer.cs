@@ -188,6 +188,7 @@ namespace VehicleManagementSystem
       this.listVehicles.TabIndex = 0;
       this.listVehicles.UseCompatibleStateImageBehavior = false;
       this.listVehicles.View = System.Windows.Forms.View.Details;
+      this.listVehicles.SelectedIndexChanged += new System.EventHandler(this.listVehicles_SelectedIndexChanged);
       // 
       // columnHeader1
       // 

@@ -79,6 +79,17 @@
           <Property Name="Note" Type="text" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="VehicleSeller">
+          <Key>
+            <PropertyRef Name="VehicleSellerId" />
+          </Key>
+          <Property Name="VehicleSellerId" Type="bigint" Nullable="false" />
+          <Property Name="SellerName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="SellerContactNumber" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="SellerType" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="SellerAddress" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="VehicleNumber" Type="varchar" MaxLength="15" />
+        </EntityType>
         <EntityType Name="VehicleType">
           <Key>
             <PropertyRef Name="VehicleTypeId" />
@@ -94,6 +105,7 @@
           <EntitySet Name="PartInventory" EntityType="Self.PartInventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleSeller" EntityType="Self.VehicleSeller" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -124,6 +136,7 @@
           <EntitySet Name="PartInventories" EntityType="VehiclePurchaseManagementsModel.PartInventory" />
           <EntitySet Name="Vehicles" EntityType="VehiclePurchaseManagementsModel.Vehicle" />
           <EntitySet Name="Brands" EntityType="VehiclePurchaseManagementsModel.Brand" />
+          <EntitySet Name="VehicleSellers" EntityType="VehiclePurchaseManagementsModel.VehicleSeller" />
         </EntityContainer>
         <EntityType Name="VehicleType">
           <Key>
@@ -190,6 +203,17 @@
           </Key>
           <Property Name="BrandId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Brand1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VehicleSeller">
+          <Key>
+            <PropertyRef Name="VehicleSellerId" />
+          </Key>
+          <Property Name="VehicleSellerId" Type="Int64" Nullable="false" />
+          <Property Name="SellerName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="SellerContactNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SellerType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SellerAddress" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -283,6 +307,18 @@
               <MappingFragment StoreEntitySet="Brands">
                 <ScalarProperty Name="Brand1" ColumnName="Brand" />
                 <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleSellers">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.VehicleSeller">
+              <MappingFragment StoreEntitySet="VehicleSeller">
+                <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+                <ScalarProperty Name="SellerAddress" ColumnName="SellerAddress" />
+                <ScalarProperty Name="SellerType" ColumnName="SellerType" />
+                <ScalarProperty Name="SellerContactNumber" ColumnName="SellerContactNumber" />
+                <ScalarProperty Name="SellerName" ColumnName="SellerName" />
+                <ScalarProperty Name="VehicleSellerId" ColumnName="VehicleSellerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -70,6 +70,12 @@
     <Compile Include="Employee.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AddSellerData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddSellerData.Designer.cs">
+      <DependentUpon>AddSellerData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AddVehicle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VehiclePurchaseManagementsDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="VehicleSeller.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="VehicleType.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
@@ -178,6 +187,9 @@
     <Compile Include="VehicleTypes.Designer.cs">
       <DependentUpon>VehicleTypes.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\AddSellerData.resx">
+      <DependentUpon>AddSellerData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddVehicle.resx">
       <DependentUpon>AddVehicle.cs</DependentUpon>
     </EmbeddedResource>

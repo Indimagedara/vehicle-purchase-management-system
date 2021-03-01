@@ -13,7 +13,9 @@ namespace VehicleManagementSystem.Forms
   public partial class frmSingleVehicle : Form
   {
     VehicleManagementEntities ve;
-    int selectedId = frmDashboard.Id;
+    public static int selectedId = frmDashboard.Id;
+    public static string vehicleNumber = frmDashboard.selectedRegNum;
+    string partInventory;
     public frmSingleVehicle()
     {
       InitializeComponent();
@@ -22,9 +24,31 @@ namespace VehicleManagementSystem.Forms
     private void frmSingleVehicle_Load(object sender, EventArgs e)
     {
       fetchData();
+      fetchSellerData();
+      //btnAddSeller.Visible = false;
     }
-
-
+    public void fetchSellerData()
+    {
+      using (ve = new VehicleManagementEntities())
+      {
+        List<VehicleSeller> vehicleSellers = ve.VehicleSellers.Where(v => v.VehicleNumber == vehicleNumber).ToList();
+        if (vehicleSellers.Any())
+        {
+          btnAddSeller.Text = "&Add / Update Info";
+          foreach(VehicleSeller seller in vehicleSellers)
+          {
+            lblSellerName.Text = seller.SellerName;
+            lblSellerPhone.Text = seller.SellerContactNumber;
+            lblSellerAddress.Text = seller.SellerAddress;
+            lblSellerType.Text = seller.SellerType;
+          }
+        }
+        else
+        {
+          btnAddSeller.Text = "&Add Info";
+        }
+      }
+    }
     private void fetchData()
     {
       Cursor.Current = Cursors.WaitCursor;
@@ -68,6 +92,7 @@ namespace VehicleManagementSystem.Forms
           ListViewItem item = new ListViewItem(vehi.VehicleId.ToString());
           this.Text = vehi.RegNum;
           lblRegNum.Text = vehi.RegNum;
+          vehicleNumber = vehi.RegNum;
           lblModel.Text = vehi.Model;
           lblBrand.Text =vehi.Brand;
           lblType.Text = vehi.VehicleType;
@@ -93,10 +118,22 @@ namespace VehicleManagementSystem.Forms
           lblFuelType.Text = vehi.FuelType;
           lblModelYear.Text = vehi.ModelYear.ToString();
           lblDateCreated.Text = vehi.Date.ToString("dd/MM/yyyy");
+          partInventory = vehi.PartInventory;
+        }
+        string[] partArray = partInventory.Split(',');
+        foreach(string part in partArray)
+        {
+          lbParts.Items.Add(part);
         }
 
       }
       Cursor.Current = Cursors.Default;
+    }
+
+    private void btnAddSeller_Click(object sender, EventArgs e)
+    {
+      frmAddSellerData addSellerData = new frmAddSellerData();
+      addSellerData.Show();
     }
   }
 }

@@ -33,5 +33,6 @@ namespace VehicleManagementSystem
         public virtual DbSet<PartInventory> PartInventories { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<VehicleSeller> VehicleSellers { get; set; }
     }
 }
