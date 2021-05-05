@@ -67,6 +67,15 @@
     <Compile Include="Category.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Contractor.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContractorPayment.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContractorType.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
@@ -87,6 +96,12 @@
     </Compile>
     <Compile Include="Forms\Brands.Designer.cs">
       <DependentUpon>Brands.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Contractor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Contractor.Designer.cs">
+      <DependentUpon>Contractor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dashboard.cs">
       <SubType>Form</SubType>
@@ -139,6 +154,9 @@
     <Compile Include="InventoryItem.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Job.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="PartInventory.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
@@ -148,6 +166,12 @@
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Vehicle.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VehicleExpense.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VehicleIncome.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="VehicleModel.Context.cs">
@@ -195,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Brands.resx">
       <DependentUpon>Brands.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Contractor.resx">
+      <DependentUpon>Contractor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>

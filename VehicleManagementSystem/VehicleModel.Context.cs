@@ -34,5 +34,11 @@ namespace VehicleManagementSystem
         public virtual DbSet<Vehicle> Vehicles { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<VehicleSeller> VehicleSellers { get; set; }
+        public virtual DbSet<ContractorPayment> ContractorPayments { get; set; }
+        public virtual DbSet<Contractor> Contractors { get; set; }
+        public virtual DbSet<ContractorType> ContractorTypes { get; set; }
+        public virtual DbSet<Job> Jobs { get; set; }
+        public virtual DbSet<VehicleExpense> VehicleExpenses { get; set; }
+        public virtual DbSet<VehicleIncome> VehicleIncomes { get; set; }
     }
 }

@@ -58,6 +58,7 @@ namespace VehicleManagementSystem
       this.btnReset = new System.Windows.Forms.Button();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.btnOpen = new System.Windows.Forms.Button();
+      this.contractorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.groupBox1.SuspendLayout();
       this.SuspendLayout();
@@ -147,7 +148,8 @@ namespace VehicleManagementSystem
       // 
       this.staffManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.employeesToolStripMenuItem1,
-            this.usersToolStripMenuItem1});
+            this.usersToolStripMenuItem1,
+            this.contractorsToolStripMenuItem});
       this.staffManagementToolStripMenuItem.Name = "staffManagementToolStripMenuItem";
       this.staffManagementToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
       this.staffManagementToolStripMenuItem.Text = "Staff Management";
@@ -155,14 +157,14 @@ namespace VehicleManagementSystem
       // employeesToolStripMenuItem1
       // 
       this.employeesToolStripMenuItem1.Name = "employeesToolStripMenuItem1";
-      this.employeesToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+      this.employeesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
       this.employeesToolStripMenuItem1.Text = "Employees";
       this.employeesToolStripMenuItem1.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
       // 
       // usersToolStripMenuItem1
       // 
       this.usersToolStripMenuItem1.Name = "usersToolStripMenuItem1";
-      this.usersToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+      this.usersToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
       this.usersToolStripMenuItem1.Text = "Users";
       this.usersToolStripMenuItem1.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
       // 
@@ -284,6 +286,13 @@ namespace VehicleManagementSystem
       this.btnOpen.UseVisualStyleBackColor = true;
       this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
       // 
+      // contractorsToolStripMenuItem
+      // 
+      this.contractorsToolStripMenuItem.Name = "contractorsToolStripMenuItem";
+      this.contractorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.contractorsToolStripMenuItem.Text = "Contractors";
+      this.contractorsToolStripMenuItem.Click += new System.EventHandler(this.contractorsToolStripMenuItem_Click);
+      // 
       // frmDashboard
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,5 +345,6 @@ namespace VehicleManagementSystem
     private System.Windows.Forms.Button btnReset;
     private System.Windows.Forms.GroupBox groupBox1;
     private System.Windows.Forms.Button btnOpen;
+    private System.Windows.Forms.ToolStripMenuItem contractorsToolStripMenuItem;
   }
 }

@@ -129,5 +129,11 @@ namespace VehicleManagementSystem
         selectedRegNum = item.SubItems[1].Text;
       }
     }
+
+    private void contractorsToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      frmContractor contractor = new frmContractor();
+      contractor.Show();
+    }
   }
 }

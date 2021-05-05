@@ -19,6 +19,33 @@
           <Property Name="CategoryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Category" Type="varchar" MaxLength="30" />
         </EntityType>
+        <EntityType Name="ContractorPayments">
+          <Key>
+            <PropertyRef Name="ContractorPaymentId" />
+          </Key>
+          <Property Name="ContractorPaymentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractorId" Type="bigint" Nullable="false" />
+          <Property Name="JobId" Type="bigint" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contractors">
+          <Key>
+            <PropertyRef Name="ContractorId" />
+          </Key>
+          <Property Name="ContractorId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractorName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContractorPhone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ContractorNic" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ContractorType" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContractorType">
+          <Key>
+            <PropertyRef Name="ContractorTypeId" />
+          </Key>
+          <Property Name="ContractorTypeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractorType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="EmployeeId" />
@@ -37,6 +64,17 @@
           </Key>
           <Property Name="InventoryItemId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jobs">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TobType" Type="bigint" Nullable="false" />
+          <Property Name="Contractor" Type="bigint" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="PartInventory">
           <Key>
@@ -79,6 +117,26 @@
           <Property Name="Note" Type="text" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="VehicleExpense">
+          <Key>
+            <PropertyRef Name="VehicleExpenseId" />
+          </Key>
+          <Property Name="VehicleExpenseId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleExpenseName" Type="varbinary" MaxLength="50" Nullable="false" />
+          <Property Name="VehicleExpenseAmount" Type="float" Nullable="false" />
+          <Property Name="VehicleId" Type="bigint" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehicleIncome">
+          <Key>
+            <PropertyRef Name="VehicleIncomeId" />
+          </Key>
+          <Property Name="VehicleIncomeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleIncomeName" Type="varbinary" MaxLength="50" Nullable="false" />
+          <Property Name="VehicleIncomeAmount" Type="float" Nullable="false" />
+          <Property Name="VehicleId" Type="bigint" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="VehicleSeller">
           <Key>
             <PropertyRef Name="VehicleSellerId" />
@@ -97,16 +155,38 @@
           <Property Name="VehicleTypeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VehiType" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Jobs_Contractors">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="Jobs" Type="Self.Jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="ContractorId" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="Contractor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="VehiclePurchaseManagementsModelStoreContainer">
           <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractorPayments" EntityType="Self.ContractorPayments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contractors" EntityType="Self.Contractors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractorType" EntityType="Self.ContractorType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryItems" EntityType="Self.InventoryItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PartInventory" EntityType="Self.PartInventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleExpense" EntityType="Self.VehicleExpense" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleIncome" EntityType="Self.VehicleIncome" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleSeller" EntityType="Self.VehicleSeller" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Jobs_Contractors" Association="Self.FK_Jobs_Contractors">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -137,6 +217,16 @@
           <EntitySet Name="Vehicles" EntityType="VehiclePurchaseManagementsModel.Vehicle" />
           <EntitySet Name="Brands" EntityType="VehiclePurchaseManagementsModel.Brand" />
           <EntitySet Name="VehicleSellers" EntityType="VehiclePurchaseManagementsModel.VehicleSeller" />
+          <EntitySet Name="ContractorPayments" EntityType="VehiclePurchaseManagementsModel.ContractorPayment" />
+          <EntitySet Name="Contractors" EntityType="VehiclePurchaseManagementsModel.Contractor" />
+          <EntitySet Name="ContractorTypes" EntityType="VehiclePurchaseManagementsModel.ContractorType" />
+          <EntitySet Name="Jobs" EntityType="VehiclePurchaseManagementsModel.Job" />
+          <EntitySet Name="VehicleExpenses" EntityType="VehiclePurchaseManagementsModel.VehicleExpense" />
+          <EntitySet Name="VehicleIncomes" EntityType="VehiclePurchaseManagementsModel.VehicleIncome" />
+          <AssociationSet Name="FK_Jobs_Contractors" Association="VehiclePurchaseManagementsModel.FK_Jobs_Contractors">
+            <End Role="Contractor" EntitySet="Contractors" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="VehicleType">
           <Key>
@@ -215,6 +305,78 @@
           <Property Name="SellerAddress" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="VehicleNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ContractorPayment">
+          <Key>
+            <PropertyRef Name="ContractorPaymentId" />
+          </Key>
+          <Property Name="ContractorPaymentId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractorId" Type="Int64" Nullable="false" />
+          <Property Name="JobId" Type="Int64" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Contractor">
+          <Key>
+            <PropertyRef Name="ContractorId" />
+          </Key>
+          <Property Name="ContractorId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractorName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContractorPhone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContractorNic" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContractorType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Jobs" Relationship="VehiclePurchaseManagementsModel.FK_Jobs_Contractors" FromRole="Contractor" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="ContractorType">
+          <Key>
+            <PropertyRef Name="ContractorTypeId" />
+          </Key>
+          <Property Name="ContractorTypeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractorType1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TobType" Type="Int64" Nullable="false" />
+          <Property Name="Contractor" Type="Int64" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Contractor1" Relationship="VehiclePurchaseManagementsModel.FK_Jobs_Contractors" FromRole="Job" ToRole="Contractor" />
+        </EntityType>
+        <EntityType Name="VehicleExpense">
+          <Key>
+            <PropertyRef Name="VehicleExpenseId" />
+          </Key>
+          <Property Name="VehicleExpenseId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleExpenseName" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
+          <Property Name="VehicleExpenseAmount" Type="Double" Nullable="false" />
+          <Property Name="VehicleId" Type="Int64" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="VehicleIncome">
+          <Key>
+            <PropertyRef Name="VehicleIncomeId" />
+          </Key>
+          <Property Name="VehicleIncomeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleIncomeName" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
+          <Property Name="VehicleIncomeAmount" Type="Double" Nullable="false" />
+          <Property Name="VehicleId" Type="Int64" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Jobs_Contractors">
+          <End Type="VehiclePurchaseManagementsModel.Contractor" Role="Contractor" Multiplicity="1" />
+          <End Type="VehiclePurchaseManagementsModel.Job" Role="Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractor">
+              <PropertyRef Name="ContractorId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="Contractor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -319,6 +481,70 @@
                 <ScalarProperty Name="SellerContactNumber" ColumnName="SellerContactNumber" />
                 <ScalarProperty Name="SellerName" ColumnName="SellerName" />
                 <ScalarProperty Name="VehicleSellerId" ColumnName="VehicleSellerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractorPayments">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.ContractorPayment">
+              <MappingFragment StoreEntitySet="ContractorPayments">
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+                <ScalarProperty Name="ContractorPaymentId" ColumnName="ContractorPaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contractors">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Contractor">
+              <MappingFragment StoreEntitySet="Contractors">
+                <ScalarProperty Name="ContractorType" ColumnName="ContractorType" />
+                <ScalarProperty Name="ContractorNic" ColumnName="ContractorNic" />
+                <ScalarProperty Name="ContractorPhone" ColumnName="ContractorPhone" />
+                <ScalarProperty Name="ContractorName" ColumnName="ContractorName" />
+                <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractorTypes">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.ContractorType">
+              <MappingFragment StoreEntitySet="ContractorType">
+                <ScalarProperty Name="ContractorType1" ColumnName="ContractorType" />
+                <ScalarProperty Name="ContractorTypeId" ColumnName="ContractorTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Job">
+              <MappingFragment StoreEntitySet="Jobs">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Contractor" ColumnName="Contractor" />
+                <ScalarProperty Name="TobType" ColumnName="TobType" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleExpenses">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.VehicleExpense">
+              <MappingFragment StoreEntitySet="VehicleExpense">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="VehicleExpenseAmount" ColumnName="VehicleExpenseAmount" />
+                <ScalarProperty Name="VehicleExpenseName" ColumnName="VehicleExpenseName" />
+                <ScalarProperty Name="VehicleExpenseId" ColumnName="VehicleExpenseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleIncomes">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.VehicleIncome">
+              <MappingFragment StoreEntitySet="VehicleIncome">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="VehicleIncomeAmount" ColumnName="VehicleIncomeAmount" />
+                <ScalarProperty Name="VehicleIncomeName" ColumnName="VehicleIncomeName" />
+                <ScalarProperty Name="VehicleIncomeId" ColumnName="VehicleIncomeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

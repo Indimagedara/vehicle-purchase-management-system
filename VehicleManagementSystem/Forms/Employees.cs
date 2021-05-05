@@ -150,7 +150,7 @@ namespace VehicleManagementSystem.Forms
         singleEmployee.SalaryType = cmbSalType.Text;
         singleEmployee.Salary = Int32.Parse(txtSalary.Text);
         ve.SaveChanges();
-        MessageBox.Show("Successfully saved!");
+        MessageBox.Show("Successfully updated!");
         displayData();
         clearFields();
       }
