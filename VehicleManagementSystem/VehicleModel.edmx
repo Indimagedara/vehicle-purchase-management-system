@@ -70,10 +70,11 @@
             <PropertyRef Name="JobId" />
           </Key>
           <Property Name="JobId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleId" Type="bigint" Nullable="false" />
           <Property Name="JobTitle" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="TobType" Type="bigint" Nullable="false" />
           <Property Name="Contractor" Type="bigint" Nullable="false" />
           <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="PartInventory">
@@ -167,6 +168,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Jobs_Vehicles">
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="Jobs" Type="Self.Jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleId" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="VehiclePurchaseManagementsModelStoreContainer">
           <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -185,6 +198,10 @@
           <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Jobs_Contractors" Association="Self.FK_Jobs_Contractors">
             <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobs_Vehicles" Association="Self.FK_Jobs_Vehicles">
+            <End Role="Vehicle" EntitySet="Vehicle" />
             <End Role="Jobs" EntitySet="Jobs" />
           </AssociationSet>
         </EntityContainer>
@@ -214,20 +231,24 @@
           <EntitySet Name="Employees" EntityType="VehiclePurchaseManagementsModel.Employee" />
           <EntitySet Name="InventoryItems" EntityType="VehiclePurchaseManagementsModel.InventoryItem" />
           <EntitySet Name="PartInventories" EntityType="VehiclePurchaseManagementsModel.PartInventory" />
-          <EntitySet Name="Vehicles" EntityType="VehiclePurchaseManagementsModel.Vehicle" />
           <EntitySet Name="Brands" EntityType="VehiclePurchaseManagementsModel.Brand" />
           <EntitySet Name="VehicleSellers" EntityType="VehiclePurchaseManagementsModel.VehicleSeller" />
           <EntitySet Name="ContractorPayments" EntityType="VehiclePurchaseManagementsModel.ContractorPayment" />
-          <EntitySet Name="Contractors" EntityType="VehiclePurchaseManagementsModel.Contractor" />
           <EntitySet Name="ContractorTypes" EntityType="VehiclePurchaseManagementsModel.ContractorType" />
-          <EntitySet Name="Jobs" EntityType="VehiclePurchaseManagementsModel.Job" />
           <EntitySet Name="VehicleExpenses" EntityType="VehiclePurchaseManagementsModel.VehicleExpense" />
           <EntitySet Name="VehicleIncomes" EntityType="VehiclePurchaseManagementsModel.VehicleIncome" />
+          <EntitySet Name="Contractors" EntityType="VehiclePurchaseManagementsModel.Contractor" />
+          <EntitySet Name="Jobs" EntityType="VehiclePurchaseManagementsModel.Job" />
+          <EntitySet Name="Vehicles" EntityType="VehiclePurchaseManagementsModel.Vehicle" />
           <AssociationSet Name="FK_Jobs_Contractors" Association="VehiclePurchaseManagementsModel.FK_Jobs_Contractors">
             <End Role="Contractor" EntitySet="Contractors" />
             <End Role="Job" EntitySet="Jobs" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_Jobs_Vehicles" Association="VehiclePurchaseManagementsModel.FK_Jobs_Vehicles">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="VehicleType">
           <Key>
             <PropertyRef Name="VehicleTypeId" />
@@ -264,29 +285,6 @@
           <Property Name="ItemStatus" Type="Boolean" Nullable="false" />
           <Property Name="ItemNote" Type="Binary" MaxLength="150" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Vehicle">
-          <Key>
-            <PropertyRef Name="VehicleId" />
-          </Key>
-          <Property Name="VehicleId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Brand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModelYear" Type="Int32" Nullable="false" />
-          <Property Name="TypeId" Type="Int64" Nullable="false" />
-          <Property Name="CategoryId" Type="Int64" Nullable="false" />
-          <Property Name="RegNum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="RegYear" Type="Int32" />
-          <Property Name="Transmission" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Condition" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="EngineNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ChassieNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Milage" Type="Int32" Nullable="false" />
-          <Property Name="EngineCapacity" Type="Double" Nullable="false" />
-          <Property Name="FuelType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="PartInventory" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="BrandId" />
@@ -315,35 +313,12 @@
           <Property Name="Amount" Type="Double" Nullable="false" />
           <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="Contractor">
-          <Key>
-            <PropertyRef Name="ContractorId" />
-          </Key>
-          <Property Name="ContractorId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ContractorName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ContractorPhone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="ContractorNic" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="ContractorType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Jobs" Relationship="VehiclePurchaseManagementsModel.FK_Jobs_Contractors" FromRole="Contractor" ToRole="Job" />
-        </EntityType>
         <EntityType Name="ContractorType">
           <Key>
             <PropertyRef Name="ContractorTypeId" />
           </Key>
           <Property Name="ContractorTypeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ContractorType1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Job">
-          <Key>
-            <PropertyRef Name="JobId" />
-          </Key>
-          <Property Name="JobId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="JobTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TobType" Type="Int64" Nullable="false" />
-          <Property Name="Contractor" Type="Int64" Nullable="false" />
-          <Property Name="Amount" Type="Double" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Contractor1" Relationship="VehiclePurchaseManagementsModel.FK_Jobs_Contractors" FromRole="Job" ToRole="Contractor" />
         </EntityType>
         <EntityType Name="VehicleExpense">
           <Key>
@@ -365,6 +340,55 @@
           <Property Name="VehicleId" Type="Int64" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="Contractor">
+          <Key>
+            <PropertyRef Name="ContractorId" />
+          </Key>
+          <Property Name="ContractorId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractorName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContractorPhone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContractorNic" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ContractorType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Jobs" Relationship="VehiclePurchaseManagementsModel.FK_Jobs_Contractors" FromRole="Contractor" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleId" Type="Int64" Nullable="false" />
+          <Property Name="JobTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contractor" Type="Int64" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Contractor1" Relationship="VehiclePurchaseManagementsModel.FK_Jobs_Contractors" FromRole="Job" ToRole="Contractor" />
+          <NavigationProperty Name="Vehicle" Relationship="VehiclePurchaseManagementsModel.FK_Jobs_Vehicles" FromRole="Job" ToRole="Vehicle" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="VehicleId" />
+          </Key>
+          <Property Name="VehicleId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModelYear" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int64" Nullable="false" />
+          <Property Name="CategoryId" Type="Int64" Nullable="false" />
+          <Property Name="RegNum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RegYear" Type="Int32" />
+          <Property Name="Transmission" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Condition" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EngineNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChassieNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Milage" Type="Int32" Nullable="false" />
+          <Property Name="EngineCapacity" Type="Double" Nullable="false" />
+          <Property Name="FuelType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PartInventory" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Jobs" Relationship="VehiclePurchaseManagementsModel.FK_Jobs_Vehicles" FromRole="Vehicle" ToRole="Job" />
+        </EntityType>
         <Association Name="FK_Jobs_Contractors">
           <End Type="VehiclePurchaseManagementsModel.Contractor" Role="Contractor" Multiplicity="1" />
           <End Type="VehiclePurchaseManagementsModel.Job" Role="Job" Multiplicity="*" />
@@ -377,7 +401,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_Jobs_Vehicles">
+          <End Type="VehiclePurchaseManagementsModel.Vehicle" Role="Vehicle" Multiplicity="1" />
+          <End Type="VehiclePurchaseManagementsModel.Job" Role="Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleId" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -440,30 +476,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Vehicles">
-            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Vehicle">
-              <MappingFragment StoreEntitySet="Vehicle">
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="PartInventory" ColumnName="PartInventory" />
-                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
-                <ScalarProperty Name="EngineCapacity" ColumnName="EngineCapacity" />
-                <ScalarProperty Name="Milage" ColumnName="Milage" />
-                <ScalarProperty Name="ChassieNumber" ColumnName="ChassieNumber" />
-                <ScalarProperty Name="EngineNumber" ColumnName="EngineNumber" />
-                <ScalarProperty Name="Condition" ColumnName="Condition" />
-                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
-                <ScalarProperty Name="RegYear" ColumnName="RegYear" />
-                <ScalarProperty Name="RegNum" ColumnName="RegNum" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="ModelYear" ColumnName="ModelYear" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="Brand" ColumnName="Brand" />
-                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Brands">
             <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Brand">
               <MappingFragment StoreEntitySet="Brands">
@@ -495,34 +507,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Contractors">
-            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Contractor">
-              <MappingFragment StoreEntitySet="Contractors">
-                <ScalarProperty Name="ContractorType" ColumnName="ContractorType" />
-                <ScalarProperty Name="ContractorNic" ColumnName="ContractorNic" />
-                <ScalarProperty Name="ContractorPhone" ColumnName="ContractorPhone" />
-                <ScalarProperty Name="ContractorName" ColumnName="ContractorName" />
-                <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ContractorTypes">
             <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.ContractorType">
               <MappingFragment StoreEntitySet="ContractorType">
                 <ScalarProperty Name="ContractorType1" ColumnName="ContractorType" />
                 <ScalarProperty Name="ContractorTypeId" ColumnName="ContractorTypeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Jobs">
-            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Job">
-              <MappingFragment StoreEntitySet="Jobs">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Contractor" ColumnName="Contractor" />
-                <ScalarProperty Name="TobType" ColumnName="TobType" />
-                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -545,6 +534,54 @@
                 <ScalarProperty Name="VehicleIncomeAmount" ColumnName="VehicleIncomeAmount" />
                 <ScalarProperty Name="VehicleIncomeName" ColumnName="VehicleIncomeName" />
                 <ScalarProperty Name="VehicleIncomeId" ColumnName="VehicleIncomeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contractors">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Contractor">
+              <MappingFragment StoreEntitySet="Contractors">
+                <ScalarProperty Name="ContractorType" ColumnName="ContractorType" />
+                <ScalarProperty Name="ContractorNic" ColumnName="ContractorNic" />
+                <ScalarProperty Name="ContractorPhone" ColumnName="ContractorPhone" />
+                <ScalarProperty Name="ContractorName" ColumnName="ContractorName" />
+                <ScalarProperty Name="ContractorId" ColumnName="ContractorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Job">
+              <MappingFragment StoreEntitySet="Jobs">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Contractor" ColumnName="Contractor" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicle">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="PartInventory" ColumnName="PartInventory" />
+                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+                <ScalarProperty Name="EngineCapacity" ColumnName="EngineCapacity" />
+                <ScalarProperty Name="Milage" ColumnName="Milage" />
+                <ScalarProperty Name="ChassieNumber" ColumnName="ChassieNumber" />
+                <ScalarProperty Name="EngineNumber" ColumnName="EngineNumber" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+                <ScalarProperty Name="RegYear" ColumnName="RegYear" />
+                <ScalarProperty Name="RegNum" ColumnName="RegNum" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="ModelYear" ColumnName="ModelYear" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

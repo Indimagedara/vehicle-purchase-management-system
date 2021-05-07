@@ -15,12 +15,14 @@ namespace VehicleManagementSystem
     public partial class Job
     {
         public long JobId { get; set; }
+        public long VehicleId { get; set; }
         public string JobTitle { get; set; }
-        public long TobType { get; set; }
         public long Contractor { get; set; }
         public double Amount { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public string Status { get; set; }
     
         public virtual Contractor Contractor1 { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
     }
 }

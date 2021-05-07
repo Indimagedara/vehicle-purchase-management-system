@@ -97,6 +97,7 @@
     <Compile Include="Forms\Brands.Designer.cs">
       <DependentUpon>Brands.cs</DependentUpon>
     </Compile>
+    <Compile Include="cmbBoxValues.cs" />
     <Compile Include="Forms\Contractor.cs">
       <SubType>Form</SubType>
     </Compile>

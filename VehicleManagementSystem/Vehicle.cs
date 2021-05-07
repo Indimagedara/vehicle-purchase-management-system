@@ -14,6 +14,12 @@ namespace VehicleManagementSystem
     
     public partial class Vehicle
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Vehicle()
+        {
+            this.Jobs = new HashSet<Job>();
+        }
+    
         public long VehicleId { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
@@ -32,5 +38,8 @@ namespace VehicleManagementSystem
         public string PartInventory { get; set; }
         public string Note { get; set; }
         public System.DateTime DateCreated { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }
