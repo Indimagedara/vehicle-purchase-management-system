@@ -79,7 +79,7 @@ namespace VehicleManagementSystem.Forms
       this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.btnDeleteJob = new System.Windows.Forms.Button();
       this.btnClearJob = new System.Windows.Forms.Button();
-      this.button2 = new System.Windows.Forms.Button();
+      this.btnUpdateJob = new System.Windows.Forms.Button();
       this.label8 = new System.Windows.Forms.Label();
       this.cmbContractors = new System.Windows.Forms.ComboBox();
       this.label2 = new System.Windows.Forms.Label();
@@ -91,6 +91,8 @@ namespace VehicleManagementSystem.Forms
       this.cmbConStatus = new System.Windows.Forms.ComboBox();
       this.label16 = new System.Windows.Forms.Label();
       this.lblConType = new System.Windows.Forms.Label();
+      this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       this.groupBox3.SuspendLayout();
@@ -519,7 +521,7 @@ namespace VehicleManagementSystem.Forms
       this.groupBox4.Controls.Add(this.listJobs);
       this.groupBox4.Controls.Add(this.btnDeleteJob);
       this.groupBox4.Controls.Add(this.btnClearJob);
-      this.groupBox4.Controls.Add(this.button2);
+      this.groupBox4.Controls.Add(this.btnUpdateJob);
       this.groupBox4.Controls.Add(this.label8);
       this.groupBox4.Controls.Add(this.cmbContractors);
       this.groupBox4.Controls.Add(this.label2);
@@ -535,7 +537,7 @@ namespace VehicleManagementSystem.Forms
       // 
       // btnAddJob
       // 
-      this.btnAddJob.Location = new System.Drawing.Point(791, 14);
+      this.btnAddJob.Location = new System.Drawing.Point(717, 14);
       this.btnAddJob.Name = "btnAddJob";
       this.btnAddJob.Size = new System.Drawing.Size(68, 26);
       this.btnAddJob.TabIndex = 40;
@@ -551,7 +553,9 @@ namespace VehicleManagementSystem.Forms
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
-            this.columnHeader5});
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7});
       this.listJobs.FullRowSelect = true;
       this.listJobs.GridLines = true;
       this.listJobs.HideSelection = false;
@@ -562,6 +566,7 @@ namespace VehicleManagementSystem.Forms
       this.listJobs.TabIndex = 49;
       this.listJobs.UseCompatibleStateImageBehavior = false;
       this.listJobs.View = System.Windows.Forms.View.Details;
+      this.listJobs.SelectedIndexChanged += new System.EventHandler(this.listJobs_SelectedIndexChanged);
       // 
       // columnHeader1
       // 
@@ -575,39 +580,42 @@ namespace VehicleManagementSystem.Forms
       // columnHeader3
       // 
       this.columnHeader3.Text = "Contractor";
-      this.columnHeader3.Width = 130;
+      this.columnHeader3.Width = 140;
       // 
       // columnHeader4
       // 
-      this.columnHeader4.Text = "Amount";
+      this.columnHeader4.Text = "Con. Type";
       this.columnHeader4.Width = 100;
       // 
       // btnDeleteJob
       // 
-      this.btnDeleteJob.Location = new System.Drawing.Point(791, 47);
+      this.btnDeleteJob.Location = new System.Drawing.Point(717, 41);
       this.btnDeleteJob.Name = "btnDeleteJob";
-      this.btnDeleteJob.Size = new System.Drawing.Size(43, 26);
+      this.btnDeleteJob.Size = new System.Drawing.Size(68, 26);
       this.btnDeleteJob.TabIndex = 48;
-      this.btnDeleteJob.Text = "&Del";
+      this.btnDeleteJob.Text = "&Delete";
       this.btnDeleteJob.UseVisualStyleBackColor = true;
+      this.btnDeleteJob.Click += new System.EventHandler(this.btnDeleteJob_Click);
       // 
       // btnClearJob
       // 
-      this.btnClearJob.Location = new System.Drawing.Point(833, 47);
+      this.btnClearJob.Location = new System.Drawing.Point(791, 41);
       this.btnClearJob.Name = "btnClearJob";
-      this.btnClearJob.Size = new System.Drawing.Size(26, 26);
+      this.btnClearJob.Size = new System.Drawing.Size(68, 26);
       this.btnClearJob.TabIndex = 47;
-      this.btnClearJob.Text = "&C";
+      this.btnClearJob.Text = "&Clear";
       this.btnClearJob.UseVisualStyleBackColor = true;
+      this.btnClearJob.Click += new System.EventHandler(this.btnClearJob_Click);
       // 
-      // button2
+      // btnUpdateJob
       // 
-      this.button2.Location = new System.Drawing.Point(791, 20);
-      this.button2.Name = "button2";
-      this.button2.Size = new System.Drawing.Size(68, 26);
-      this.button2.TabIndex = 46;
-      this.button2.Text = "&Update";
-      this.button2.UseVisualStyleBackColor = true;
+      this.btnUpdateJob.Location = new System.Drawing.Point(791, 14);
+      this.btnUpdateJob.Name = "btnUpdateJob";
+      this.btnUpdateJob.Size = new System.Drawing.Size(68, 26);
+      this.btnUpdateJob.TabIndex = 46;
+      this.btnUpdateJob.Text = "&Update";
+      this.btnUpdateJob.UseVisualStyleBackColor = true;
+      this.btnUpdateJob.Click += new System.EventHandler(this.btnUpdateJob_Click);
       // 
       // label8
       // 
@@ -655,14 +663,19 @@ namespace VehicleManagementSystem.Forms
       // txtJobAmount
       // 
       this.txtJobAmount.Location = new System.Drawing.Point(546, 14);
+      this.txtJobAmount.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
       this.txtJobAmount.Name = "txtJobAmount";
       this.txtJobAmount.Size = new System.Drawing.Size(161, 25);
       this.txtJobAmount.TabIndex = 50;
       // 
       // columnHeader5
       // 
-      this.columnHeader5.Text = "Date added";
-      this.columnHeader5.Width = 80;
+      this.columnHeader5.Text = "Amount(LKR)";
+      this.columnHeader5.Width = 110;
       // 
       // label12
       // 
@@ -703,6 +716,16 @@ namespace VehicleManagementSystem.Forms
       this.lblConType.Size = new System.Drawing.Size(13, 17);
       this.lblConType.TabIndex = 54;
       this.lblConType.Text = "-";
+      // 
+      // columnHeader6
+      // 
+      this.columnHeader6.Text = "Status";
+      this.columnHeader6.Width = 100;
+      // 
+      // columnHeader7
+      // 
+      this.columnHeader7.Text = "Date added";
+      this.columnHeader7.Width = 150;
       // 
       // frmSingleVehicle
       // 
@@ -784,7 +807,7 @@ namespace VehicleManagementSystem.Forms
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.Button btnDeleteJob;
     private System.Windows.Forms.Button btnClearJob;
-    private System.Windows.Forms.Button button2;
+    private System.Windows.Forms.Button btnUpdateJob;
     private System.Windows.Forms.Label label8;
     private System.Windows.Forms.ComboBox cmbContractors;
     private System.Windows.Forms.Label label2;
@@ -800,5 +823,7 @@ namespace VehicleManagementSystem.Forms
     private System.Windows.Forms.Label label12;
     private System.Windows.Forms.Label lblConType;
     private System.Windows.Forms.Label label16;
+    private System.Windows.Forms.ColumnHeader columnHeader6;
+    private System.Windows.Forms.ColumnHeader columnHeader7;
   }
 }

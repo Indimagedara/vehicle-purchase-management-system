@@ -196,6 +196,7 @@ namespace VehicleManagementSystem.Forms
         var singleContractor = ve.Contractors.Where(r => r.ContractorId == id).First();
         ve.Contractors.Remove(singleContractor);
         ve.SaveChanges();
+        MessageBox.Show("Contractor successfully deleted!");
         displayData();         
       }
     }

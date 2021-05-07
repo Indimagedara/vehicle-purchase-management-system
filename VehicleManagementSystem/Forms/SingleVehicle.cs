@@ -16,6 +16,7 @@ namespace VehicleManagementSystem.Forms
     public static int selectedId = frmDashboard.Id;
     public static string vehicleNumber = frmDashboard.selectedRegNum;
     public int vehicleId = 0;
+    public int selectedJobID = 0;
     string partInventory;
     public frmSingleVehicle()
     {
@@ -153,6 +154,9 @@ namespace VehicleManagementSystem.Forms
     
     private void fetchJobs()
     {
+      btnAddJob.Enabled = true;
+      btnUpdateJob.Enabled = false;
+      btnDeleteJob.Enabled = false;
       using(ve = new VehicleManagementEntities())
       {
         List<Job> jobList = ve.Jobs.Where(r => r.VehicleId == vehicleId).ToList();
@@ -164,7 +168,9 @@ namespace VehicleManagementSystem.Forms
             ListViewItem item = new ListViewItem(j.JobId.ToString());
             item.SubItems.Add(j.JobTitle);
             item.SubItems.Add(j.Contractor1.ContractorName);
+            item.SubItems.Add(j.Contractor1.ContractorType);
             item.SubItems.Add(j.Amount.ToString());
+            item.SubItems.Add(j.Status.ToString());
             item.SubItems.Add(j.CreatedDate.ToString());
             listJobs.Items.Add(item);
           }
@@ -195,7 +201,7 @@ namespace VehicleManagementSystem.Forms
             JobTitle = txtJobTitle.Text,
             VehicleId = vehicleId,
             Contractor = long.Parse(selectedContractor.ToString()),
-            Amount = float.Parse(txtJobAmount.Text),
+            Amount = float.Parse(txtJobAmount.Value.ToString()),
             Status = cmbConStatus.Text,
             CreatedDate = DateTime.Now
           };
@@ -218,12 +224,79 @@ namespace VehicleManagementSystem.Forms
       txtJobTitle.Text = "";
       txtJobAmount.Text = "";
       cmbContractors.Text = "";
+      cmbConStatus.Text = "";
+      lblConType.Text = "-";
     }
 
     private void cmbContractors_SelectedIndexChanged(object sender, EventArgs e)
     {
       cmbBoxValues cmbBoxValues = cmbContractors.SelectedItem as cmbBoxValues;
       lblConType.Text = cmbBoxValues.extraValues.ToString();
+    }
+
+    private void btnUpdateJob_Click(object sender, EventArgs e)
+    {
+      if (!string.IsNullOrEmpty(txtJobTitle.Text) && !string.IsNullOrEmpty(cmbContractors.Text) && !string.IsNullOrEmpty(cmbConStatus.Text))
+      {
+        ve = new VehicleManagementEntities();
+        cmbBoxValues selCon = cmbContractors.SelectedItem as cmbBoxValues;
+        int selectedContractor = selCon.cmbVal;
+
+        var singleJob = ve.Jobs.Where(r => r.JobId == selectedJobID).First();
+        singleJob.JobTitle = txtJobTitle.Text;
+        singleJob.Contractor = long.Parse(selectedContractor.ToString());
+        singleJob.Amount = float.Parse(txtJobAmount.Value.ToString());
+        singleJob.Status = cmbConStatus.Text;
+        ve.SaveChanges();
+        MessageBox.Show("Job successfully updated!");
+        fetchJobs();
+        clearJobFields();
+        selectedJobID = 0;
+      }
+      else
+      {
+        MessageBox.Show("You must fill all fields!");
+      }
+
+    }
+
+    private void listJobs_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      btnAddJob.Enabled = false;
+      btnUpdateJob.Enabled = true;
+      btnDeleteJob.Enabled = true;
+      ListView.SelectedListViewItemCollection itemCollection = listJobs.SelectedItems;
+      foreach (ListViewItem item in itemCollection)
+      {
+        selectedJobID = Int32.Parse(item.SubItems[0].Text);
+        txtJobTitle.Text = item.SubItems[1].Text;
+        cmbContractors.Text = item.SubItems[2].Text;
+        txtJobAmount.Value = Int32.Parse(item.SubItems[4].Text);
+        cmbConStatus.Text = item.SubItems[5].Text;
+      }
+    }
+
+    private void btnClearJob_Click(object sender, EventArgs e)
+    {
+      btnAddJob.Enabled = true;
+      btnUpdateJob.Enabled = false;
+      btnDeleteJob.Enabled = false;
+      clearJobFields();
+    }
+
+    private void btnDeleteJob_Click(object sender, EventArgs e)
+    {
+      DialogResult res = MessageBox.Show("Are you sure you want to Delete?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+      if (res == DialogResult.OK)
+      {
+        ve = new VehicleManagementEntities();
+        var singleJob = ve.Jobs.Where(r => r.JobId == selectedJobID).First();
+        ve.Jobs.Remove(singleJob);
+        ve.SaveChanges();
+        MessageBox.Show("Job successfully deleted!");
+        fetchJobs();
+        clearJobFields();
+      }
     }
   }
 }
