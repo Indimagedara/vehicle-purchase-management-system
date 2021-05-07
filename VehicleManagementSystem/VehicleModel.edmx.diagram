@@ -17,11 +17,13 @@
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.ContractorType" Width="1.5" PointX="0.5" PointY="9.5" />
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.VehicleExpense" Width="1.5" PointX="2.5" PointY="9.5" />
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.VehicleIncome" Width="1.5" PointX="8.5" PointY="2.875" />
-        <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.Contractor" Width="1.5" PointX="6.75" PointY="5.125" />
+        <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.Contractor" Width="1.5" PointX="6.625" PointY="4.75" />
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.Job" Width="1.5" PointX="2.75" PointY="5.75" />
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.Vehicle" Width="1.5" PointX="4.75" PointY="2.5" />
         <AssociationConnector Association="VehiclePurchaseManagementsModel.FK_Jobs_Contractors" />
         <AssociationConnector Association="VehiclePurchaseManagementsModel.FK_Jobs_Vehicles" />
+        <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.Expenses" Width="1.5" PointX="8.5" PointY="5.125" />
+        <AssociationConnector Association="VehiclePurchaseManagementsModel.FK_Expenses_Vehicle" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

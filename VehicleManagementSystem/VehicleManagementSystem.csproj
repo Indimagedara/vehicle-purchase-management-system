@@ -79,6 +79,9 @@
     <Compile Include="Employee.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Expenses.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AddSellerData.cs">
       <SubType>Form</SubType>
     </Compile>

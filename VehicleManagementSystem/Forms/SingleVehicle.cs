@@ -17,6 +17,7 @@ namespace VehicleManagementSystem.Forms
     public static string vehicleNumber = frmDashboard.selectedRegNum;
     public int vehicleId = 0;
     public int selectedJobID = 0;
+    public int selectedExpenseId = 0;
     string partInventory;
     public frmSingleVehicle()
     {
@@ -28,6 +29,7 @@ namespace VehicleManagementSystem.Forms
       fetchData();
       fetchSellerData();
       fetchJobs();
+      fetchExpenses();
       //btnAddSeller.Visible = false;
     }
     public void fetchSellerData()
@@ -257,7 +259,6 @@ namespace VehicleManagementSystem.Forms
       {
         MessageBox.Show("You must fill all fields!");
       }
-
     }
 
     private void listJobs_SelectedIndexChanged(object sender, EventArgs e)
@@ -286,7 +287,7 @@ namespace VehicleManagementSystem.Forms
 
     private void btnDeleteJob_Click(object sender, EventArgs e)
     {
-      DialogResult res = MessageBox.Show("Are you sure you want to Delete?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+      DialogResult res = MessageBox.Show("Are you sure you want to Delete this Job?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
       if (res == DialogResult.OK)
       {
         ve = new VehicleManagementEntities();
@@ -296,6 +297,133 @@ namespace VehicleManagementSystem.Forms
         MessageBox.Show("Job successfully deleted!");
         fetchJobs();
         clearJobFields();
+      }
+    }
+
+    private void btnAddExpense_Click(object sender, EventArgs e)
+    {
+      if (!string.IsNullOrEmpty(txtExpTitle.Text) && !string.IsNullOrEmpty(cmbExpType.Text))
+      {
+        ve = new VehicleManagementEntities();
+        if (ve.Expenses.Any(r => r.ExpenseTitle == txtExpTitle.Text))
+        {
+          MessageBox.Show("This expense is already exists!");
+        }
+        else
+        {
+          Expenses expenses = new Expenses()
+          {
+            ExpenseTitle = txtExpTitle.Text,
+            VehicleId = vehicleId,
+            ExpenseType = cmbExpType.Text,
+            Amount = long.Parse(numExpAmount.Value.ToString()),
+            DateCreated = DateTime.Now
+          };
+          ve.Expenses.Add(expenses);
+          ve.SaveChanges();
+          MessageBox.Show("Expense successfully added!");
+          fetchExpenses();
+          clearExpenseFields();
+        }
+      }
+      else
+      {
+        MessageBox.Show("You must fill all fields!");
+      }
+    }
+
+    private void clearExpenseFields()
+    {
+      txtExpTitle.Text = "";
+      cmbExpType.Text = "";
+      numExpAmount.Value = 0;
+      selectedExpenseId = 0;
+      btnAddExpense.Enabled = true;
+      btnDeleteExpense.Enabled = false;
+      btnDeleteExpense.Enabled = false;
+    }
+
+    private void fetchExpenses()
+    {
+      btnAddExpense.Enabled = true;
+      btnDeleteExpense.Enabled = false;
+      btnDeleteExpense.Enabled = false;
+      using (ve = new VehicleManagementEntities())
+      {
+        List<Expenses> expenseList = ve.Expenses.Where(r => r.VehicleId == vehicleId).ToList();
+        listExpenses.Items.Clear();
+        if (expenseList.Any())
+        {
+          foreach (Expenses exp in expenseList)
+          {
+            ListViewItem item = new ListViewItem(exp.ExpenseId.ToString());
+            item.SubItems.Add(exp.ExpenseTitle);
+            item.SubItems.Add(exp.ExpenseType);
+            item.SubItems.Add(exp.Amount.ToString());
+            item.SubItems.Add(exp.DateCreated.ToString());
+            listExpenses.Items.Add(item);
+          }
+        }
+      }
+    }
+
+    private void btnUpdateExpense_Click(object sender, EventArgs e)
+    {
+      if (!string.IsNullOrEmpty(txtExpTitle.Text) && !string.IsNullOrEmpty(cmbExpType.Text))
+      {
+        ve = new VehicleManagementEntities();
+
+        var singleExp = ve.Expenses.Where(r => r.ExpenseId == selectedExpenseId).First();
+        singleExp.ExpenseTitle = txtExpTitle.Text;
+        singleExp.ExpenseType = cmbExpType.Text;
+        singleExp.Amount = float.Parse(numExpAmount.Value.ToString());
+        ve.SaveChanges();
+        MessageBox.Show("Expense successfully updated!");
+        fetchExpenses();
+        clearExpenseFields();
+        selectedExpenseId = 0;
+      }
+      else
+      {
+        MessageBox.Show("You must fill all fields!");
+      }
+    }
+
+    private void listExpenses_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      btnAddExpense.Enabled = false;
+      btnUpdateExpense.Enabled = true;
+      btnDeleteExpense.Enabled = true;
+      ListView.SelectedListViewItemCollection itemCollection = listExpenses.SelectedItems;
+      foreach (ListViewItem item in itemCollection)
+      {
+        selectedExpenseId = Int32.Parse(item.SubItems[0].Text);
+        txtExpTitle.Text = item.SubItems[1].Text;
+        cmbExpType.Text = item.SubItems[2].Text;
+        numExpAmount.Value = Int32.Parse(item.SubItems[3].Text);
+      }
+    }
+
+    private void btnClearExpense_Click(object sender, EventArgs e)
+    {
+      btnAddExpense.Enabled = true;
+      btnUpdateExpense.Enabled = false;
+      btnDeleteExpense.Enabled = false;
+      clearExpenseFields();
+    }
+
+    private void btnDeleteExpense_Click(object sender, EventArgs e)
+    {
+      DialogResult res = MessageBox.Show("Are you sure you want to Delete this Expense?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+      if (res == DialogResult.OK)
+      {
+        ve = new VehicleManagementEntities();
+        var singleExp = ve.Expenses.Where(r => r.ExpenseId == selectedExpenseId).First();
+        ve.Expenses.Remove(singleExp);
+        ve.SaveChanges();
+        MessageBox.Show("Expense successfully deleted!");
+        fetchExpenses();
+        clearExpenseFields();
       }
     }
   }

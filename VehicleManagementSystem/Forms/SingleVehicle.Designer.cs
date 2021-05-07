@@ -71,12 +71,20 @@ namespace VehicleManagementSystem.Forms
       this.lblSellerName = new System.Windows.Forms.Label();
       this.label1 = new System.Windows.Forms.Label();
       this.groupBox4 = new System.Windows.Forms.GroupBox();
+      this.lblConType = new System.Windows.Forms.Label();
+      this.label16 = new System.Windows.Forms.Label();
+      this.cmbConStatus = new System.Windows.Forms.ComboBox();
+      this.label12 = new System.Windows.Forms.Label();
+      this.txtJobAmount = new System.Windows.Forms.NumericUpDown();
       this.btnAddJob = new System.Windows.Forms.Button();
       this.listJobs = new System.Windows.Forms.ListView();
       this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.btnDeleteJob = new System.Windows.Forms.Button();
       this.btnClearJob = new System.Windows.Forms.Button();
       this.btnUpdateJob = new System.Windows.Forms.Button();
@@ -85,19 +93,30 @@ namespace VehicleManagementSystem.Forms
       this.label2 = new System.Windows.Forms.Label();
       this.txtJobTitle = new System.Windows.Forms.TextBox();
       this.label4 = new System.Windows.Forms.Label();
-      this.txtJobAmount = new System.Windows.Forms.NumericUpDown();
-      this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-      this.label12 = new System.Windows.Forms.Label();
-      this.cmbConStatus = new System.Windows.Forms.ComboBox();
-      this.label16 = new System.Windows.Forms.Label();
-      this.lblConType = new System.Windows.Forms.Label();
-      this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-      this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.groupBox5 = new System.Windows.Forms.GroupBox();
+      this.numExpAmount = new System.Windows.Forms.NumericUpDown();
+      this.btnAddExpense = new System.Windows.Forms.Button();
+      this.listExpenses = new System.Windows.Forms.ListView();
+      this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.btnDeleteExpense = new System.Windows.Forms.Button();
+      this.btnClearExpense = new System.Windows.Forms.Button();
+      this.btnUpdateExpense = new System.Windows.Forms.Button();
+      this.label24 = new System.Windows.Forms.Label();
+      this.cmbExpType = new System.Windows.Forms.ComboBox();
+      this.label25 = new System.Windows.Forms.Label();
+      this.txtExpTitle = new System.Windows.Forms.TextBox();
+      this.label26 = new System.Windows.Forms.Label();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       this.groupBox3.SuspendLayout();
       this.groupBox4.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.txtJobAmount)).BeginInit();
+      this.groupBox5.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numExpAmount)).BeginInit();
       this.SuspendLayout();
       // 
       // groupBox1
@@ -535,6 +554,58 @@ namespace VehicleManagementSystem.Forms
       this.groupBox4.TabStop = false;
       this.groupBox4.Text = "Jobs";
       // 
+      // lblConType
+      // 
+      this.lblConType.AutoSize = true;
+      this.lblConType.Location = new System.Drawing.Point(363, 48);
+      this.lblConType.Name = "lblConType";
+      this.lblConType.Size = new System.Drawing.Size(13, 17);
+      this.lblConType.TabIndex = 54;
+      this.lblConType.Text = "-";
+      // 
+      // label16
+      // 
+      this.label16.AutoSize = true;
+      this.label16.Location = new System.Drawing.Point(238, 48);
+      this.label16.Name = "label16";
+      this.label16.Size = new System.Drawing.Size(108, 17);
+      this.label16.TabIndex = 53;
+      this.label16.Text = "Contractor type";
+      // 
+      // cmbConStatus
+      // 
+      this.cmbConStatus.FormattingEnabled = true;
+      this.cmbConStatus.Items.AddRange(new object[] {
+            "To do",
+            "In progress",
+            "Completed",
+            "Re Assigned"});
+      this.cmbConStatus.Location = new System.Drawing.Point(546, 44);
+      this.cmbConStatus.Name = "cmbConStatus";
+      this.cmbConStatus.Size = new System.Drawing.Size(161, 25);
+      this.cmbConStatus.TabIndex = 52;
+      // 
+      // label12
+      // 
+      this.label12.AutoSize = true;
+      this.label12.Location = new System.Drawing.Point(483, 48);
+      this.label12.Name = "label12";
+      this.label12.Size = new System.Drawing.Size(50, 17);
+      this.label12.TabIndex = 51;
+      this.label12.Text = "Status";
+      // 
+      // txtJobAmount
+      // 
+      this.txtJobAmount.Location = new System.Drawing.Point(546, 14);
+      this.txtJobAmount.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
+      this.txtJobAmount.Name = "txtJobAmount";
+      this.txtJobAmount.Size = new System.Drawing.Size(161, 25);
+      this.txtJobAmount.TabIndex = 50;
+      // 
       // btnAddJob
       // 
       this.btnAddJob.Location = new System.Drawing.Point(717, 14);
@@ -587,6 +658,21 @@ namespace VehicleManagementSystem.Forms
       this.columnHeader4.Text = "Con. Type";
       this.columnHeader4.Width = 100;
       // 
+      // columnHeader5
+      // 
+      this.columnHeader5.Text = "Amount(LKR)";
+      this.columnHeader5.Width = 110;
+      // 
+      // columnHeader6
+      // 
+      this.columnHeader6.Text = "Status";
+      this.columnHeader6.Width = 100;
+      // 
+      // columnHeader7
+      // 
+      this.columnHeader7.Text = "Date added";
+      this.columnHeader7.Width = 150;
+      // 
       // btnDeleteJob
       // 
       this.btnDeleteJob.Location = new System.Drawing.Point(717, 41);
@@ -620,7 +706,7 @@ namespace VehicleManagementSystem.Forms
       // label8
       // 
       this.label8.AutoSize = true;
-      this.label8.Location = new System.Drawing.Point(482, 21);
+      this.label8.Location = new System.Drawing.Point(482, 18);
       this.label8.Name = "label8";
       this.label8.Size = new System.Drawing.Size(58, 17);
       this.label8.TabIndex = 44;
@@ -638,7 +724,7 @@ namespace VehicleManagementSystem.Forms
       // label2
       // 
       this.label2.AutoSize = true;
-      this.label2.Location = new System.Drawing.Point(9, 52);
+      this.label2.Location = new System.Drawing.Point(9, 49);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(77, 17);
       this.label2.TabIndex = 42;
@@ -646,92 +732,190 @@ namespace VehicleManagementSystem.Forms
       // 
       // txtJobTitle
       // 
-      this.txtJobTitle.Location = new System.Drawing.Point(75, 14);
+      this.txtJobTitle.Location = new System.Drawing.Point(92, 14);
       this.txtJobTitle.Name = "txtJobTitle";
-      this.txtJobTitle.Size = new System.Drawing.Size(383, 25);
+      this.txtJobTitle.Size = new System.Drawing.Size(366, 25);
       this.txtJobTitle.TabIndex = 41;
       // 
       // label4
       // 
       this.label4.AutoSize = true;
-      this.label4.Location = new System.Drawing.Point(8, 22);
+      this.label4.Location = new System.Drawing.Point(8, 19);
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(61, 17);
       this.label4.TabIndex = 38;
       this.label4.Text = "Job Title";
       // 
-      // txtJobAmount
+      // groupBox5
       // 
-      this.txtJobAmount.Location = new System.Drawing.Point(546, 14);
-      this.txtJobAmount.Maximum = new decimal(new int[] {
+      this.groupBox5.Controls.Add(this.numExpAmount);
+      this.groupBox5.Controls.Add(this.btnAddExpense);
+      this.groupBox5.Controls.Add(this.listExpenses);
+      this.groupBox5.Controls.Add(this.btnDeleteExpense);
+      this.groupBox5.Controls.Add(this.btnClearExpense);
+      this.groupBox5.Controls.Add(this.btnUpdateExpense);
+      this.groupBox5.Controls.Add(this.label24);
+      this.groupBox5.Controls.Add(this.cmbExpType);
+      this.groupBox5.Controls.Add(this.label25);
+      this.groupBox5.Controls.Add(this.txtExpTitle);
+      this.groupBox5.Controls.Add(this.label26);
+      this.groupBox5.Font = new System.Drawing.Font("Arial", 11.25F);
+      this.groupBox5.Location = new System.Drawing.Point(18, 580);
+      this.groupBox5.Name = "groupBox5";
+      this.groupBox5.Size = new System.Drawing.Size(625, 283);
+      this.groupBox5.TabIndex = 55;
+      this.groupBox5.TabStop = false;
+      this.groupBox5.Text = "Expenses";
+      // 
+      // numExpAmount
+      // 
+      this.numExpAmount.Location = new System.Drawing.Point(326, 42);
+      this.numExpAmount.Maximum = new decimal(new int[] {
             -727379969,
             232,
             0,
             0});
-      this.txtJobAmount.Name = "txtJobAmount";
-      this.txtJobAmount.Size = new System.Drawing.Size(161, 25);
-      this.txtJobAmount.TabIndex = 50;
+      this.numExpAmount.Name = "numExpAmount";
+      this.numExpAmount.Size = new System.Drawing.Size(132, 25);
+      this.numExpAmount.TabIndex = 50;
       // 
-      // columnHeader5
+      // btnAddExpense
       // 
-      this.columnHeader5.Text = "Amount(LKR)";
-      this.columnHeader5.Width = 110;
+      this.btnAddExpense.Location = new System.Drawing.Point(472, 14);
+      this.btnAddExpense.Name = "btnAddExpense";
+      this.btnAddExpense.Size = new System.Drawing.Size(68, 26);
+      this.btnAddExpense.TabIndex = 40;
+      this.btnAddExpense.Text = "&Add";
+      this.btnAddExpense.UseVisualStyleBackColor = true;
+      this.btnAddExpense.Click += new System.EventHandler(this.btnAddExpense_Click);
       // 
-      // label12
+      // listExpenses
       // 
-      this.label12.AutoSize = true;
-      this.label12.Location = new System.Drawing.Point(483, 50);
-      this.label12.Name = "label12";
-      this.label12.Size = new System.Drawing.Size(50, 17);
-      this.label12.TabIndex = 51;
-      this.label12.Text = "Status";
+      this.listExpenses.Activation = System.Windows.Forms.ItemActivation.OneClick;
+      this.listExpenses.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12});
+      this.listExpenses.FullRowSelect = true;
+      this.listExpenses.GridLines = true;
+      this.listExpenses.HideSelection = false;
+      this.listExpenses.Location = new System.Drawing.Point(12, 100);
+      this.listExpenses.MultiSelect = false;
+      this.listExpenses.Name = "listExpenses";
+      this.listExpenses.Size = new System.Drawing.Size(602, 177);
+      this.listExpenses.TabIndex = 49;
+      this.listExpenses.UseCompatibleStateImageBehavior = false;
+      this.listExpenses.View = System.Windows.Forms.View.Details;
+      this.listExpenses.SelectedIndexChanged += new System.EventHandler(this.listExpenses_SelectedIndexChanged);
       // 
-      // cmbConStatus
+      // columnHeader8
       // 
-      this.cmbConStatus.FormattingEnabled = true;
-      this.cmbConStatus.Items.AddRange(new object[] {
-            "To do",
-            "In progress",
-            "Completed",
-            "Re Assigned"});
-      this.cmbConStatus.Location = new System.Drawing.Point(546, 44);
-      this.cmbConStatus.Name = "cmbConStatus";
-      this.cmbConStatus.Size = new System.Drawing.Size(161, 25);
-      this.cmbConStatus.TabIndex = 52;
+      this.columnHeader8.Text = "Id";
       // 
-      // label16
+      // columnHeader9
       // 
-      this.label16.AutoSize = true;
-      this.label16.Location = new System.Drawing.Point(238, 50);
-      this.label16.Name = "label16";
-      this.label16.Size = new System.Drawing.Size(108, 17);
-      this.label16.TabIndex = 53;
-      this.label16.Text = "Contractor type";
+      this.columnHeader9.Text = "Exp. Title";
+      this.columnHeader9.Width = 220;
       // 
-      // lblConType
+      // columnHeader10
       // 
-      this.lblConType.AutoSize = true;
-      this.lblConType.Location = new System.Drawing.Point(363, 50);
-      this.lblConType.Name = "lblConType";
-      this.lblConType.Size = new System.Drawing.Size(13, 17);
-      this.lblConType.TabIndex = 54;
-      this.lblConType.Text = "-";
+      this.columnHeader10.Text = "Exp. type";
+      this.columnHeader10.Width = 140;
       // 
-      // columnHeader6
+      // columnHeader11
       // 
-      this.columnHeader6.Text = "Status";
-      this.columnHeader6.Width = 100;
+      this.columnHeader11.Text = "Amount";
+      this.columnHeader11.Width = 100;
       // 
-      // columnHeader7
+      // columnHeader12
       // 
-      this.columnHeader7.Text = "Date added";
-      this.columnHeader7.Width = 150;
+      this.columnHeader12.Text = "Date added";
+      this.columnHeader12.Width = 110;
+      // 
+      // btnDeleteExpense
+      // 
+      this.btnDeleteExpense.Location = new System.Drawing.Point(472, 41);
+      this.btnDeleteExpense.Name = "btnDeleteExpense";
+      this.btnDeleteExpense.Size = new System.Drawing.Size(68, 26);
+      this.btnDeleteExpense.TabIndex = 48;
+      this.btnDeleteExpense.Text = "&Delete";
+      this.btnDeleteExpense.UseVisualStyleBackColor = true;
+      this.btnDeleteExpense.Click += new System.EventHandler(this.btnDeleteExpense_Click);
+      // 
+      // btnClearExpense
+      // 
+      this.btnClearExpense.Location = new System.Drawing.Point(546, 41);
+      this.btnClearExpense.Name = "btnClearExpense";
+      this.btnClearExpense.Size = new System.Drawing.Size(68, 26);
+      this.btnClearExpense.TabIndex = 47;
+      this.btnClearExpense.Text = "&Clear";
+      this.btnClearExpense.UseVisualStyleBackColor = true;
+      this.btnClearExpense.Click += new System.EventHandler(this.btnClearExpense_Click);
+      // 
+      // btnUpdateExpense
+      // 
+      this.btnUpdateExpense.Location = new System.Drawing.Point(546, 14);
+      this.btnUpdateExpense.Name = "btnUpdateExpense";
+      this.btnUpdateExpense.Size = new System.Drawing.Size(68, 26);
+      this.btnUpdateExpense.TabIndex = 46;
+      this.btnUpdateExpense.Text = "&Update";
+      this.btnUpdateExpense.UseVisualStyleBackColor = true;
+      this.btnUpdateExpense.Click += new System.EventHandler(this.btnUpdateExpense_Click);
+      // 
+      // label24
+      // 
+      this.label24.AutoSize = true;
+      this.label24.Location = new System.Drawing.Point(262, 46);
+      this.label24.Name = "label24";
+      this.label24.Size = new System.Drawing.Size(58, 17);
+      this.label24.TabIndex = 44;
+      this.label24.Text = "Amount";
+      // 
+      // cmbExpType
+      // 
+      this.cmbExpType.FormattingEnabled = true;
+      this.cmbExpType.Items.AddRange(new object[] {
+            "Spare Part",
+            "Broker Fees",
+            "Advertiesment Fees"});
+      this.cmbExpType.Location = new System.Drawing.Point(117, 44);
+      this.cmbExpType.Name = "cmbExpType";
+      this.cmbExpType.Size = new System.Drawing.Size(139, 25);
+      this.cmbExpType.TabIndex = 43;
+      // 
+      // label25
+      // 
+      this.label25.AutoSize = true;
+      this.label25.Location = new System.Drawing.Point(8, 48);
+      this.label25.Name = "label25";
+      this.label25.Size = new System.Drawing.Size(100, 17);
+      this.label25.TabIndex = 42;
+      this.label25.Text = "Expense Type";
+      // 
+      // txtExpTitle
+      // 
+      this.txtExpTitle.Location = new System.Drawing.Point(117, 14);
+      this.txtExpTitle.Name = "txtExpTitle";
+      this.txtExpTitle.Size = new System.Drawing.Size(341, 25);
+      this.txtExpTitle.TabIndex = 41;
+      // 
+      // label26
+      // 
+      this.label26.AutoSize = true;
+      this.label26.Location = new System.Drawing.Point(8, 18);
+      this.label26.Name = "label26";
+      this.label26.Size = new System.Drawing.Size(91, 17);
+      this.label26.TabIndex = 38;
+      this.label26.Text = "Expense title";
       // 
       // frmSingleVehicle
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1378, 883);
+      this.Controls.Add(this.groupBox5);
       this.Controls.Add(this.groupBox4);
       this.Controls.Add(this.groupBox3);
       this.Controls.Add(this.groupBox2);
@@ -754,6 +938,9 @@ namespace VehicleManagementSystem.Forms
       this.groupBox4.ResumeLayout(false);
       this.groupBox4.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.txtJobAmount)).EndInit();
+      this.groupBox5.ResumeLayout(false);
+      this.groupBox5.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numExpAmount)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -825,5 +1012,22 @@ namespace VehicleManagementSystem.Forms
     private System.Windows.Forms.Label label16;
     private System.Windows.Forms.ColumnHeader columnHeader6;
     private System.Windows.Forms.ColumnHeader columnHeader7;
+    private System.Windows.Forms.GroupBox groupBox5;
+    private System.Windows.Forms.NumericUpDown numExpAmount;
+    private System.Windows.Forms.Button btnAddExpense;
+    private System.Windows.Forms.ListView listExpenses;
+    private System.Windows.Forms.ColumnHeader columnHeader8;
+    private System.Windows.Forms.ColumnHeader columnHeader9;
+    private System.Windows.Forms.ColumnHeader columnHeader10;
+    private System.Windows.Forms.ColumnHeader columnHeader11;
+    private System.Windows.Forms.ColumnHeader columnHeader12;
+    private System.Windows.Forms.Button btnDeleteExpense;
+    private System.Windows.Forms.Button btnClearExpense;
+    private System.Windows.Forms.Button btnUpdateExpense;
+    private System.Windows.Forms.Label label24;
+    private System.Windows.Forms.ComboBox cmbExpType;
+    private System.Windows.Forms.Label label25;
+    private System.Windows.Forms.TextBox txtExpTitle;
+    private System.Windows.Forms.Label label26;
   }
 }
