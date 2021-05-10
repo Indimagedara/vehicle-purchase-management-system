@@ -20,6 +20,7 @@ namespace VehicleManagementSystem
         public string Installment { get; set; }
         public double Amount { get; set; }
         public System.DateTime DatePayed { get; set; }
+        public string InvoiceNumber { get; set; }
     
         public virtual SaleVehicle SaleVehicle { get; set; }
     }

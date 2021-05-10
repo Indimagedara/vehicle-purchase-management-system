@@ -112,22 +112,20 @@ namespace VehicleManagementSystem.Forms
       this.txtExpTitle = new System.Windows.Forms.TextBox();
       this.label26 = new System.Windows.Forms.Label();
       this.groupBox6 = new System.Windows.Forms.GroupBox();
-      this.label30 = new System.Windows.Forms.Label();
+      this.lblDueAmount = new System.Windows.Forms.Label();
       this.label28 = new System.Windows.Forms.Label();
       this.numInstAmount = new System.Windows.Forms.NumericUpDown();
       this.btnAddIncome = new System.Windows.Forms.Button();
-      this.listView1 = new System.Windows.Forms.ListView();
+      this.listPayments = new System.Windows.Forms.ListView();
       this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.btnDeleteIncome = new System.Windows.Forms.Button();
-      this.btnClear = new System.Windows.Forms.Button();
+      this.btnClearIncome = new System.Windows.Forms.Button();
       this.btnUpdateIncome = new System.Windows.Forms.Button();
       this.label18 = new System.Windows.Forms.Label();
-      this.cmbNumOfInst = new System.Windows.Forms.ComboBox();
-      this.label20 = new System.Windows.Forms.Label();
       this.groupBox7 = new System.Windows.Forms.GroupBox();
       this.btnBuyerView = new System.Windows.Forms.Button();
       this.txtBuyerAddress = new System.Windows.Forms.TextBox();
@@ -146,6 +144,8 @@ namespace VehicleManagementSystem.Forms
       this.btnUpdateSale = new System.Windows.Forms.Button();
       this.txtBuyerName = new System.Windows.Forms.TextBox();
       this.label35 = new System.Windows.Forms.Label();
+      this.txtInvoiceNumber = new System.Windows.Forms.TextBox();
+      this.label34 = new System.Windows.Forms.Label();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       this.groupBox3.SuspendLayout();
@@ -962,17 +962,17 @@ namespace VehicleManagementSystem.Forms
       // 
       // groupBox6
       // 
-      this.groupBox6.Controls.Add(this.label30);
+      this.groupBox6.Controls.Add(this.txtInvoiceNumber);
+      this.groupBox6.Controls.Add(this.label34);
+      this.groupBox6.Controls.Add(this.lblDueAmount);
       this.groupBox6.Controls.Add(this.label28);
       this.groupBox6.Controls.Add(this.numInstAmount);
       this.groupBox6.Controls.Add(this.btnAddIncome);
-      this.groupBox6.Controls.Add(this.listView1);
+      this.groupBox6.Controls.Add(this.listPayments);
       this.groupBox6.Controls.Add(this.btnDeleteIncome);
-      this.groupBox6.Controls.Add(this.btnClear);
+      this.groupBox6.Controls.Add(this.btnClearIncome);
       this.groupBox6.Controls.Add(this.btnUpdateIncome);
       this.groupBox6.Controls.Add(this.label18);
-      this.groupBox6.Controls.Add(this.cmbNumOfInst);
-      this.groupBox6.Controls.Add(this.label20);
       this.groupBox6.Font = new System.Drawing.Font("Arial", 11.25F);
       this.groupBox6.Location = new System.Drawing.Point(974, 580);
       this.groupBox6.Name = "groupBox6";
@@ -981,19 +981,19 @@ namespace VehicleManagementSystem.Forms
       this.groupBox6.TabStop = false;
       this.groupBox6.Text = "Payments";
       // 
-      // label30
+      // lblDueAmount
       // 
-      this.label30.AutoSize = true;
-      this.label30.Location = new System.Drawing.Point(106, 52);
-      this.label30.Name = "label30";
-      this.label30.Size = new System.Drawing.Size(13, 17);
-      this.label30.TabIndex = 52;
-      this.label30.Text = "-";
+      this.lblDueAmount.AutoSize = true;
+      this.lblDueAmount.Location = new System.Drawing.Point(105, 22);
+      this.lblDueAmount.Name = "lblDueAmount";
+      this.lblDueAmount.Size = new System.Drawing.Size(13, 17);
+      this.lblDueAmount.TabIndex = 52;
+      this.lblDueAmount.Text = "-";
       // 
       // label28
       // 
       this.label28.AutoSize = true;
-      this.label28.Location = new System.Drawing.Point(11, 52);
+      this.label28.Location = new System.Drawing.Point(11, 22);
       this.label28.Name = "label28";
       this.label28.Size = new System.Drawing.Size(88, 17);
       this.label28.TabIndex = 51;
@@ -1001,7 +1001,7 @@ namespace VehicleManagementSystem.Forms
       // 
       // numInstAmount
       // 
-      this.numInstAmount.Location = new System.Drawing.Point(371, 18);
+      this.numInstAmount.Location = new System.Drawing.Point(375, 20);
       this.numInstAmount.Maximum = new decimal(new int[] {
             -727379969,
             232,
@@ -1013,32 +1013,34 @@ namespace VehicleManagementSystem.Forms
       // 
       // btnAddIncome
       // 
-      this.btnAddIncome.Location = new System.Drawing.Point(219, 48);
+      this.btnAddIncome.Location = new System.Drawing.Point(227, 51);
       this.btnAddIncome.Name = "btnAddIncome";
       this.btnAddIncome.Size = new System.Drawing.Size(68, 26);
       this.btnAddIncome.TabIndex = 40;
       this.btnAddIncome.Text = "&Add";
       this.btnAddIncome.UseVisualStyleBackColor = true;
+      this.btnAddIncome.Click += new System.EventHandler(this.btnAddIncome_Click);
       // 
-      // listView1
+      // listPayments
       // 
-      this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
-      this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+      this.listPayments.Activation = System.Windows.Forms.ItemActivation.OneClick;
+      this.listPayments.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader13,
             this.columnHeader14,
             this.columnHeader15,
             this.columnHeader16,
             this.columnHeader17});
-      this.listView1.FullRowSelect = true;
-      this.listView1.GridLines = true;
-      this.listView1.HideSelection = false;
-      this.listView1.Location = new System.Drawing.Point(6, 100);
-      this.listView1.MultiSelect = false;
-      this.listView1.Name = "listView1";
-      this.listView1.Size = new System.Drawing.Size(511, 177);
-      this.listView1.TabIndex = 49;
-      this.listView1.UseCompatibleStateImageBehavior = false;
-      this.listView1.View = System.Windows.Forms.View.Details;
+      this.listPayments.FullRowSelect = true;
+      this.listPayments.GridLines = true;
+      this.listPayments.HideSelection = false;
+      this.listPayments.Location = new System.Drawing.Point(6, 100);
+      this.listPayments.MultiSelect = false;
+      this.listPayments.Name = "listPayments";
+      this.listPayments.Size = new System.Drawing.Size(511, 177);
+      this.listPayments.TabIndex = 49;
+      this.listPayments.UseCompatibleStateImageBehavior = false;
+      this.listPayments.View = System.Windows.Forms.View.Details;
+      this.listPayments.SelectedIndexChanged += new System.EventHandler(this.listPayments_SelectedIndexChanged);
       // 
       // columnHeader13
       // 
@@ -1065,60 +1067,42 @@ namespace VehicleManagementSystem.Forms
       // 
       // btnDeleteIncome
       // 
-      this.btnDeleteIncome.Location = new System.Drawing.Point(367, 48);
+      this.btnDeleteIncome.Location = new System.Drawing.Point(375, 51);
       this.btnDeleteIncome.Name = "btnDeleteIncome";
       this.btnDeleteIncome.Size = new System.Drawing.Size(68, 26);
       this.btnDeleteIncome.TabIndex = 48;
       this.btnDeleteIncome.Text = "&Delete";
       this.btnDeleteIncome.UseVisualStyleBackColor = true;
+      this.btnDeleteIncome.Click += new System.EventHandler(this.btnDeleteIncome_Click);
       // 
-      // btnClear
+      // btnClearIncome
       // 
-      this.btnClear.Location = new System.Drawing.Point(441, 48);
-      this.btnClear.Name = "btnClear";
-      this.btnClear.Size = new System.Drawing.Size(68, 26);
-      this.btnClear.TabIndex = 47;
-      this.btnClear.Text = "&Clear";
-      this.btnClear.UseVisualStyleBackColor = true;
+      this.btnClearIncome.Location = new System.Drawing.Point(449, 51);
+      this.btnClearIncome.Name = "btnClearIncome";
+      this.btnClearIncome.Size = new System.Drawing.Size(68, 26);
+      this.btnClearIncome.TabIndex = 47;
+      this.btnClearIncome.Text = "&Clear";
+      this.btnClearIncome.UseVisualStyleBackColor = true;
+      this.btnClearIncome.Click += new System.EventHandler(this.btnClear_Click);
       // 
       // btnUpdateIncome
       // 
-      this.btnUpdateIncome.Location = new System.Drawing.Point(293, 48);
+      this.btnUpdateIncome.Location = new System.Drawing.Point(301, 51);
       this.btnUpdateIncome.Name = "btnUpdateIncome";
       this.btnUpdateIncome.Size = new System.Drawing.Size(68, 26);
       this.btnUpdateIncome.TabIndex = 46;
       this.btnUpdateIncome.Text = "&Update";
       this.btnUpdateIncome.UseVisualStyleBackColor = true;
+      this.btnUpdateIncome.Click += new System.EventHandler(this.btnUpdateIncome_Click);
       // 
       // label18
       // 
       this.label18.AutoSize = true;
-      this.label18.Location = new System.Drawing.Point(283, 22);
+      this.label18.Location = new System.Drawing.Point(287, 24);
       this.label18.Name = "label18";
       this.label18.Size = new System.Drawing.Size(58, 17);
       this.label18.TabIndex = 44;
       this.label18.Text = "Amount";
-      // 
-      // cmbNumOfInst
-      // 
-      this.cmbNumOfInst.FormattingEnabled = true;
-      this.cmbNumOfInst.Items.AddRange(new object[] {
-            "Spare Part",
-            "Broker Fees",
-            "Advertiesment Fees"});
-      this.cmbNumOfInst.Location = new System.Drawing.Point(107, 18);
-      this.cmbNumOfInst.Name = "cmbNumOfInst";
-      this.cmbNumOfInst.Size = new System.Drawing.Size(139, 25);
-      this.cmbNumOfInst.TabIndex = 43;
-      // 
-      // label20
-      // 
-      this.label20.AutoSize = true;
-      this.label20.Location = new System.Drawing.Point(11, 22);
-      this.label20.Name = "label20";
-      this.label20.Size = new System.Drawing.Size(78, 17);
-      this.label20.TabIndex = 42;
-      this.label20.Text = "Installment";
       // 
       // groupBox7
       // 
@@ -1292,6 +1276,22 @@ namespace VehicleManagementSystem.Forms
       this.label35.TabIndex = 38;
       this.label35.Text = "Buyer Name";
       // 
+      // txtInvoiceNumber
+      // 
+      this.txtInvoiceNumber.Location = new System.Drawing.Point(107, 52);
+      this.txtInvoiceNumber.Name = "txtInvoiceNumber";
+      this.txtInvoiceNumber.Size = new System.Drawing.Size(115, 25);
+      this.txtInvoiceNumber.TabIndex = 54;
+      // 
+      // label34
+      // 
+      this.label34.AutoSize = true;
+      this.label34.Location = new System.Drawing.Point(11, 56);
+      this.label34.Name = "label34";
+      this.label34.Size = new System.Drawing.Size(88, 17);
+      this.label34.TabIndex = 53;
+      this.label34.Text = "Invoice Num";
+      // 
       // frmSingleVehicle
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -1307,7 +1307,6 @@ namespace VehicleManagementSystem.Forms
       this.Controls.Add(this.groupBox1);
       this.Controls.Add(this.lblRegNum);
       this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "frmSingleVehicle";
@@ -1420,22 +1419,20 @@ namespace VehicleManagementSystem.Forms
     private System.Windows.Forms.TextBox txtExpTitle;
     private System.Windows.Forms.Label label26;
     private System.Windows.Forms.GroupBox groupBox6;
-    private System.Windows.Forms.Label label30;
+    private System.Windows.Forms.Label lblDueAmount;
     private System.Windows.Forms.Label label28;
     private System.Windows.Forms.NumericUpDown numInstAmount;
     private System.Windows.Forms.Button btnAddIncome;
-    private System.Windows.Forms.ListView listView1;
+    private System.Windows.Forms.ListView listPayments;
     private System.Windows.Forms.ColumnHeader columnHeader13;
     private System.Windows.Forms.ColumnHeader columnHeader14;
     private System.Windows.Forms.ColumnHeader columnHeader15;
     private System.Windows.Forms.ColumnHeader columnHeader16;
     private System.Windows.Forms.ColumnHeader columnHeader17;
     private System.Windows.Forms.Button btnDeleteIncome;
-    private System.Windows.Forms.Button btnClear;
+    private System.Windows.Forms.Button btnClearIncome;
     private System.Windows.Forms.Button btnUpdateIncome;
     private System.Windows.Forms.Label label18;
-    private System.Windows.Forms.ComboBox cmbNumOfInst;
-    private System.Windows.Forms.Label label20;
     private System.Windows.Forms.Button btnRefresh;
     private System.Windows.Forms.GroupBox groupBox7;
     private System.Windows.Forms.Label label31;
@@ -1455,5 +1452,7 @@ namespace VehicleManagementSystem.Forms
     private System.Windows.Forms.TextBox txtBuyerPhone;
     private System.Windows.Forms.Label label22;
     private System.Windows.Forms.Button btnBuyerView;
+    private System.Windows.Forms.TextBox txtInvoiceNumber;
+    private System.Windows.Forms.Label label34;
   }
 }

@@ -44,6 +44,7 @@ namespace VehicleManagementSystem
       this.staffManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.employeesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.usersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+      this.contractorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.listVehicles = new System.Windows.Forms.ListView();
       this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -58,7 +59,6 @@ namespace VehicleManagementSystem
       this.btnReset = new System.Windows.Forms.Button();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.btnOpen = new System.Windows.Forms.Button();
-      this.contractorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.groupBox1.SuspendLayout();
       this.SuspendLayout();
@@ -79,14 +79,15 @@ namespace VehicleManagementSystem
             this.staffManagementToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
-      this.menuStrip1.Size = new System.Drawing.Size(1077, 24);
+      this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
+      this.menuStrip1.Size = new System.Drawing.Size(1436, 25);
       this.menuStrip1.TabIndex = 1;
       this.menuStrip1.Text = "menuStrip1";
       // 
       // usersToolStripMenuItem
       // 
       this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-      this.usersToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
+      this.usersToolStripMenuItem.Size = new System.Drawing.Size(12, 19);
       // 
       // vehicleToolStripMenuItem
       // 
@@ -96,7 +97,7 @@ namespace VehicleManagementSystem
             this.vehicleCategoryToolStripMenuItem,
             this.brandsToolStripMenuItem});
       this.vehicleToolStripMenuItem.Name = "vehicleToolStripMenuItem";
-      this.vehicleToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
+      this.vehicleToolStripMenuItem.Size = new System.Drawing.Size(130, 19);
       this.vehicleToolStripMenuItem.Text = "Vehicle Management";
       // 
       // addVehicleToolStripMenuItem
@@ -130,19 +131,19 @@ namespace VehicleManagementSystem
       // employeesToolStripMenuItem
       // 
       this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
-      this.employeesToolStripMenuItem.Size = new System.Drawing.Size(12, 20);
+      this.employeesToolStripMenuItem.Size = new System.Drawing.Size(12, 19);
       // 
       // inventoryToolStripMenuItem
       // 
       this.inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
-      this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+      this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(69, 19);
       this.inventoryToolStripMenuItem.Text = "Inventory";
       this.inventoryToolStripMenuItem.Click += new System.EventHandler(this.inventoryToolStripMenuItem_Click);
       // 
       // toolStripMenuItem1
       // 
       this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-      this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
+      this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 19);
       // 
       // staffManagementToolStripMenuItem
       // 
@@ -151,22 +152,29 @@ namespace VehicleManagementSystem
             this.usersToolStripMenuItem1,
             this.contractorsToolStripMenuItem});
       this.staffManagementToolStripMenuItem.Name = "staffManagementToolStripMenuItem";
-      this.staffManagementToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+      this.staffManagementToolStripMenuItem.Size = new System.Drawing.Size(117, 19);
       this.staffManagementToolStripMenuItem.Text = "Staff Management";
       // 
       // employeesToolStripMenuItem1
       // 
       this.employeesToolStripMenuItem1.Name = "employeesToolStripMenuItem1";
-      this.employeesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+      this.employeesToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
       this.employeesToolStripMenuItem1.Text = "Employees";
       this.employeesToolStripMenuItem1.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
       // 
       // usersToolStripMenuItem1
       // 
       this.usersToolStripMenuItem1.Name = "usersToolStripMenuItem1";
-      this.usersToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+      this.usersToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
       this.usersToolStripMenuItem1.Text = "Users";
       this.usersToolStripMenuItem1.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
+      // 
+      // contractorsToolStripMenuItem
+      // 
+      this.contractorsToolStripMenuItem.Name = "contractorsToolStripMenuItem";
+      this.contractorsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+      this.contractorsToolStripMenuItem.Text = "Contractors";
+      this.contractorsToolStripMenuItem.Click += new System.EventHandler(this.contractorsToolStripMenuItem_Click);
       // 
       // listVehicles
       // 
@@ -179,14 +187,15 @@ namespace VehicleManagementSystem
             this.columnHeader6,
             this.columnHeader7});
       this.listVehicles.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.listVehicles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.listVehicles.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.listVehicles.FullRowSelect = true;
       this.listVehicles.GridLines = true;
       this.listVehicles.HideSelection = false;
-      this.listVehicles.Location = new System.Drawing.Point(6, 56);
+      this.listVehicles.Location = new System.Drawing.Point(8, 73);
+      this.listVehicles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.listVehicles.MultiSelect = false;
       this.listVehicles.Name = "listVehicles";
-      this.listVehicles.Size = new System.Drawing.Size(650, 595);
+      this.listVehicles.Size = new System.Drawing.Size(865, 777);
       this.listVehicles.TabIndex = 0;
       this.listVehicles.UseCompatibleStateImageBehavior = false;
       this.listVehicles.View = System.Windows.Forms.View.Details;
@@ -229,33 +238,37 @@ namespace VehicleManagementSystem
       // 
       // txtSearch
       // 
-      this.txtSearch.Location = new System.Drawing.Point(6, 25);
+      this.txtSearch.Location = new System.Drawing.Point(8, 33);
+      this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.txtSearch.Name = "txtSearch";
-      this.txtSearch.Size = new System.Drawing.Size(271, 24);
+      this.txtSearch.Size = new System.Drawing.Size(360, 25);
       this.txtSearch.TabIndex = 1;
       // 
       // cmSearchType
       // 
       this.cmSearchType.FormattingEnabled = true;
-      this.cmSearchType.Location = new System.Drawing.Point(283, 24);
+      this.cmSearchType.Location = new System.Drawing.Point(377, 31);
+      this.cmSearchType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.cmSearchType.Name = "cmSearchType";
-      this.cmSearchType.Size = new System.Drawing.Size(121, 26);
+      this.cmSearchType.Size = new System.Drawing.Size(160, 25);
       this.cmSearchType.TabIndex = 2;
       // 
       // btnSearch
       // 
-      this.btnSearch.Location = new System.Drawing.Point(410, 23);
+      this.btnSearch.Location = new System.Drawing.Point(547, 30);
+      this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.btnSearch.Name = "btnSearch";
-      this.btnSearch.Size = new System.Drawing.Size(85, 27);
+      this.btnSearch.Size = new System.Drawing.Size(113, 28);
       this.btnSearch.TabIndex = 3;
       this.btnSearch.Text = "&Search";
       this.btnSearch.UseVisualStyleBackColor = true;
       // 
       // btnReset
       // 
-      this.btnReset.Location = new System.Drawing.Point(501, 23);
+      this.btnReset.Location = new System.Drawing.Point(668, 30);
+      this.btnReset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.btnReset.Name = "btnReset";
-      this.btnReset.Size = new System.Drawing.Size(85, 27);
+      this.btnReset.Size = new System.Drawing.Size(113, 28);
       this.btnReset.TabIndex = 4;
       this.btnReset.Text = "&Reset";
       this.btnReset.UseVisualStyleBackColor = true;
@@ -268,40 +281,38 @@ namespace VehicleManagementSystem
       this.groupBox1.Controls.Add(this.cmSearchType);
       this.groupBox1.Controls.Add(this.txtSearch);
       this.groupBox1.Controls.Add(this.listVehicles);
-      this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.groupBox1.Location = new System.Drawing.Point(12, 60);
+      this.groupBox1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.groupBox1.Location = new System.Drawing.Point(16, 78);
+      this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(663, 657);
+      this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.groupBox1.Size = new System.Drawing.Size(884, 859);
       this.groupBox1.TabIndex = 2;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Vehicles";
       // 
       // btnOpen
       // 
-      this.btnOpen.Location = new System.Drawing.Point(592, 23);
+      this.btnOpen.Location = new System.Drawing.Point(789, 30);
+      this.btnOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.btnOpen.Name = "btnOpen";
-      this.btnOpen.Size = new System.Drawing.Size(64, 27);
+      this.btnOpen.Size = new System.Drawing.Size(84, 28);
       this.btnOpen.TabIndex = 5;
       this.btnOpen.Text = "&Open";
       this.btnOpen.UseVisualStyleBackColor = true;
       this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
       // 
-      // contractorsToolStripMenuItem
-      // 
-      this.contractorsToolStripMenuItem.Name = "contractorsToolStripMenuItem";
-      this.contractorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-      this.contractorsToolStripMenuItem.Text = "Contractors";
-      this.contractorsToolStripMenuItem.Click += new System.EventHandler(this.contractorsToolStripMenuItem_Click);
-      // 
       // frmDashboard
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1077, 729);
+      this.ClientSize = new System.Drawing.Size(1436, 953);
       this.Controls.Add(this.groupBox1);
       this.Controls.Add(this.menuStrip1);
+      this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
       this.MainMenuStrip = this.menuStrip1;
+      this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
       this.Name = "frmDashboard";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Dashboard";

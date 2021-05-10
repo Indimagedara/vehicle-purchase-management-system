@@ -19,6 +19,10 @@ namespace VehicleManagementSystem.Forms
     public int selectedJobID = 0;
     public int selectedExpenseId = 0;
     public int selectedSaleId = 0;
+    public int installmentCount = 0;
+    public int selectedPayment = 0;
+    public decimal totalVehicleAmount = 0;
+    public decimal totalDueAmount = 0;
     string partInventory;
     public frmSingleVehicle()
     {
@@ -32,6 +36,7 @@ namespace VehicleManagementSystem.Forms
       fetchJobs();
       fetchSale();
       fetchExpenses();
+      fetchPayments();
       //btnAddSeller.Visible = false;
     }
     public void fetchSellerData()
@@ -480,9 +485,16 @@ namespace VehicleManagementSystem.Forms
           txtBuyerNIC.Enabled = false;
           txtBuyerPhone.Enabled = false;
           txtBuyerAddress.Enabled = false;
+
+          btnAddIncome.Enabled = true;
+          btnUpdateIncome.Enabled = true;
+          btnDeleteIncome.Enabled = true;
+          numInstAmount.Enabled = true;
           foreach (SaleVehicle sale in saleList)
           {
             ListViewItem item = new ListViewItem(sale.SaleId.ToString());
+            selectedSaleId = (int)sale.SaleId;
+            totalVehicleAmount = (decimal)sale.SaleAmount;
             item.SubItems.Add(sale.BuyerName);
             item.SubItems.Add(sale.SaleAmount.ToString());
             listSale.Items.Add(item);
@@ -490,7 +502,10 @@ namespace VehicleManagementSystem.Forms
         }
         else
         {
-
+          btnAddIncome.Enabled = false;
+          btnUpdateIncome.Enabled = false;
+          btnDeleteIncome.Enabled = false;
+          numInstAmount.Enabled = false;
         }
       }
     }
@@ -559,6 +574,164 @@ namespace VehicleManagementSystem.Forms
       else
       {
         MessageBox.Show("You must fill all fields!");
+      }
+    }
+
+    private void btnAddIncome_Click(object sender, EventArgs e)
+    {
+      if(numInstAmount.Value != 0 && !string.IsNullOrEmpty(txtInvoiceNumber.Text))
+      {
+        if(totalDueAmount < numInstAmount.Value)
+        {
+          MessageBox.Show("Installment amount should be less than total vehicle value.");
+        }
+        else
+        {
+          ve = new VehicleManagementEntities();
+          Payment payment = new Payment() {
+            VehicleId = vehicleId,
+            SaleId = selectedSaleId,
+            Installment = (installmentCount+1).ToString(),
+            InvoiceNumber = txtInvoiceNumber.Text,
+            Amount = (double)numInstAmount.Value,
+            DatePayed = DateTime.Now
+          };
+          ve.Payments.Add(payment);
+          ve.SaveChanges();
+          MessageBox.Show("Payment saved succesfully!");
+          clearPaymentFields();
+          fetchPayments();
+        }
+      }
+      else
+      {
+        MessageBox.Show("You must fill all fields!");
+      }
+    }
+
+    private void fetchPayments()
+    {
+      using (ve = new VehicleManagementEntities())
+      {
+        List<Payment> paymentList = ve.Payments.Where(r => r.VehicleId == vehicleId).ToList();
+        listExpenses.Items.Clear();
+        decimal totalPayed = 0;
+        if (paymentList.Any())
+        {
+          listPayments.Items.Clear();
+          installmentCount = paymentList.Count;
+          foreach (Payment pay in paymentList)
+          {
+            ListViewItem item = new ListViewItem(pay.PaymentId.ToString());
+            item.SubItems.Add(pay.Installment);
+            item.SubItems.Add(pay.Amount.ToString());
+            totalPayed = totalPayed + (decimal)pay.Amount;
+            item.SubItems.Add(pay.InvoiceNumber);
+            item.SubItems.Add(pay.DatePayed.ToString());
+            listPayments.Items.Add(item);
+          }
+          totalDueAmount = totalVehicleAmount - totalPayed;
+          if(totalPayed == totalVehicleAmount)
+          {
+            numInstAmount.Enabled = false;
+            txtInvoiceNumber.Enabled = false;
+            btnAddIncome.Enabled = false;
+            btnUpdateExpense.Enabled = false;
+            btnUpdateIncome.Enabled = false;
+            btnDeleteIncome.Enabled = false;
+            btnClearIncome.Enabled = false;
+          }
+          lblDueAmount.Text = totalDueAmount.ToString();
+        }
+      }
+    }
+
+    private void clearPaymentFields()
+    {
+      numInstAmount.Value = 0;
+      txtInvoiceNumber.Text = "";
+    }
+
+    private void btnClear_Click(object sender, EventArgs e)
+    {
+      clearPaymentFields();
+      btnUpdateExpense.Enabled = false;
+      btnUpdateIncome.Enabled = false;
+      btnDeleteIncome.Enabled = false;
+      btnClearIncome.Enabled = false;
+      if(totalDueAmount != 0)
+      {
+        btnAddIncome.Enabled = true;
+        numInstAmount.Enabled = true;
+        txtInvoiceNumber.Enabled = true;
+      }
+      else
+      {
+        numInstAmount.Enabled = false;
+        txtInvoiceNumber.Enabled = false;   
+        btnAddIncome.Enabled = false;
+      }
+    }
+
+    private void listPayments_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      numInstAmount.Enabled = true;
+      txtInvoiceNumber.Enabled = true;
+      btnAddIncome.Enabled = false;
+      btnUpdateExpense.Enabled = true;
+      btnUpdateIncome.Enabled = true;
+      btnDeleteIncome.Enabled = true;
+      btnClearIncome.Enabled = true;
+      ListView.SelectedListViewItemCollection itemCollection = listPayments.SelectedItems;
+      foreach (ListViewItem item in itemCollection)
+      {
+        selectedPayment = Int32.Parse(item.SubItems[0].Text);
+        numInstAmount.Value = decimal.Parse(item.SubItems[2].Text);
+        txtInvoiceNumber.Text = item.SubItems[3].Text;
+      }
+    }
+
+    private void btnUpdateIncome_Click(object sender, EventArgs e)
+    {
+      if (numInstAmount.Value != 0 && !string.IsNullOrEmpty(txtInvoiceNumber.Text))
+      {
+        if (totalDueAmount < numInstAmount.Value)
+        {
+          MessageBox.Show("Installment amount should be less than total vehicle value.");
+        }
+        else
+        {
+          ve = new VehicleManagementEntities();
+
+          var singlePayment = ve.Payments.Where(r => r.PaymentId == selectedPayment).First();
+          singlePayment.InvoiceNumber = txtInvoiceNumber.Text;
+          singlePayment.Amount = float.Parse(numInstAmount.Value.ToString());
+          ve.SaveChanges();
+          MessageBox.Show("Payment successfully updated!");
+          fetchPayments();
+          clearPaymentFields();
+          selectedPayment = 0;
+        }
+      }
+      else
+      {
+        MessageBox.Show("You must fill all fields!");
+      }
+    }
+
+    private void btnDeleteIncome_Click(object sender, EventArgs e)
+    {
+      DialogResult res = MessageBox.Show("Are you sure you want to Delete this Payment? You cannot reverse this action.", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+      if (res == DialogResult.OK)
+      {
+        ve = new VehicleManagementEntities();
+        var singlePayment = ve.Payments.Where(r => r.PaymentId == selectedPayment).First();
+        ve.Payments.Remove(singlePayment);
+        ve.SaveChanges();
+        MessageBox.Show("Payment successfully deleted!");
+        fetchPayments();
+        clearPaymentFields();
+        selectedPayment = 0;
       }
     }
   }
