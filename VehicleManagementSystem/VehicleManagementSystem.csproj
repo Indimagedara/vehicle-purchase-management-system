@@ -164,8 +164,14 @@
     <Compile Include="PartInventory.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Payment.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaleVehicle.cs">
+      <DependentUpon>VehicleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>

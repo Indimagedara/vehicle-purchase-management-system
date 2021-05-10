@@ -18,6 +18,7 @@ namespace VehicleManagementSystem.Forms
     public int vehicleId = 0;
     public int selectedJobID = 0;
     public int selectedExpenseId = 0;
+    public int selectedSaleId = 0;
     string partInventory;
     public frmSingleVehicle()
     {
@@ -29,6 +30,7 @@ namespace VehicleManagementSystem.Forms
       fetchData();
       fetchSellerData();
       fetchJobs();
+      fetchSale();
       fetchExpenses();
       //btnAddSeller.Visible = false;
     }
@@ -424,6 +426,139 @@ namespace VehicleManagementSystem.Forms
         MessageBox.Show("Expense successfully deleted!");
         fetchExpenses();
         clearExpenseFields();
+      }
+    }
+
+    private void btnAddSale_Click(object sender, EventArgs e)
+    {
+      if (!string.IsNullOrEmpty(txtBuyerName.Text) && !string.IsNullOrEmpty(txtBuyerNIC.Text) && !string.IsNullOrEmpty(txtBuyerPhone.Text)&& 
+        !string.IsNullOrEmpty(txtBuyerAddress.Text))
+      {
+        if(numSaleAmount.Value != 0)
+        {
+          ve = new VehicleManagementEntities();
+          SaleVehicle sale = new SaleVehicle()
+          {
+            VehicleId = vehicleId,
+            BuyerName = txtBuyerName.Text,
+            NIC = txtBuyerNIC.Text,
+            Address = txtBuyerAddress.Text,
+            Phone = txtBuyerPhone.Text,
+            SaleAmount = float.Parse(numSaleAmount.Value.ToString()),
+            Status = "0",
+            DateSold = DateTime.Now
+          };
+          ve.SaleVehicles.Add(sale);
+          ve.SaveChanges();
+          MessageBox.Show("Contractor successfully added!");
+          fetchSale();
+          clearSaleFields();
+        }
+        else
+        {
+          MessageBox.Show("You must enter sale amount!");
+        }
+      }
+      else
+      {
+        MessageBox.Show("You must fill all fields!");
+      }
+    }
+
+    private void fetchSale()
+    {
+      using (ve = new VehicleManagementEntities())
+      {
+        List<SaleVehicle> saleList = ve.SaleVehicles.Where(r => r.VehicleId == vehicleId).ToList();
+        listSale.Items.Clear();
+        if (saleList.Any())
+        {
+          btnAddSale.Enabled = false;
+          btnUpdateSale.Enabled = false;
+          txtBuyerName.Enabled = false;
+          numSaleAmount.Enabled = false;
+          txtBuyerNIC.Enabled = false;
+          txtBuyerPhone.Enabled = false;
+          txtBuyerAddress.Enabled = false;
+          foreach (SaleVehicle sale in saleList)
+          {
+            ListViewItem item = new ListViewItem(sale.SaleId.ToString());
+            item.SubItems.Add(sale.BuyerName);
+            item.SubItems.Add(sale.SaleAmount.ToString());
+            listSale.Items.Add(item);
+          }
+        }
+        else
+        {
+
+        }
+      }
+    }
+
+    private void clearSaleFields()
+    {
+      txtBuyerName.Text = "";
+      numSaleAmount.Value = 0;
+      txtBuyerPhone.Text = "";
+      txtBuyerNIC.Text = "";
+      txtBuyerAddress.Text = "";
+    }
+
+    private void listSale_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      btnAddSale.Enabled = false;
+      btnUpdateSale.Enabled = true;
+      btnBuyerView.Enabled = true;
+      txtBuyerName.Enabled = true;
+      numSaleAmount.Enabled = true;
+      txtBuyerNIC.Enabled = true;
+      txtBuyerPhone.Enabled = true;
+      txtBuyerAddress.Enabled = true;
+      ListView.SelectedListViewItemCollection itemCollection = listSale.SelectedItems;
+      foreach (ListViewItem item in itemCollection)
+      {
+        selectedSaleId = Int32.Parse(item.SubItems[0].Text);
+        using (ve = new VehicleManagementEntities())
+        {
+          List<SaleVehicle> saleList = ve.SaleVehicles.Where(r => r.VehicleId == vehicleId).ToList();
+          if (saleList.Any())
+          {
+            foreach (SaleVehicle sale in saleList)
+            {
+              ListViewItem saleItem = new ListViewItem(sale.SaleId.ToString());
+              txtBuyerName.Text = sale.BuyerName;
+              txtBuyerAddress.Text = sale.Address;
+              txtBuyerNIC.Text = sale.NIC;
+              txtBuyerPhone.Text = sale.Phone;
+              numSaleAmount.Value = (decimal)sale.SaleAmount;
+            }
+          }
+        }
+      }
+    }
+
+    private void btnUpdateSale_Click(object sender, EventArgs e)
+    {
+      if (!string.IsNullOrEmpty(txtBuyerName.Text) && !string.IsNullOrEmpty(txtBuyerNIC.Text) && !string.IsNullOrEmpty(txtBuyerPhone.Text) &&
+        !string.IsNullOrEmpty(txtBuyerAddress.Text))
+      {
+        ve = new VehicleManagementEntities();
+
+        var singleSale = ve.SaleVehicles.Where(r => r.SaleId == selectedSaleId).First();
+        singleSale.BuyerName = txtBuyerName.Text;
+        singleSale.NIC = txtBuyerNIC.Text;
+        singleSale.Phone = txtBuyerPhone.Text;
+        singleSale.Address = txtBuyerAddress.Text;
+        singleSale.SaleAmount = float.Parse(numSaleAmount.Value.ToString());
+        ve.SaveChanges();
+        MessageBox.Show("Sale successfully updated!");
+        fetchSale();
+        clearSaleFields();
+        selectedSaleId = 0;
+      }
+      else
+      {
+        MessageBox.Show("You must fill all fields!");
       }
     }
   }

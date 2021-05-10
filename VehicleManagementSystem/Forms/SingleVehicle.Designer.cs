@@ -61,6 +61,7 @@ namespace VehicleManagementSystem.Forms
       this.groupBox2 = new System.Windows.Forms.GroupBox();
       this.lbParts = new System.Windows.Forms.ListBox();
       this.groupBox3 = new System.Windows.Forms.GroupBox();
+      this.btnRefresh = new System.Windows.Forms.Button();
       this.btnAddSeller = new System.Windows.Forms.Button();
       this.lblSellerType = new System.Windows.Forms.Label();
       this.label14 = new System.Windows.Forms.Label();
@@ -110,6 +111,41 @@ namespace VehicleManagementSystem.Forms
       this.label25 = new System.Windows.Forms.Label();
       this.txtExpTitle = new System.Windows.Forms.TextBox();
       this.label26 = new System.Windows.Forms.Label();
+      this.groupBox6 = new System.Windows.Forms.GroupBox();
+      this.label30 = new System.Windows.Forms.Label();
+      this.label28 = new System.Windows.Forms.Label();
+      this.numInstAmount = new System.Windows.Forms.NumericUpDown();
+      this.btnAddIncome = new System.Windows.Forms.Button();
+      this.listView1 = new System.Windows.Forms.ListView();
+      this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.btnDeleteIncome = new System.Windows.Forms.Button();
+      this.btnClear = new System.Windows.Forms.Button();
+      this.btnUpdateIncome = new System.Windows.Forms.Button();
+      this.label18 = new System.Windows.Forms.Label();
+      this.cmbNumOfInst = new System.Windows.Forms.ComboBox();
+      this.label20 = new System.Windows.Forms.Label();
+      this.groupBox7 = new System.Windows.Forms.GroupBox();
+      this.btnBuyerView = new System.Windows.Forms.Button();
+      this.txtBuyerAddress = new System.Windows.Forms.TextBox();
+      this.label33 = new System.Windows.Forms.Label();
+      this.txtBuyerNIC = new System.Windows.Forms.TextBox();
+      this.label32 = new System.Windows.Forms.Label();
+      this.txtBuyerPhone = new System.Windows.Forms.TextBox();
+      this.label22 = new System.Windows.Forms.Label();
+      this.numSaleAmount = new System.Windows.Forms.NumericUpDown();
+      this.label31 = new System.Windows.Forms.Label();
+      this.btnAddSale = new System.Windows.Forms.Button();
+      this.listSale = new System.Windows.Forms.ListView();
+      this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.btnUpdateSale = new System.Windows.Forms.Button();
+      this.txtBuyerName = new System.Windows.Forms.TextBox();
+      this.label35 = new System.Windows.Forms.Label();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       this.groupBox3.SuspendLayout();
@@ -117,6 +153,10 @@ namespace VehicleManagementSystem.Forms
       ((System.ComponentModel.ISupportInitialize)(this.txtJobAmount)).BeginInit();
       this.groupBox5.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numExpAmount)).BeginInit();
+      this.groupBox6.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numInstAmount)).BeginInit();
+      this.groupBox7.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numSaleAmount)).BeginInit();
       this.SuspendLayout();
       // 
       // groupBox1
@@ -431,6 +471,7 @@ namespace VehicleManagementSystem.Forms
       // 
       // groupBox3
       // 
+      this.groupBox3.Controls.Add(this.btnRefresh);
       this.groupBox3.Controls.Add(this.btnAddSeller);
       this.groupBox3.Controls.Add(this.lblSellerType);
       this.groupBox3.Controls.Add(this.label14);
@@ -448,11 +489,20 @@ namespace VehicleManagementSystem.Forms
       this.groupBox3.TabStop = false;
       this.groupBox3.Text = "Bought From";
       // 
+      // btnRefresh
+      // 
+      this.btnRefresh.Location = new System.Drawing.Point(471, 14);
+      this.btnRefresh.Name = "btnRefresh";
+      this.btnRefresh.Size = new System.Drawing.Size(86, 24);
+      this.btnRefresh.TabIndex = 41;
+      this.btnRefresh.Text = "&Refresh";
+      this.btnRefresh.UseVisualStyleBackColor = true;
+      // 
       // btnAddSeller
       // 
-      this.btnAddSeller.Location = new System.Drawing.Point(334, 15);
+      this.btnAddSeller.Location = new System.Drawing.Point(379, 14);
       this.btnAddSeller.Name = "btnAddSeller";
-      this.btnAddSeller.Size = new System.Drawing.Size(222, 36);
+      this.btnAddSeller.Size = new System.Drawing.Size(86, 24);
       this.btnAddSeller.TabIndex = 40;
       this.btnAddSeller.Text = "&Add Info";
       this.btnAddSeller.UseVisualStyleBackColor = true;
@@ -547,9 +597,9 @@ namespace VehicleManagementSystem.Forms
       this.groupBox4.Controls.Add(this.txtJobTitle);
       this.groupBox4.Controls.Add(this.label4);
       this.groupBox4.Font = new System.Drawing.Font("Arial", 11.25F);
-      this.groupBox4.Location = new System.Drawing.Point(469, 291);
+      this.groupBox4.Location = new System.Drawing.Point(461, 291);
       this.groupBox4.Name = "groupBox4";
-      this.groupBox4.Size = new System.Drawing.Size(877, 283);
+      this.groupBox4.Size = new System.Drawing.Size(893, 283);
       this.groupBox4.TabIndex = 32;
       this.groupBox4.TabStop = false;
       this.groupBox4.Text = "Jobs";
@@ -633,7 +683,7 @@ namespace VehicleManagementSystem.Forms
       this.listJobs.Location = new System.Drawing.Point(12, 100);
       this.listJobs.MultiSelect = false;
       this.listJobs.Name = "listJobs";
-      this.listJobs.Size = new System.Drawing.Size(847, 177);
+      this.listJobs.Size = new System.Drawing.Size(873, 177);
       this.listJobs.TabIndex = 49;
       this.listJobs.UseCompatibleStateImageBehavior = false;
       this.listJobs.View = System.Windows.Forms.View.Details;
@@ -910,11 +960,345 @@ namespace VehicleManagementSystem.Forms
       this.label26.TabIndex = 38;
       this.label26.Text = "Expense title";
       // 
+      // groupBox6
+      // 
+      this.groupBox6.Controls.Add(this.label30);
+      this.groupBox6.Controls.Add(this.label28);
+      this.groupBox6.Controls.Add(this.numInstAmount);
+      this.groupBox6.Controls.Add(this.btnAddIncome);
+      this.groupBox6.Controls.Add(this.listView1);
+      this.groupBox6.Controls.Add(this.btnDeleteIncome);
+      this.groupBox6.Controls.Add(this.btnClear);
+      this.groupBox6.Controls.Add(this.btnUpdateIncome);
+      this.groupBox6.Controls.Add(this.label18);
+      this.groupBox6.Controls.Add(this.cmbNumOfInst);
+      this.groupBox6.Controls.Add(this.label20);
+      this.groupBox6.Font = new System.Drawing.Font("Arial", 11.25F);
+      this.groupBox6.Location = new System.Drawing.Point(974, 580);
+      this.groupBox6.Name = "groupBox6";
+      this.groupBox6.Size = new System.Drawing.Size(525, 283);
+      this.groupBox6.TabIndex = 56;
+      this.groupBox6.TabStop = false;
+      this.groupBox6.Text = "Payments";
+      // 
+      // label30
+      // 
+      this.label30.AutoSize = true;
+      this.label30.Location = new System.Drawing.Point(106, 52);
+      this.label30.Name = "label30";
+      this.label30.Size = new System.Drawing.Size(13, 17);
+      this.label30.TabIndex = 52;
+      this.label30.Text = "-";
+      // 
+      // label28
+      // 
+      this.label28.AutoSize = true;
+      this.label28.Location = new System.Drawing.Point(11, 52);
+      this.label28.Name = "label28";
+      this.label28.Size = new System.Drawing.Size(88, 17);
+      this.label28.TabIndex = 51;
+      this.label28.Text = "Due Amount";
+      // 
+      // numInstAmount
+      // 
+      this.numInstAmount.Location = new System.Drawing.Point(371, 18);
+      this.numInstAmount.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
+      this.numInstAmount.Name = "numInstAmount";
+      this.numInstAmount.Size = new System.Drawing.Size(139, 25);
+      this.numInstAmount.TabIndex = 50;
+      // 
+      // btnAddIncome
+      // 
+      this.btnAddIncome.Location = new System.Drawing.Point(219, 48);
+      this.btnAddIncome.Name = "btnAddIncome";
+      this.btnAddIncome.Size = new System.Drawing.Size(68, 26);
+      this.btnAddIncome.TabIndex = 40;
+      this.btnAddIncome.Text = "&Add";
+      this.btnAddIncome.UseVisualStyleBackColor = true;
+      // 
+      // listView1
+      // 
+      this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
+      this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader13,
+            this.columnHeader14,
+            this.columnHeader15,
+            this.columnHeader16,
+            this.columnHeader17});
+      this.listView1.FullRowSelect = true;
+      this.listView1.GridLines = true;
+      this.listView1.HideSelection = false;
+      this.listView1.Location = new System.Drawing.Point(6, 100);
+      this.listView1.MultiSelect = false;
+      this.listView1.Name = "listView1";
+      this.listView1.Size = new System.Drawing.Size(511, 177);
+      this.listView1.TabIndex = 49;
+      this.listView1.UseCompatibleStateImageBehavior = false;
+      this.listView1.View = System.Windows.Forms.View.Details;
+      // 
+      // columnHeader13
+      // 
+      this.columnHeader13.Text = "Id";
+      // 
+      // columnHeader14
+      // 
+      this.columnHeader14.Text = "Inst.";
+      // 
+      // columnHeader15
+      // 
+      this.columnHeader15.Text = "Amount";
+      this.columnHeader15.Width = 140;
+      // 
+      // columnHeader16
+      // 
+      this.columnHeader16.Text = "Invoice Num.";
+      this.columnHeader16.Width = 100;
+      // 
+      // columnHeader17
+      // 
+      this.columnHeader17.Text = "Payment Date";
+      this.columnHeader17.Width = 150;
+      // 
+      // btnDeleteIncome
+      // 
+      this.btnDeleteIncome.Location = new System.Drawing.Point(367, 48);
+      this.btnDeleteIncome.Name = "btnDeleteIncome";
+      this.btnDeleteIncome.Size = new System.Drawing.Size(68, 26);
+      this.btnDeleteIncome.TabIndex = 48;
+      this.btnDeleteIncome.Text = "&Delete";
+      this.btnDeleteIncome.UseVisualStyleBackColor = true;
+      // 
+      // btnClear
+      // 
+      this.btnClear.Location = new System.Drawing.Point(441, 48);
+      this.btnClear.Name = "btnClear";
+      this.btnClear.Size = new System.Drawing.Size(68, 26);
+      this.btnClear.TabIndex = 47;
+      this.btnClear.Text = "&Clear";
+      this.btnClear.UseVisualStyleBackColor = true;
+      // 
+      // btnUpdateIncome
+      // 
+      this.btnUpdateIncome.Location = new System.Drawing.Point(293, 48);
+      this.btnUpdateIncome.Name = "btnUpdateIncome";
+      this.btnUpdateIncome.Size = new System.Drawing.Size(68, 26);
+      this.btnUpdateIncome.TabIndex = 46;
+      this.btnUpdateIncome.Text = "&Update";
+      this.btnUpdateIncome.UseVisualStyleBackColor = true;
+      // 
+      // label18
+      // 
+      this.label18.AutoSize = true;
+      this.label18.Location = new System.Drawing.Point(283, 22);
+      this.label18.Name = "label18";
+      this.label18.Size = new System.Drawing.Size(58, 17);
+      this.label18.TabIndex = 44;
+      this.label18.Text = "Amount";
+      // 
+      // cmbNumOfInst
+      // 
+      this.cmbNumOfInst.FormattingEnabled = true;
+      this.cmbNumOfInst.Items.AddRange(new object[] {
+            "Spare Part",
+            "Broker Fees",
+            "Advertiesment Fees"});
+      this.cmbNumOfInst.Location = new System.Drawing.Point(107, 18);
+      this.cmbNumOfInst.Name = "cmbNumOfInst";
+      this.cmbNumOfInst.Size = new System.Drawing.Size(139, 25);
+      this.cmbNumOfInst.TabIndex = 43;
+      // 
+      // label20
+      // 
+      this.label20.AutoSize = true;
+      this.label20.Location = new System.Drawing.Point(11, 22);
+      this.label20.Name = "label20";
+      this.label20.Size = new System.Drawing.Size(78, 17);
+      this.label20.TabIndex = 42;
+      this.label20.Text = "Installment";
+      // 
+      // groupBox7
+      // 
+      this.groupBox7.Controls.Add(this.btnBuyerView);
+      this.groupBox7.Controls.Add(this.txtBuyerAddress);
+      this.groupBox7.Controls.Add(this.label33);
+      this.groupBox7.Controls.Add(this.txtBuyerNIC);
+      this.groupBox7.Controls.Add(this.label32);
+      this.groupBox7.Controls.Add(this.txtBuyerPhone);
+      this.groupBox7.Controls.Add(this.label22);
+      this.groupBox7.Controls.Add(this.numSaleAmount);
+      this.groupBox7.Controls.Add(this.label31);
+      this.groupBox7.Controls.Add(this.btnAddSale);
+      this.groupBox7.Controls.Add(this.listSale);
+      this.groupBox7.Controls.Add(this.btnUpdateSale);
+      this.groupBox7.Controls.Add(this.txtBuyerName);
+      this.groupBox7.Controls.Add(this.label35);
+      this.groupBox7.Font = new System.Drawing.Font("Arial", 11.25F);
+      this.groupBox7.Location = new System.Drawing.Point(649, 580);
+      this.groupBox7.Name = "groupBox7";
+      this.groupBox7.Size = new System.Drawing.Size(319, 283);
+      this.groupBox7.TabIndex = 57;
+      this.groupBox7.TabStop = false;
+      this.groupBox7.Text = "Sell Vehicle";
+      // 
+      // btnBuyerView
+      // 
+      this.btnBuyerView.Location = new System.Drawing.Point(234, 74);
+      this.btnBuyerView.Name = "btnBuyerView";
+      this.btnBuyerView.Size = new System.Drawing.Size(68, 26);
+      this.btnBuyerView.TabIndex = 61;
+      this.btnBuyerView.Text = "&View";
+      this.btnBuyerView.UseVisualStyleBackColor = true;
+      // 
+      // txtBuyerAddress
+      // 
+      this.txtBuyerAddress.Location = new System.Drawing.Point(99, 131);
+      this.txtBuyerAddress.Multiline = true;
+      this.txtBuyerAddress.Name = "txtBuyerAddress";
+      this.txtBuyerAddress.Size = new System.Drawing.Size(203, 37);
+      this.txtBuyerAddress.TabIndex = 60;
+      // 
+      // label33
+      // 
+      this.label33.AutoSize = true;
+      this.label33.Location = new System.Drawing.Point(8, 135);
+      this.label33.Name = "label33";
+      this.label33.Size = new System.Drawing.Size(62, 17);
+      this.label33.TabIndex = 59;
+      this.label33.Text = "Address";
+      // 
+      // txtBuyerNIC
+      // 
+      this.txtBuyerNIC.Location = new System.Drawing.Point(99, 102);
+      this.txtBuyerNIC.Name = "txtBuyerNIC";
+      this.txtBuyerNIC.Size = new System.Drawing.Size(129, 25);
+      this.txtBuyerNIC.TabIndex = 58;
+      // 
+      // label32
+      // 
+      this.label32.AutoSize = true;
+      this.label32.Location = new System.Drawing.Point(8, 106);
+      this.label32.Name = "label32";
+      this.label32.Size = new System.Drawing.Size(32, 17);
+      this.label32.TabIndex = 57;
+      this.label32.Text = "NIC";
+      // 
+      // txtBuyerPhone
+      // 
+      this.txtBuyerPhone.Location = new System.Drawing.Point(99, 73);
+      this.txtBuyerPhone.Name = "txtBuyerPhone";
+      this.txtBuyerPhone.Size = new System.Drawing.Size(129, 25);
+      this.txtBuyerPhone.TabIndex = 56;
+      // 
+      // label22
+      // 
+      this.label22.AutoSize = true;
+      this.label22.Location = new System.Drawing.Point(8, 77);
+      this.label22.Name = "label22";
+      this.label22.Size = new System.Drawing.Size(50, 17);
+      this.label22.TabIndex = 55;
+      this.label22.Text = "Phone";
+      // 
+      // numSaleAmount
+      // 
+      this.numSaleAmount.Location = new System.Drawing.Point(99, 43);
+      this.numSaleAmount.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
+      this.numSaleAmount.Name = "numSaleAmount";
+      this.numSaleAmount.Size = new System.Drawing.Size(129, 25);
+      this.numSaleAmount.TabIndex = 54;
+      // 
+      // label31
+      // 
+      this.label31.AutoSize = true;
+      this.label31.Location = new System.Drawing.Point(8, 48);
+      this.label31.Name = "label31";
+      this.label31.Size = new System.Drawing.Size(58, 17);
+      this.label31.TabIndex = 50;
+      this.label31.Text = "Amount";
+      // 
+      // btnAddSale
+      // 
+      this.btnAddSale.Location = new System.Drawing.Point(234, 14);
+      this.btnAddSale.Name = "btnAddSale";
+      this.btnAddSale.Size = new System.Drawing.Size(68, 26);
+      this.btnAddSale.TabIndex = 40;
+      this.btnAddSale.Text = "&Add";
+      this.btnAddSale.UseVisualStyleBackColor = true;
+      this.btnAddSale.Click += new System.EventHandler(this.btnAddSale_Click);
+      // 
+      // listSale
+      // 
+      this.listSale.Activation = System.Windows.Forms.ItemActivation.OneClick;
+      this.listSale.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader18,
+            this.columnHeader19,
+            this.columnHeader20});
+      this.listSale.FullRowSelect = true;
+      this.listSale.GridLines = true;
+      this.listSale.HideSelection = false;
+      this.listSale.Location = new System.Drawing.Point(6, 174);
+      this.listSale.MultiSelect = false;
+      this.listSale.Name = "listSale";
+      this.listSale.Size = new System.Drawing.Size(307, 103);
+      this.listSale.TabIndex = 49;
+      this.listSale.UseCompatibleStateImageBehavior = false;
+      this.listSale.View = System.Windows.Forms.View.Details;
+      this.listSale.SelectedIndexChanged += new System.EventHandler(this.listSale_SelectedIndexChanged);
+      // 
+      // columnHeader18
+      // 
+      this.columnHeader18.Text = "Id";
+      // 
+      // columnHeader19
+      // 
+      this.columnHeader19.Text = "Buyer";
+      this.columnHeader19.Width = 180;
+      // 
+      // columnHeader20
+      // 
+      this.columnHeader20.Text = "Amount";
+      this.columnHeader20.Width = 100;
+      // 
+      // btnUpdateSale
+      // 
+      this.btnUpdateSale.Location = new System.Drawing.Point(234, 42);
+      this.btnUpdateSale.Name = "btnUpdateSale";
+      this.btnUpdateSale.Size = new System.Drawing.Size(68, 26);
+      this.btnUpdateSale.TabIndex = 46;
+      this.btnUpdateSale.Text = "&Update";
+      this.btnUpdateSale.UseVisualStyleBackColor = true;
+      this.btnUpdateSale.Click += new System.EventHandler(this.btnUpdateSale_Click);
+      // 
+      // txtBuyerName
+      // 
+      this.txtBuyerName.Location = new System.Drawing.Point(99, 14);
+      this.txtBuyerName.Name = "txtBuyerName";
+      this.txtBuyerName.Size = new System.Drawing.Size(129, 25);
+      this.txtBuyerName.TabIndex = 41;
+      // 
+      // label35
+      // 
+      this.label35.AutoSize = true;
+      this.label35.Location = new System.Drawing.Point(8, 18);
+      this.label35.Name = "label35";
+      this.label35.Size = new System.Drawing.Size(89, 17);
+      this.label35.TabIndex = 38;
+      this.label35.Text = "Buyer Name";
+      // 
       // frmSingleVehicle
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1378, 883);
+      this.ClientSize = new System.Drawing.Size(1575, 876);
+      this.Controls.Add(this.groupBox7);
+      this.Controls.Add(this.groupBox6);
       this.Controls.Add(this.groupBox5);
       this.Controls.Add(this.groupBox4);
       this.Controls.Add(this.groupBox3);
@@ -941,6 +1325,12 @@ namespace VehicleManagementSystem.Forms
       this.groupBox5.ResumeLayout(false);
       this.groupBox5.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.numExpAmount)).EndInit();
+      this.groupBox6.ResumeLayout(false);
+      this.groupBox6.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numInstAmount)).EndInit();
+      this.groupBox7.ResumeLayout(false);
+      this.groupBox7.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numSaleAmount)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -1029,5 +1419,41 @@ namespace VehicleManagementSystem.Forms
     private System.Windows.Forms.Label label25;
     private System.Windows.Forms.TextBox txtExpTitle;
     private System.Windows.Forms.Label label26;
+    private System.Windows.Forms.GroupBox groupBox6;
+    private System.Windows.Forms.Label label30;
+    private System.Windows.Forms.Label label28;
+    private System.Windows.Forms.NumericUpDown numInstAmount;
+    private System.Windows.Forms.Button btnAddIncome;
+    private System.Windows.Forms.ListView listView1;
+    private System.Windows.Forms.ColumnHeader columnHeader13;
+    private System.Windows.Forms.ColumnHeader columnHeader14;
+    private System.Windows.Forms.ColumnHeader columnHeader15;
+    private System.Windows.Forms.ColumnHeader columnHeader16;
+    private System.Windows.Forms.ColumnHeader columnHeader17;
+    private System.Windows.Forms.Button btnDeleteIncome;
+    private System.Windows.Forms.Button btnClear;
+    private System.Windows.Forms.Button btnUpdateIncome;
+    private System.Windows.Forms.Label label18;
+    private System.Windows.Forms.ComboBox cmbNumOfInst;
+    private System.Windows.Forms.Label label20;
+    private System.Windows.Forms.Button btnRefresh;
+    private System.Windows.Forms.GroupBox groupBox7;
+    private System.Windows.Forms.Label label31;
+    private System.Windows.Forms.Button btnAddSale;
+    private System.Windows.Forms.ListView listSale;
+    private System.Windows.Forms.ColumnHeader columnHeader18;
+    private System.Windows.Forms.ColumnHeader columnHeader19;
+    private System.Windows.Forms.ColumnHeader columnHeader20;
+    private System.Windows.Forms.Button btnUpdateSale;
+    private System.Windows.Forms.TextBox txtBuyerName;
+    private System.Windows.Forms.Label label35;
+    private System.Windows.Forms.NumericUpDown numSaleAmount;
+    private System.Windows.Forms.TextBox txtBuyerAddress;
+    private System.Windows.Forms.Label label33;
+    private System.Windows.Forms.TextBox txtBuyerNIC;
+    private System.Windows.Forms.Label label32;
+    private System.Windows.Forms.TextBox txtBuyerPhone;
+    private System.Windows.Forms.Label label22;
+    private System.Windows.Forms.Button btnBuyerView;
   }
 }

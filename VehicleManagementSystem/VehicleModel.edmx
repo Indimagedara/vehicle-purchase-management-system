@@ -98,6 +98,31 @@
           <Property Name="ItemStatus" Type="bit" Nullable="false" />
           <Property Name="ItemNote" Type="varbinary" MaxLength="150" />
         </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleId" Type="bigint" Nullable="false" />
+          <Property Name="SaleId" Type="bigint" Nullable="false" />
+          <Property Name="Installment" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="DatePayed" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SaleVehicle">
+          <Key>
+            <PropertyRef Name="SaleId" />
+          </Key>
+          <Property Name="SaleId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleId" Type="bigint" Nullable="false" />
+          <Property Name="BuyerName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="NIC" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SaleAmount" Type="float" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="DateSold" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
@@ -203,6 +228,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SaleVehicle_Vehicle">
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
+          <End Role="SaleVehicle" Type="Self.SaleVehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleId" />
+            </Principal>
+            <Dependent Role="SaleVehicle">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="VehiclePurchaseManagementsModelStoreContainer">
           <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -214,6 +251,8 @@
           <EntitySet Name="InventoryItems" EntityType="Self.InventoryItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PartInventory" EntityType="Self.PartInventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleVehicle" EntityType="Self.SaleVehicle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleExpense" EntityType="Self.VehicleExpense" Schema="dbo" store:Type="Tables" />
@@ -231,6 +270,10 @@
           <AssociationSet Name="FK_Jobs_Vehicles" Association="Self.FK_Jobs_Vehicles">
             <End Role="Vehicle" EntitySet="Vehicle" />
             <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleVehicle_Vehicle" Association="Self.FK_SaleVehicle_Vehicle">
+            <End Role="Vehicle" EntitySet="Vehicle" />
+            <End Role="SaleVehicle" EntitySet="SaleVehicle" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -280,6 +323,16 @@
           <AssociationSet Name="FK_Expenses_Vehicle" Association="VehiclePurchaseManagementsModel.FK_Expenses_Vehicle">
             <End Role="Vehicle" EntitySet="Vehicles" />
             <End Role="Expens" EntitySet="Expenses" />
+          </AssociationSet>
+          <EntitySet Name="Payments" EntityType="VehiclePurchaseManagementsModel.Payment" />
+          <EntitySet Name="SaleVehicles" EntityType="VehiclePurchaseManagementsModel.SaleVehicle" />
+          <AssociationSet Name="FK_Payments_SaleVehicle" Association="VehiclePurchaseManagementsModel.FK_Payments_SaleVehicle">
+            <End Role="SaleVehicle" EntitySet="SaleVehicles" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleVehicle_Vehicle" Association="VehiclePurchaseManagementsModel.FK_SaleVehicle_Vehicle">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="SaleVehicle" EntitySet="SaleVehicles" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="VehicleType">
@@ -422,6 +475,7 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Jobs" Relationship="VehiclePurchaseManagementsModel.FK_Jobs_Vehicles" FromRole="Vehicle" ToRole="Job" />
           <NavigationProperty Name="Expenses" Relationship="VehiclePurchaseManagementsModel.FK_Expenses_Vehicle" FromRole="Vehicle" ToRole="Expens" />
+          <NavigationProperty Name="SaleVehicles" Relationship="VehiclePurchaseManagementsModel.FK_SaleVehicle_Vehicle" FromRole="Vehicle" ToRole="SaleVehicle" />
         </EntityType>
         <Association Name="FK_Jobs_Contractors">
           <End Type="VehiclePurchaseManagementsModel.Contractor" Role="Contractor" Multiplicity="1" />
@@ -467,6 +521,58 @@
               <PropertyRef Name="VehicleId" />
             </Principal>
             <Dependent Role="Expens">
+              <PropertyRef Name="VehicleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int64" Nullable="false" />
+          <Property Name="VehicleId" Type="Int64" Nullable="false" />
+          <Property Name="SaleId" Type="Int64" Nullable="false" />
+          <Property Name="Installment" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="DatePayed" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SaleVehicle" Relationship="VehiclePurchaseManagementsModel.FK_Payments_SaleVehicle" FromRole="Payment" ToRole="SaleVehicle" />
+        </EntityType>
+        <EntityType Name="SaleVehicle">
+          <Key>
+            <PropertyRef Name="SaleId" />
+          </Key>
+          <Property Name="SaleId" Type="Int64" Nullable="false" />
+          <Property Name="VehicleId" Type="Int64" Nullable="false" />
+          <Property Name="BuyerName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SaleAmount" Type="Double" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateSold" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Payments" Relationship="VehiclePurchaseManagementsModel.FK_Payments_SaleVehicle" FromRole="SaleVehicle" ToRole="Payment" />
+          <NavigationProperty Name="Vehicle" Relationship="VehiclePurchaseManagementsModel.FK_SaleVehicle_Vehicle" FromRole="SaleVehicle" ToRole="Vehicle" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NIC" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Payments_SaleVehicle">
+          <End Type="VehiclePurchaseManagementsModel.SaleVehicle" Role="SaleVehicle" Multiplicity="1" />
+          <End Type="VehiclePurchaseManagementsModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SaleVehicle">
+              <PropertyRef Name="SaleId" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="SaleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleVehicle_Vehicle">
+          <End Type="VehiclePurchaseManagementsModel.Vehicle" Role="Vehicle" Multiplicity="1" />
+          <End Type="VehiclePurchaseManagementsModel.SaleVehicle" Role="SaleVehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleId" />
+            </Principal>
+            <Dependent Role="SaleVehicle">
               <PropertyRef Name="VehicleId" />
             </Dependent>
           </ReferentialConstraint>
@@ -652,6 +758,33 @@
                 <ScalarProperty Name="ExpenseTitle" ColumnName="ExpenseTitle" />
                 <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
                 <ScalarProperty Name="ExpenseId" ColumnName="ExpenseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="DatePayed" ColumnName="DatePayed" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Installment" ColumnName="Installment" />
+                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleVehicles">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.SaleVehicle">
+              <MappingFragment StoreEntitySet="SaleVehicle">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="NIC" ColumnName="NIC" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DateSold" ColumnName="DateSold" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SaleAmount" ColumnName="SaleAmount" />
+                <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
