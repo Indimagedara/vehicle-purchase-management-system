@@ -67,6 +67,8 @@ namespace VehicleManagementSystem
     private void frmDashboard_Load(object sender, EventArgs e)
     {
       fetchVehicleData();
+      fetchEmpSalary();
+      fetchEmployees();
     }
 
     private void fetchVehicleData()
@@ -134,6 +136,134 @@ namespace VehicleManagementSystem
     {
       frmContractor contractor = new frmContractor();
       contractor.Show();
+    }
+
+    private void btnSearch_Click(object sender, EventArgs e)
+    {
+      if (!string.IsNullOrEmpty(txtSearch.Text))
+      {
+        using (ve = new VehicleManagementEntities()) { 
+          var query = ve.Vehicles
+            .Join(
+              ve.Categories,
+              vh => vh.CategoryId,
+              vc => vc.CategoryId,
+              (vh, vc) => new { vh, vc }
+            )
+            .Join(
+              ve.VehicleTypes,
+              v => v.vh.TypeId,
+              vt => vt.VehicleTypeId,
+              (v, vt) => new
+              {
+                VehicleId = v.vh.VehicleId,
+                Brand = v.vh.Brand,
+                Model = v.vh.Model,
+                RegNum = v.vh.RegNum,
+                VehicleType = vt.VehiType,
+                VehicleCategory = v.vc.Category1,
+                Date = v.vh.DateCreated
+              }
+            ).Where(r => r.RegNum.Contains(txtSearch.Text)).ToList();
+          listVehicles.Items.Clear();
+        foreach (var vehi in query)
+        {
+          ListViewItem item = new ListViewItem(vehi.VehicleId.ToString());
+          item.SubItems.Add(vehi.RegNum);
+          item.SubItems.Add(vehi.Model);
+          item.SubItems.Add(vehi.Brand);
+          item.SubItems.Add(vehi.VehicleType);
+          item.SubItems.Add(vehi.VehicleCategory);
+          item.SubItems.Add(vehi.Date.ToString("dd/MM/yyyy"));
+          listVehicles.Items.Add(item);
+        }
+
+      }
+      Cursor.Current = Cursors.Default;
+    }
+    }
+
+    private void btnResetSearch_Click(object sender, EventArgs e)
+    {
+      txtSearch.Text = "";
+      fetchVehicleData();
+    }
+
+    private void fetchEmpSalary()
+    {
+      using (ve = new VehicleManagementEntities())
+      {
+        int year = DateTime.Now.Year;
+        int month = DateTime.Now.Month;
+        List<EmployeeSalaries> list = ve.EmployeeSalaries1.Where(r=>r.DatePayed.Year == (year) && r.DatePayed.Month == (month)).ToList();
+        foreach (EmployeeSalaries eSal in list)
+        {
+          ListViewItem item = new ListViewItem(eSal.SalaryId.ToString());
+          item.SubItems.Add(eSal.Employee.EmployeeName);
+          item.SubItems.Add(eSal.Amount.ToString());
+          item.SubItems.Add(eSal.Description);
+          item.SubItems.Add(eSal.DatePayed.ToString());
+          listEmpSalary.Items.Add(item);
+        }
+      }
+    }
+
+    private void fetchEmployees()
+    {
+      using (ve = new VehicleManagementEntities())
+      {
+        cmbEmployees.Items.Clear();
+        List<Employee> list = ve.Employees.ToList();
+        List<cmbBoxValues> cmbData = new List<cmbBoxValues>();
+        foreach (Employee c in list)
+        {
+          cmbData.Add(new cmbBoxValues() { cmbVal = Int32.Parse(c.EmployeeId.ToString()), cmbName = c.EmployeeName });
+        }
+        cmbEmployees.DataSource = cmbData;
+        cmbEmployees.DisplayMember = "cmbName";
+      }
+    }
+
+    private void btnAddSalary_Click(object sender, EventArgs e)
+    {
+      if(!string.IsNullOrEmpty(cmbEmployees.Text) && !string.IsNullOrEmpty(txtSalaryAmount.Text))
+      {
+        ve = new VehicleManagementEntities();
+        cmbBoxValues selEmp = cmbEmployees.SelectedItem as cmbBoxValues;
+        int selectedEmployee = selEmp.cmbVal;
+        EmployeeSalaries employeeSalary = new EmployeeSalaries()
+        {
+          EmployeeId = long.Parse(selectedEmployee.ToString()),
+          Amount = double.Parse(txtSalaryAmount.Text),
+          Description = txtDescription.Text,
+          Status = "1",
+          DatePayed = DateTime.Now
+        };
+        ve.EmployeeSalaries1.Add(employeeSalary);
+        ve.SaveChanges();
+        MessageBox.Show("Salary saved successfully!");
+        fetchEmpSalary();
+      }
+      else
+      {
+        MessageBox.Show("You must fill all fields!");
+      }
+    }
+
+    private void btnClearSalary_Click(object sender, EventArgs e)
+    {
+      txtDescription.Text = "";
+      cmbEmployees.Text = "";
+      txtSalaryAmount.Text = "";
+      btnUpdateSalary.Enabled = false;
+      btnDeleteSalary.Enabled = false;
+      btnAddSalary.Enabled = true;
+      btnClearSalary.Enabled = true;
+    }
+
+    private void btnUpdateSalary_Click(object sender, EventArgs e)
+    {
+      fetchEmpSalary();
     }
   }
 }

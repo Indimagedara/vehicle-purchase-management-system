@@ -14,6 +14,12 @@ namespace VehicleManagementSystem
     
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.EmployeeSalaries = new HashSet<EmployeeSalaries>();
+        }
+    
         public long EmployeeId { get; set; }
         public string EmployeeName { get; set; }
         public string Nic { get; set; }
@@ -21,5 +27,8 @@ namespace VehicleManagementSystem
         public string EmpType { get; set; }
         public string SalaryType { get; set; }
         public double Salary { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeSalaries> EmployeeSalaries { get; set; }
     }
 }

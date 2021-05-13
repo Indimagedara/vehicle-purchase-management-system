@@ -28,6 +28,8 @@
         <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.SaleVehicle" Width="1.5" PointX="4.75" PointY="8.125" />
         <AssociationConnector Association="VehiclePurchaseManagementsModel.FK_Payments_SaleVehicle" />
         <AssociationConnector Association="VehiclePurchaseManagementsModel.FK_SaleVehicle_Vehicle" />
+        <EntityTypeShape EntityType="VehiclePurchaseManagementsModel.EmployeeSalaries" Width="1.5" PointX="6.625" PointY="10.875" />
+        <AssociationConnector Association="VehiclePurchaseManagementsModel.FK_EmployeeSalary_Employees" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

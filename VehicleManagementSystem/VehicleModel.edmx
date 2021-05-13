@@ -58,6 +58,17 @@
           <Property Name="SalaryType" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Salary" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="EmployeeSalary">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="bigint" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DatePayed" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Expenses">
           <Key>
             <PropertyRef Name="ExpenseId" />
@@ -193,6 +204,18 @@
           <Property Name="VehicleTypeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VehiType" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
+        <Association Name="FK_EmployeeSalary_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="EmployeeSalary" Type="Self.EmployeeSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeSalary">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Expenses_Vehicle">
           <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="0..1" />
           <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
@@ -248,6 +271,7 @@
           <EntitySet Name="Contractors" EntityType="Self.Contractors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContractorType" EntityType="Self.ContractorType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeSalary" EntityType="Self.EmployeeSalary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryItems" EntityType="Self.InventoryItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
@@ -260,6 +284,10 @@
           <EntitySet Name="VehicleIncome" EntityType="Self.VehicleIncome" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleSeller" EntityType="Self.VehicleSeller" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmployeeSalary_Employees" Association="Self.FK_EmployeeSalary_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeeSalary" EntitySet="EmployeeSalary" />
+          </AssociationSet>
           <AssociationSet Name="FK_Expenses_Vehicle" Association="Self.FK_Expenses_Vehicle">
             <End Role="Vehicle" EntitySet="Vehicle" />
             <End Role="Expenses" EntitySet="Expenses" />
@@ -335,6 +363,11 @@
             <End Role="Vehicle" EntitySet="Vehicles" />
             <End Role="SaleVehicle" EntitySet="SaleVehicles" />
           </AssociationSet>
+          <EntitySet Name="EmployeeSalaries1" EntityType="VehiclePurchaseManagementsModel.EmployeeSalaries" />
+          <AssociationSet Name="FK_EmployeeSalary_Employees" Association="VehiclePurchaseManagementsModel.FK_EmployeeSalary_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeSalary" EntitySet="EmployeeSalaries1" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="VehicleType">
           <Key>
@@ -354,6 +387,7 @@
           <Property Name="EmpType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="SalaryType" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Salary" Type="Double" Nullable="false" />
+          <NavigationProperty Name="EmployeeSalaries" Relationship="VehiclePurchaseManagementsModel.FK_EmployeeSalary_Employees" FromRole="Employee" ToRole="EmployeeSalary" />
         </EntityType>
         <EntityType Name="InventoryItem">
           <Key>
@@ -579,6 +613,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EmployeeSalaries">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int64" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DatePayed" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="VehiclePurchaseManagementsModel.FK_EmployeeSalary_Employees" FromRole="EmployeeSalary" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_EmployeeSalary_Employees">
+          <End Type="VehiclePurchaseManagementsModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="VehiclePurchaseManagementsModel.EmployeeSalaries" Role="EmployeeSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeSalary">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -788,6 +846,18 @@
                 <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
                 <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
                 <ScalarProperty Name="SaleId" ColumnName="SaleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeSalaries1">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.EmployeeSalaries">
+              <MappingFragment StoreEntitySet="EmployeeSalary">
+                <ScalarProperty Name="DatePayed" ColumnName="DatePayed" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

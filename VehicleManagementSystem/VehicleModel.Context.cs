@@ -43,5 +43,6 @@ namespace VehicleManagementSystem
         public virtual DbSet<Expenses> Expenses { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<SaleVehicle> SaleVehicles { get; set; }
+        public virtual DbSet<EmployeeSalaries> EmployeeSalaries1 { get; set; }
     }
 }
