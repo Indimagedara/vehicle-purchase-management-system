@@ -13,5 +13,6 @@ namespace VehicleManagementSystem.Forms
     public string cmbName { get; set; }
 
     public string extraValues { get; set; }
+    public string extraValues2 { get; set; }
   }
 }

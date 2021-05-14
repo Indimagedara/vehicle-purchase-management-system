@@ -16,6 +16,7 @@ namespace VehicleManagementSystem
     VehicleManagementEntities ve;
     public static int Id = 0;
     public static string selectedRegNum;
+    public int selectedSalId = 0;
     public frmDashboard()
     {
       InitializeComponent();
@@ -195,6 +196,7 @@ namespace VehicleManagementSystem
       {
         int year = DateTime.Now.Year;
         int month = DateTime.Now.Month;
+        listEmpSalary.Items.Clear();
         List<EmployeeSalaries> list = ve.EmployeeSalaries1.Where(r=>r.DatePayed.Year == (year) && r.DatePayed.Month == (month)).ToList();
         foreach (EmployeeSalaries eSal in list)
         {
@@ -217,7 +219,7 @@ namespace VehicleManagementSystem
         List<cmbBoxValues> cmbData = new List<cmbBoxValues>();
         foreach (Employee c in list)
         {
-          cmbData.Add(new cmbBoxValues() { cmbVal = Int32.Parse(c.EmployeeId.ToString()), cmbName = c.EmployeeName });
+          cmbData.Add(new cmbBoxValues() { cmbVal = Int32.Parse(c.EmployeeId.ToString()), cmbName = c.EmployeeName, extraValues = c.Salary.ToString(), extraValues2 = c.SalaryType });
         }
         cmbEmployees.DataSource = cmbData;
         cmbEmployees.DisplayMember = "cmbName";
@@ -252,18 +254,83 @@ namespace VehicleManagementSystem
 
     private void btnClearSalary_Click(object sender, EventArgs e)
     {
+      clearSalFields();
+    }
+
+    private void clearSalFields()
+    {
       txtDescription.Text = "";
       cmbEmployees.Text = "";
       txtSalaryAmount.Text = "";
       btnUpdateSalary.Enabled = false;
       btnDeleteSalary.Enabled = false;
       btnAddSalary.Enabled = true;
-      btnClearSalary.Enabled = true;
+      btnClearSalary.Enabled = true;      
     }
 
     private void btnUpdateSalary_Click(object sender, EventArgs e)
     {
-      fetchEmpSalary();
+      if (!string.IsNullOrEmpty(cmbEmployees.Text) && !string.IsNullOrEmpty(txtSalaryAmount.Text))
+      {
+        ve = new VehicleManagementEntities();
+        cmbBoxValues selEmp = cmbEmployees.SelectedItem as cmbBoxValues;
+        int selectedEmployee = selEmp.cmbVal;
+
+        var singleContractor = ve.EmployeeSalaries1.Where(r => r.SalaryId == selectedSalId).First();
+        singleContractor.EmployeeId = long.Parse(selectedEmployee.ToString());
+        singleContractor.Amount = double.Parse(txtSalaryAmount.Text);
+        singleContractor.Description = txtDescription.Text;
+        singleContractor.Status = "1";
+        ve.SaveChanges();
+        MessageBox.Show("Salary successfully updated!");
+        fetchEmpSalary();
+        clearSalFields();
+        selectedSalId = 0;
+      }
+      else
+      {
+        MessageBox.Show("You must fill all fields!");
+      }
+    }
+
+    private void listEmpSalary_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      ListView.SelectedListViewItemCollection selectedSalary = this.listEmpSalary.SelectedItems;
+      string vehicleType = "";
+      foreach (ListViewItem item in selectedSalary)
+      {
+        selectedSalId = Int32.Parse(item.SubItems[0].Text);
+        cmbEmployees.Text = item.SubItems[1].Text;
+        txtSalaryAmount.Text = item.SubItems[2].Text;
+        txtDescription.Text = item.SubItems[3].Text;
+      }
+      btnUpdateSalary.Enabled = true;
+      btnDeleteSalary.Enabled = true;
+      btnAddSalary.Enabled = false;
+      btnClearSalary.Enabled = true;
+    }
+
+    private void btnDeleteSalary_Click(object sender, EventArgs e)
+    {
+      DialogResult res = MessageBox.Show("Are you sure you want to Delete this Salary? You cannot reverse this action.", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+      if (res == DialogResult.OK)
+      {
+        ve = new VehicleManagementEntities();
+        var singleSalary = ve.EmployeeSalaries1.Where(r => r.SalaryId == selectedSalId).First();
+        ve.EmployeeSalaries1.Remove(singleSalary);
+        ve.SaveChanges();
+        MessageBox.Show("Payment successfully deleted!");
+        fetchEmpSalary();
+        clearSalFields();
+        selectedSalId = 0;
+      }
+    }
+
+    private void cmbEmployees_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      cmbBoxValues cmbBoxValues = cmbEmployees.SelectedItem as cmbBoxValues;
+      txtSalaryAmount.Text = cmbBoxValues.extraValues.ToString();
+      lblSalType.Text = cmbBoxValues.extraValues2.ToString();
     }
   }
 }

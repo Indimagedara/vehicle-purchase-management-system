@@ -75,6 +75,7 @@ namespace VehicleManagementSystem
       this.label2 = new System.Windows.Forms.Label();
       this.label1 = new System.Windows.Forms.Label();
       this.cmbEmployees = new System.Windows.Forms.ComboBox();
+      this.lblSalType = new System.Windows.Forms.Label();
       this.menuStrip1.SuspendLayout();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
@@ -313,6 +314,7 @@ namespace VehicleManagementSystem
       // 
       // groupBox2
       // 
+      this.groupBox2.Controls.Add(this.lblSalType);
       this.groupBox2.Controls.Add(this.btnClearSalary);
       this.groupBox2.Controls.Add(this.txtDescription);
       this.groupBox2.Controls.Add(this.label3);
@@ -366,6 +368,7 @@ namespace VehicleManagementSystem
       this.btnDeleteSalary.TabIndex = 33;
       this.btnDeleteSalary.Text = "&Delete";
       this.btnDeleteSalary.UseVisualStyleBackColor = true;
+      this.btnDeleteSalary.Click += new System.EventHandler(this.btnDeleteSalary_Click);
       // 
       // btnUpdateSalary
       // 
@@ -406,6 +409,7 @@ namespace VehicleManagementSystem
       this.listEmpSalary.TabIndex = 30;
       this.listEmpSalary.UseCompatibleStateImageBehavior = false;
       this.listEmpSalary.View = System.Windows.Forms.View.Details;
+      this.listEmpSalary.SelectedIndexChanged += new System.EventHandler(this.listEmpSalary_SelectedIndexChanged);
       // 
       // columnHeader8
       // 
@@ -435,7 +439,7 @@ namespace VehicleManagementSystem
       // 
       this.txtSalaryAmount.Location = new System.Drawing.Point(301, 30);
       this.txtSalaryAmount.Name = "txtSalaryAmount";
-      this.txtSalaryAmount.Size = new System.Drawing.Size(147, 25);
+      this.txtSalaryAmount.Size = new System.Drawing.Size(86, 25);
       this.txtSalaryAmount.TabIndex = 3;
       // 
       // label2
@@ -463,6 +467,16 @@ namespace VehicleManagementSystem
       this.cmbEmployees.Name = "cmbEmployees";
       this.cmbEmployees.Size = new System.Drawing.Size(145, 25);
       this.cmbEmployees.TabIndex = 0;
+      this.cmbEmployees.SelectedIndexChanged += new System.EventHandler(this.cmbEmployees_SelectedIndexChanged);
+      // 
+      // lblSalType
+      // 
+      this.lblSalType.AutoSize = true;
+      this.lblSalType.Location = new System.Drawing.Point(393, 34);
+      this.lblSalType.Name = "lblSalType";
+      this.lblSalType.Size = new System.Drawing.Size(13, 17);
+      this.lblSalType.TabIndex = 37;
+      this.lblSalType.Text = "-";
       // 
       // frmDashboard
       // 
@@ -538,5 +552,6 @@ namespace VehicleManagementSystem
     private System.Windows.Forms.Button btnClearSalary;
     private System.Windows.Forms.TextBox txtDescription;
     private System.Windows.Forms.Label label3;
+    private System.Windows.Forms.Label lblSalType;
   }
 }
