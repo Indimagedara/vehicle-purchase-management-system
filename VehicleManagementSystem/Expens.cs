@@ -12,14 +12,14 @@ namespace VehicleManagementSystem
     using System;
     using System.Collections.Generic;
     
-    public partial class Expenses
+    public partial class Expens
     {
         public long ExpenseId { get; set; }
-        public Nullable<long> VehicleId { get; set; }
+        public long VehicleId { get; set; }
         public string ExpenseTitle { get; set; }
         public string ExpenseType { get; set; }
-        public Nullable<double> Amount { get; set; }
-        public Nullable<System.DateTime> DateCreated { get; set; }
+        public double Amount { get; set; }
+        public System.DateTime DateCreated { get; set; }
     
         public virtual Vehicle Vehicle { get; set; }
     }

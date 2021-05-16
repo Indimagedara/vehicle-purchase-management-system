@@ -18,8 +18,8 @@ namespace VehicleManagementSystem
         public Vehicle()
         {
             this.Jobs = new HashSet<Job>();
-            this.Expenses = new HashSet<Expenses>();
             this.SaleVehicles = new HashSet<SaleVehicle>();
+            this.Expenses = new HashSet<Expens>();
         }
     
         public long VehicleId { get; set; }
@@ -44,8 +44,8 @@ namespace VehicleManagementSystem
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Job> Jobs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Expenses> Expenses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SaleVehicle> SaleVehicles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Expens> Expenses { get; set; }
     }
 }

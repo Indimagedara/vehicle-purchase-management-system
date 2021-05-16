@@ -74,11 +74,11 @@
             <PropertyRef Name="ExpenseId" />
           </Key>
           <Property Name="ExpenseId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="VehicleId" Type="bigint" />
+          <Property Name="VehicleId" Type="bigint" Nullable="false" />
           <Property Name="ExpenseTitle" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="ExpenseType" Type="varchar" MaxLength="50" />
-          <Property Name="Amount" Type="float" />
-          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="ExpenseType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="InventoryItems">
           <Key>
@@ -217,7 +217,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Expenses_Vehicle">
-          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="0..1" />
+          <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="1" />
           <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vehicle">
@@ -348,11 +348,6 @@
             <End Role="Vehicle" EntitySet="Vehicles" />
             <End Role="Job" EntitySet="Jobs" />
           </AssociationSet>
-          <EntitySet Name="Expenses" EntityType="VehiclePurchaseManagementsModel.Expenses" />
-          <AssociationSet Name="FK_Expenses_Vehicle" Association="VehiclePurchaseManagementsModel.FK_Expenses_Vehicle">
-            <End Role="Vehicle" EntitySet="Vehicles" />
-            <End Role="Expens" EntitySet="Expenses" />
-          </AssociationSet>
           <EntitySet Name="Payments" EntityType="VehiclePurchaseManagementsModel.Payment" />
           <EntitySet Name="SaleVehicles" EntityType="VehiclePurchaseManagementsModel.SaleVehicle" />
           <AssociationSet Name="FK_Payments_SaleVehicle" Association="VehiclePurchaseManagementsModel.FK_Payments_SaleVehicle">
@@ -367,6 +362,11 @@
           <AssociationSet Name="FK_EmployeeSalary_Employees" Association="VehiclePurchaseManagementsModel.FK_EmployeeSalary_Employees">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="EmployeeSalary" EntitySet="EmployeeSalaries1" />
+          </AssociationSet>
+          <EntitySet Name="Expenses" EntityType="VehiclePurchaseManagementsModel.Expens" />
+          <AssociationSet Name="FK_Expenses_Vehicle" Association="VehiclePurchaseManagementsModel.FK_Expenses_Vehicle">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="Expens" EntitySet="Expenses" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="VehicleType">
@@ -509,8 +509,8 @@
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Jobs" Relationship="VehiclePurchaseManagementsModel.FK_Jobs_Vehicles" FromRole="Vehicle" ToRole="Job" />
-          <NavigationProperty Name="Expenses" Relationship="VehiclePurchaseManagementsModel.FK_Expenses_Vehicle" FromRole="Vehicle" ToRole="Expens" />
           <NavigationProperty Name="SaleVehicles" Relationship="VehiclePurchaseManagementsModel.FK_SaleVehicle_Vehicle" FromRole="Vehicle" ToRole="SaleVehicle" />
+          <NavigationProperty Name="Expenses" Relationship="VehiclePurchaseManagementsModel.FK_Expenses_Vehicle" FromRole="Vehicle" ToRole="Expens" />
         </EntityType>
         <Association Name="FK_Jobs_Contractors">
           <End Type="VehiclePurchaseManagementsModel.Contractor" Role="Contractor" Multiplicity="1" />
@@ -532,30 +532,6 @@
               <PropertyRef Name="VehicleId" />
             </Principal>
             <Dependent Role="Job">
-              <PropertyRef Name="VehicleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Expenses">
-          <Key>
-            <PropertyRef Name="ExpenseId" />
-          </Key>
-          <Property Name="ExpenseId" Type="Int64" Nullable="false" />
-          <Property Name="VehicleId" Type="Int64" />
-          <Property Name="ExpenseTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ExpenseType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Amount" Type="Double" />
-          <Property Name="DateCreated" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Vehicle" Relationship="VehiclePurchaseManagementsModel.FK_Expenses_Vehicle" FromRole="Expens" ToRole="Vehicle" />
-        </EntityType>
-        <Association Name="FK_Expenses_Vehicle">
-          <End Type="VehiclePurchaseManagementsModel.Vehicle" Role="Vehicle" Multiplicity="0..1" />
-          <End Type="VehiclePurchaseManagementsModel.Expenses" Role="Expens" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vehicle">
-              <PropertyRef Name="VehicleId" />
-            </Principal>
-            <Dependent Role="Expens">
               <PropertyRef Name="VehicleId" />
             </Dependent>
           </ReferentialConstraint>
@@ -634,6 +610,30 @@
             </Principal>
             <Dependent Role="EmployeeSalary">
               <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Expens">
+          <Key>
+            <PropertyRef Name="ExpenseId" />
+          </Key>
+          <Property Name="ExpenseId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleId" Type="Int64" Nullable="false" />
+          <Property Name="ExpenseTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ExpenseType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Vehicle" Relationship="VehiclePurchaseManagementsModel.FK_Expenses_Vehicle" FromRole="Expens" ToRole="Vehicle" />
+        </EntityType>
+        <Association Name="FK_Expenses_Vehicle">
+          <End Type="VehiclePurchaseManagementsModel.Vehicle" Role="Vehicle" Multiplicity="1" />
+          <End Type="VehiclePurchaseManagementsModel.Expens" Role="Expens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleId" />
+            </Principal>
+            <Dependent Role="Expens">
+              <PropertyRef Name="VehicleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -809,18 +809,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Expenses">
-            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Expenses">
-              <MappingFragment StoreEntitySet="Expenses">
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="ExpenseType" ColumnName="ExpenseType" />
-                <ScalarProperty Name="ExpenseTitle" ColumnName="ExpenseTitle" />
-                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
-                <ScalarProperty Name="ExpenseId" ColumnName="ExpenseId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Payments">
             <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Payment">
               <MappingFragment StoreEntitySet="Payments">
@@ -858,6 +846,18 @@
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expenses">
+            <EntityTypeMapping TypeName="VehiclePurchaseManagementsModel.Expens">
+              <MappingFragment StoreEntitySet="Expenses">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ExpenseType" ColumnName="ExpenseType" />
+                <ScalarProperty Name="ExpenseTitle" ColumnName="ExpenseTitle" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="ExpenseId" ColumnName="ExpenseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

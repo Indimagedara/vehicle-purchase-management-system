@@ -82,7 +82,7 @@
     <Compile Include="EmployeeSalaries.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Expenses.cs">
+    <Compile Include="Expens.cs">
       <DependentUpon>VehicleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Forms\AddSellerData.cs">

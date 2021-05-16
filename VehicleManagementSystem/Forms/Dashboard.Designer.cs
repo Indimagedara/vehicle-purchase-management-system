@@ -76,9 +76,13 @@ namespace VehicleManagementSystem
       this.label1 = new System.Windows.Forms.Label();
       this.cmbEmployees = new System.Windows.Forms.ComboBox();
       this.lblSalType = new System.Windows.Forms.Label();
+      this.groupBox3 = new System.Windows.Forms.GroupBox();
+      this.label7 = new System.Windows.Forms.Label();
+      this.lblCurrentMonth = new System.Windows.Forms.Label();
       this.menuStrip1.SuspendLayout();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
+      this.groupBox3.SuspendLayout();
       this.SuspendLayout();
       // 
       // contextMenuStrip1
@@ -478,11 +482,41 @@ namespace VehicleManagementSystem
       this.lblSalType.TabIndex = 37;
       this.lblSalType.Text = "-";
       // 
+      // groupBox3
+      // 
+      this.groupBox3.Controls.Add(this.lblCurrentMonth);
+      this.groupBox3.Controls.Add(this.label7);
+      this.groupBox3.Location = new System.Drawing.Point(904, 332);
+      this.groupBox3.Name = "groupBox3";
+      this.groupBox3.Size = new System.Drawing.Size(593, 286);
+      this.groupBox3.TabIndex = 4;
+      this.groupBox3.TabStop = false;
+      this.groupBox3.Text = "Stats";
+      // 
+      // label7
+      // 
+      this.label7.AutoSize = true;
+      this.label7.Location = new System.Drawing.Point(6, 21);
+      this.label7.Name = "label7";
+      this.label7.Size = new System.Drawing.Size(100, 17);
+      this.label7.TabIndex = 1;
+      this.label7.Text = "Current Month";
+      // 
+      // lblCurrentMonth
+      // 
+      this.lblCurrentMonth.AutoSize = true;
+      this.lblCurrentMonth.Location = new System.Drawing.Point(112, 21);
+      this.lblCurrentMonth.Name = "lblCurrentMonth";
+      this.lblCurrentMonth.Size = new System.Drawing.Size(13, 17);
+      this.lblCurrentMonth.TabIndex = 2;
+      this.lblCurrentMonth.Text = "-";
+      // 
       // frmDashboard
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1509, 953);
+      this.Controls.Add(this.groupBox3);
       this.Controls.Add(this.groupBox2);
       this.Controls.Add(this.groupBox1);
       this.Controls.Add(this.menuStrip1);
@@ -500,6 +534,8 @@ namespace VehicleManagementSystem
       this.groupBox1.PerformLayout();
       this.groupBox2.ResumeLayout(false);
       this.groupBox2.PerformLayout();
+      this.groupBox3.ResumeLayout(false);
+      this.groupBox3.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -553,5 +589,8 @@ namespace VehicleManagementSystem
     private System.Windows.Forms.TextBox txtDescription;
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.Label lblSalType;
+    private System.Windows.Forms.GroupBox groupBox3;
+    private System.Windows.Forms.Label lblCurrentMonth;
+    private System.Windows.Forms.Label label7;
   }
 }

@@ -318,7 +318,7 @@ namespace VehicleManagementSystem.Forms
         }
         else
         {
-          Expenses expenses = new Expenses()
+          Expens expenses = new Expens()
           {
             ExpenseTitle = txtExpTitle.Text,
             VehicleId = vehicleId,
@@ -357,11 +357,11 @@ namespace VehicleManagementSystem.Forms
       btnDeleteExpense.Enabled = false;
       using (ve = new VehicleManagementEntities())
       {
-        List<Expenses> expenseList = ve.Expenses.Where(r => r.VehicleId == vehicleId).ToList();
+        List<Expens> expenseList = ve.Expenses.Where(r => r.VehicleId == vehicleId).ToList();
         listExpenses.Items.Clear();
         if (expenseList.Any())
         {
-          foreach (Expenses exp in expenseList)
+          foreach (Expens exp in expenseList)
           {
             ListViewItem item = new ListViewItem(exp.ExpenseId.ToString());
             item.SubItems.Add(exp.ExpenseTitle);

@@ -17,6 +17,11 @@ namespace VehicleManagementSystem
     public static int Id = 0;
     public static string selectedRegNum;
     public int selectedSalId = 0;
+    public decimal totalIncomeForPeriod = 0;
+    public decimal totalExpenseForPeriod = 0;
+    public decimal totalExpenses = 0;
+    public decimal totalSalaries = 0;
+    public decimal totalJobAmount = 0;
     public frmDashboard()
     {
       InitializeComponent();
@@ -70,6 +75,7 @@ namespace VehicleManagementSystem
       fetchVehicleData();
       fetchEmpSalary();
       fetchEmployees();
+      fetchStats();
     }
 
     private void fetchVehicleData()
@@ -331,6 +337,57 @@ namespace VehicleManagementSystem
       cmbBoxValues cmbBoxValues = cmbEmployees.SelectedItem as cmbBoxValues;
       txtSalaryAmount.Text = cmbBoxValues.extraValues.ToString();
       lblSalType.Text = cmbBoxValues.extraValues2.ToString();
+    }
+
+    private void fetchStats()
+    {
+      lblCurrentMonth.Text = DateTime.Now.Year.ToString() + "-" + DateTime.Now.Month.ToString();
+    }
+
+    private void calculateIncome()
+    {
+      decimal totalIncome = 0;
+      ve = new VehicleManagementEntities();
+      List<Payment> payments = ve.Payments.Where(r => r.DatePayed.Year == (DateTime.Now.Year) && r.DatePayed.Month == (DateTime.Now.Month)).ToList();
+      foreach(Payment payment in payments)
+      {
+        totalIncome = totalIncome + (decimal)payment.Amount;
+      }
+      totalIncomeForPeriod = totalIncome;
+    }
+    
+    private void calculateExpense()
+    {
+      decimal totalExp = 0;
+      //Calculate expenses
+      ve = new VehicleManagementEntities();
+      List<Expens> expenses = ve.Expenses.Where(s => s.DateCreated.Year == (DateTime.Now.Year) && s.DateCreated.Month == (DateTime.Now.Month)).ToList();
+      foreach (Expens exp in expenses)
+      {
+        totalExp = totalExp + (decimal)exp.Amount;
+      }
+      totalExpenseForPeriod = totalExpenseForPeriod+totalExp;
+      
+      //Calculate Salary
+      ve = new VehicleManagementEntities();
+      List<EmployeeSalaries> salaries = ve.EmployeeSalaries1.Where(s => s.DatePayed.Year == (DateTime.Now.Year) && s.DatePayed.Month == (DateTime.Now.Month)).ToList();
+      foreach (EmployeeSalaries sal in salaries)
+      {
+        totalExp = totalExp + (decimal)sal.Amount;
+      }
+      totalExpenseForPeriod = totalExpenseForPeriod+totalExp;
+      
+      //Calculate Salary
+      ve = new VehicleManagementEntities();
+      List<Job> jobs = ve.Jobs.Where(s => s.CreatedDate.Year == (DateTime.Now.Year) && s.CreatedDate.Month == (DateTime.Now.Month)).ToList();
+      foreach (Job job in jobs)
+      {
+        totalExp = totalExp + (decimal)job.Amount;
+      }
+      totalExpenseForPeriod = totalExpenseForPeriod+totalExp;
+
+      //Calculate SUM of Income and expense
+
     }
   }
 }
